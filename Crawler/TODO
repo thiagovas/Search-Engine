@@ -1,1 +1,5 @@
-* Remember to backup the priority queue every x minutes
+* Remember to backup the priority queue (scheduler) every x minutes
+
+* Make sure that the crawler is collecting just .br websites
+
+* See what is a good number of threads to keep running
