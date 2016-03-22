@@ -1,5 +1,5 @@
 CC=g++
-OP=-O2 -std=c++11 -Wall
+OP=-O2 -std=c++11 -Wall -lcurl
 OBJ_DIR=./bin
 SRC_DIR=./src
 
@@ -11,7 +11,7 @@ build: main crawler utils scheduler parser
 main:
 	$(CC) -c $(SRC_DIR)/main.cc -o $(OBJ_DIR)/main.o $(OP)
 
-crawler:
+crawler: scheduler
 	$(CC) -c $(SRC_DIR)/crawler.cc -o $(OBJ_DIR)/crawler.o $(OP)
 
 parser:

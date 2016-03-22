@@ -2,13 +2,16 @@
 #define _parser_hpp
 
 #include <regex>
+#include <vector>
+#include <algorithm>
+#include <functional>
 
 class Parser
 {
   public:
     Parser();
-    vector<string> getLinks(string html);
-
+    std::vector<std::string> GetLinks(std::string html);
+    
   private:
 };
 

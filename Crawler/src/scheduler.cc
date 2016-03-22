@@ -5,45 +5,36 @@ using namespace std;
 Scheduler::Scheduler()
 {}
 
-Scheduler::Scheduler(string seeds_filename)
-{
-  this->loadScheduler(seeds_filename);
-}
-
-// This function loads the scheduler with the urls present on the [seeds_filename] file
-void Scheduler::loadScheduler(string seeds_filename)
-{
-  
-}
-
 // Adds a new well-formed url to the scheduler
-void Scheduler::addURL(string url)
+void Scheduler::AddURL(string url)
 {
-  
+  this->pq_urls.push(url);
 }
 
 // It returns the next url available on the scheduler
 // If there is none, it returns an empty string
-string Scheduler::getNext()
+string Scheduler::GetNext()
 {
-  
+  if(this->pq_urls.empty()) return "";
+  return this->pq_urls.top();
 }
 
 // This method removes the url from the top of the scheduler
 // If there is no url, nothing happens
-void Scheduler::removeTop()
+void Scheduler::RemoveTop()
 {
-  
+  if(!this->pq_urls.empty())
+    this->pq_urls.pop();
 }
 
 // It returns if the scheduler has no more urls
-bool Scheduler::isEmpty()
+bool Scheduler::IsEmpty()
 {
-  
+  return this->pq_urls.empty();
 }
 
 // This function returns the number of components the url has.
-int Scheduler::countComponents(string url)
+int Scheduler::CountComponents(string url)
 {
   int c=1;
   unsigned i, j=0;
