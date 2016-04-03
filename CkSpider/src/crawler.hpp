@@ -1,6 +1,8 @@
 #ifndef _crawler_hpp
 #define _crawler_hpp
 
+#include <mutex>
+#include <thread>
 #include <string>
 #include <csignal>
 #include <fstream>
@@ -8,8 +10,10 @@
 #include <unistd.h>
 #include <iostream>
 #include <algorithm>
-#include <curl/curl.h>
+#include "CkSpider.h"
+#include "CkString.h"
 #include "scheduler.hpp"
+#include "utils.hpp"
 
 class Crawler
 {
@@ -18,29 +22,31 @@ class Crawler
     Crawler();
     
     // Starts to crawl
-    void Start(std::string pseedFilename, int pnThreads, int pnFiles);
+    void Start(std::string pseedFilename, int pnThreads);
     
     // It sets the name of the folder that will keep the pages crawled
     void SetOutputFolder(std::string pfolderName);
     
     void Stop();
     
-    static size_t WriteOnString(void *content, size_t size, size_t nmembytes, void *userp);
     
   private:
     
     // Name of the folder that will keep the pages crawled
-    std::string folderName;
+    static std::string folderName;
+    
+    static std::mutex scheduler_mutex;
     
     std::string seedFilename;
     
     // Number of threads the crawler will create in order to collect the pages
     int nThreads;
     
-    int nFiles;
-    
     // Loads
     void LoadScheduler();
+    
+    // Function executed by each thread
+    void Crawl();
 };
 
 

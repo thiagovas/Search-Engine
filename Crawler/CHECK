@@ -1,1 +1,8 @@
 * Install libcurl4-gnutls-dev
+
+* Install g++-5
+   -- On Ubuntu:
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install g++-5 g++-5-multilib
+   -- The multilib package serves to support other architectures

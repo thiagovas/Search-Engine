@@ -25,10 +25,10 @@ void Crawler::Start(string pseedFilename, int pnThreads, int pnFiles)
   
   
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &Crawler::WriteOnString);
-  while(not this->_scheduler.IsEmpty())
+  while(not Scheduler::IsEmpty())
   {
-    string url = this->_scheduler.GetNext(), html;
-    this->_scheduler.RemoveTop();
+    string url = Scheduler::GetNext(), html;
+    Scheduler::RemoveTop();
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &html);
     res = curl_easy_perform(curl);
@@ -45,6 +45,7 @@ void Crawler::SetOutputFolder(string pfolderName)
 void Crawler::Stop()
 {
   cout << "Stopping...\n";
+  
   exit(0);
 }
 
@@ -59,7 +60,7 @@ void Crawler::LoadScheduler()
     {
       getline(is, url);
       if(not is) break;
-      _scheduler.AddURL(url);
+      Scheduler::AddURL(url);
     }
     fb.close();
   }

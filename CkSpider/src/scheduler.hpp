@@ -6,7 +6,6 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include "utils.hpp"
 
 class Scheduler
 {
@@ -31,9 +30,6 @@ class Scheduler
   private:
     
     static std::priority_queue<std::string> pq_urls;
-    
-    // This function returns the number of components the url has.
-    static int CountComponents(std::string url);
 };
 
 #endif
