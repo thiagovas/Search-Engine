@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include "utils.hpp"
 
 class Scheduler
 {

@@ -3,6 +3,7 @@ using namespace std;
 
 std::string Crawler::folderName = ".\\";
 std::mutex Crawler::scheduler_mutex;
+bool Crawler::stopping = false;
 
 Crawler::Crawler()
 { }
@@ -12,7 +13,8 @@ void Crawler::Start(string pseedFilename, int pnThreads)
   this->seedFilename = pseedFilename;
   this->nThreads = pnThreads;
   this->LoadScheduler();
-  
+  Crawler::stopping = false;
+
   vector<thread> running;
   for(int i = 0; i < pnThreads; i++)
     running.push_back(thread(&Crawler::Crawl, this));
@@ -31,10 +33,7 @@ void Crawler::SetOutputFolder(string pfolderName)
 void Crawler::Stop()
 {
   cout << "Stopping...\n";
-  
-  // TODO: Make sure every file is closed.
-  
-  exit(0);
+  Crawler::stopping = true;
 }
 
 void Crawler::LoadScheduler()
@@ -61,23 +60,38 @@ void Crawler::LoadScheduler()
 
 void Crawler::Crawl()
 {
+  Dumper dmp;
   CkSpider spider;
   CkString collectedUrl, collectedTitle, collectedHtml;
   
-  while(not Scheduler::IsEmpty())
+  stringstream ss;
+  ss << this_thread::get_id();
+  
+  string filename = Crawler::folderName + "f" + ss.str();
+  dmp.SetFilename(filename);
+  dmp.OpenStream();
+  
+  while(true)
   {
     Crawler::scheduler_mutex.lock();
     string nextUrl = Scheduler::GetNext();
     Scheduler::RemoveTop();
     Crawler::scheduler_mutex.unlock();
-    
+    if(Crawler::stopping)
+    {
+      dmp.ForceDump();
+      break;
+    }
+    if(Scheduler::IsEmpty()) continue;
+
     spider.Initialize(nextUrl.c_str());
     spider.CrawlNext();
     spider.get_LastUrl(collectedUrl);
     spider.get_LastHtmlTitle(collectedTitle);
     spider.get_LastHtml(collectedHtml);
+    dmp.AddPage(collectedUrl.getString(), collectedTitle.getString(), collectedHtml.getString());
+    dmp.Dump();
     
-    cout << nextUrl << " " << collectedUrl.getString() << endl << endl;
     int unspidered = spider.get_NumUnspidered();
     for(int i = 0; i < unspidered; i++)
     {
@@ -88,4 +102,6 @@ void Crawler::Crawl()
       Crawler::scheduler_mutex.unlock();
     }
   }
+  
+  dmp.CloseStream();
 }

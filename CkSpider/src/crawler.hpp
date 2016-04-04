@@ -4,6 +4,9 @@
 #include <mutex>
 #include <thread>
 #include <string>
+#include <locale>
+#include <cstring>
+#include <sstream>
 #include <csignal>
 #include <fstream>
 #include <cstdlib>
@@ -14,6 +17,7 @@
 #include "CkString.h"
 #include "scheduler.hpp"
 #include "utils.hpp"
+#include "dumper.hpp"
 
 class Crawler
 {
@@ -37,6 +41,8 @@ class Crawler
     
     static std::mutex scheduler_mutex;
     
+    static bool stopping;
+
     std::string seedFilename;
     
     // Number of threads the crawler will create in order to collect the pages

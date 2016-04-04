@@ -7,13 +7,13 @@ SRC_DIR=./src
 
 all: prep build
 
-build: main crawler scheduler utils
-	$(CC) $(IOP) $(OBJ_DIR)/main.o $(OBJ_DIR)/crawler.o $(OBJ_DIR)/scheduler.o $(OBJ_DIR)/utils.o $(BINLIB) -o main $(OP)
+build: main crawler scheduler utils dumper page
+	$(CC) $(IOP) $(OBJ_DIR)/main.o $(OBJ_DIR)/crawler.o $(OBJ_DIR)/scheduler.o $(OBJ_DIR)/utils.o $(OBJ_DIR)/dumper.o $(OBJ_DIR)/page.o $(BINLIB) -o main $(OP)
 
 main: crawler
 	$(CC) $(IOP) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o $(OP)
 
-crawler: scheduler utils
+crawler: scheduler utils dumper page
 	$(CC) $(IOP) -c $(SRC_DIR)/crawler.cpp -o $(OBJ_DIR)/crawler.o $(OP)
 
 scheduler: utils
@@ -21,6 +21,13 @@ scheduler: utils
 
 utils:
 	$(CC) -c $(SRC_DIR)/utils.cpp -o $(OBJ_DIR)/utils.o $(OP)
+
+dumper: page
+	$(CC) -c $(SRC_DIR)/dumper.cpp -o $(OBJ_DIR)/dumper.o $(OP)
+
+page:
+	$(CC) -c $(SRC_DIR)/page.cpp -o $(OBJ_DIR)/page.o $(OP)
+
 
 prep:
 	clear

@@ -11,7 +11,9 @@ Scheduler::Scheduler()
 // Adds a new well-formed url to the scheduler
 void Scheduler::AddURL(string url)
 {
-  pq_urls.push(url);
+  // Here, I'm just adding url's that has a .br
+  if(Utils::Exists(Utils::GetDomain(url), ".br"))
+    pq_urls.push(url);
 }
 
 // It returns the next url available on the scheduler
