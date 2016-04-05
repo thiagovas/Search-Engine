@@ -2,8 +2,8 @@
 using namespace std;
 
 
-priority_queue<string> Scheduler::pq_urls;
-
+priority_queue<string, vector<string>, QueueComparison> Scheduler::pq_urls;
+set<string> Scheduler::visited;
 
 Scheduler::Scheduler()
 {}
@@ -13,7 +13,13 @@ void Scheduler::AddURL(string url)
 {
   // Here, I'm just adding url's that has a .br
   if(Utils::Exists(Utils::GetDomain(url), ".br"))
-    pq_urls.push(url);
+  {
+    if(Scheduler::visited.find(url) == Scheduler::visited.end())
+    {
+      Scheduler::visited.insert(url);
+      pq_urls.push(url);
+    }
+  }
 }
 
 // It returns the next url available on the scheduler

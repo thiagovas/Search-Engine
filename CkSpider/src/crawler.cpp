@@ -92,6 +92,7 @@ void Crawler::Crawl()
     dmp.AddPage(collectedUrl.getString(), collectedTitle.getString(), collectedHtml.getString());
     dmp.Dump();
     
+    cout << nextUrl << endl;
     int unspidered = spider.get_NumUnspidered();
     for(int i = 0; i < unspidered; i++)
     {

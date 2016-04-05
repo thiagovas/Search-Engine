@@ -1,12 +1,22 @@
 #ifndef _scheduler_hpp
 #define _scheduler_hpp
 
+#include <set>
 #include <queue>
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <functional>
 #include "utils.hpp"
+
+class QueueComparison {
+  public:
+    QueueComparison(){}
+    bool operator()(const std::string& lhs, const std::string& rhs)
+    {
+      return Utils::CountComponents(lhs) < Utils::CountComponents(rhs);
+    }
+};
 
 class Scheduler
 {
@@ -30,7 +40,8 @@ class Scheduler
     
   private:
     
-    static std::priority_queue<std::string> pq_urls;
+    static std::set<std::string> visited;
+    static std::priority_queue<std::string, std::vector<std::string>, QueueComparison > pq_urls;
 };
 
 #endif
