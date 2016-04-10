@@ -9,12 +9,14 @@
 #include <functional>
 #include "utils.hpp"
 
+typedef long long int ll;
+
 class QueueComparison {
   public:
     QueueComparison(){}
-    bool operator()(const std::string& lhs, const std::string& rhs)
+    bool operator()(const std::pair<std::string, ll>& lhs, const std::pair<std::string, ll>& rhs)
     {
-      return Utils::CountComponents(lhs) < Utils::CountComponents(rhs);
+      return lhs.second > rhs.second;
     }
 };
 
@@ -25,7 +27,7 @@ class Scheduler
     Scheduler();
     
     // Adds a new well-formed url to the scheduler
-    static void AddURL(std::string url);
+    static bool AddURL(std::string url, ll weight);
     
     // It returns the next url available on the scheduler
     // If there is none, it returns an empty string
@@ -41,7 +43,7 @@ class Scheduler
   private:
     
     static std::set<std::string> visited;
-    static std::priority_queue<std::string, std::vector<std::string>, QueueComparison > pq_urls;
+    static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_urls;
 };
 
 #endif

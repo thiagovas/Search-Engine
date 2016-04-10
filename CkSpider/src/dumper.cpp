@@ -25,7 +25,6 @@ void Dumper::ForceDump()
   {
     ostream out(&this->_fb);
     out << this->_vp[i].GetUrl() << endl;
-    out << this->_vp[i].GetTitle() << endl << endl;
     out << this->_vp[i].GetHtml() << endl << endl;
     out << "|||\n\n";
   }

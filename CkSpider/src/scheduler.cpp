@@ -2,24 +2,28 @@
 using namespace std;
 
 
-priority_queue<string, vector<string>, QueueComparison> Scheduler::pq_urls;
+priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison> Scheduler::pq_urls;
 set<string> Scheduler::visited;
 
 Scheduler::Scheduler()
 {}
 
 // Adds a new well-formed url to the scheduler
-void Scheduler::AddURL(string url)
+bool Scheduler::AddURL(string url, ll weight)
 {
-  // Here, I'm just adding url's that has a .br
+  // Here, I'm making sure the scheduler just adds urls that has a .br
   if(Utils::Exists(Utils::GetDomain(url), ".br"))
   {
     if(Scheduler::visited.find(url) == Scheduler::visited.end())
     {
       Scheduler::visited.insert(url);
-      pq_urls.push(url);
+      weight = 100000000ll*weight + Utils::CountComponents(url);
+      pq_urls.push(make_pair(url, weight));
+      return true;
     }
   }
+  else return false;
+  return true;
 }
 
 // It returns the next url available on the scheduler
@@ -27,7 +31,7 @@ void Scheduler::AddURL(string url)
 string Scheduler::GetNext()
 {
   if(pq_urls.empty()) return "";
-  return pq_urls.top();
+  return pq_urls.top().first;
 }
 
 // This method removes the url from the top of the scheduler

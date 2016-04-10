@@ -20,7 +20,7 @@ bool Utils::Exists(string str, string pattern)
   return false;
 }
 
-string Utils::GetDomain(string url)
+string Utils::GetDomain(string &url)
 {
   unsigned i, j=0;
   const string http = "https";
@@ -56,8 +56,17 @@ int Utils::CountComponents(string url)
   }
   if(j >= http.size()-1) i+=3;
   
+  // Ignoring the www in front of the url
+  const string www = "www."; j=0;
+  for(;i < url.size() && j < www.size(); i++)
+  {
+    if(url[i]==www[j]) j++;
+    else break;
+  }
+  if(j != www.size()) i-=j;
+  
   for(;i < url.size()-1; i++)
-    if(url[i]=='.' || url[i]=='/') c++;
+    if(url[i]=='.' || url[i]=='/' || url[i]=='&' || url[i]=='?') c++;
   
   return c;
 }

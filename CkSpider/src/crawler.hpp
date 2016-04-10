@@ -1,6 +1,7 @@
 #ifndef _crawler_hpp
 #define _crawler_hpp
 
+#include <map>
 #include <mutex>
 #include <thread>
 #include <string>
@@ -43,6 +44,13 @@ class Crawler
     
     static bool stopping;
 
+    static int crawlCount;
+    
+    static std::map<std::string, long long int> weights;
+    
+    // Integer used as a url weight for the scheduler
+    int urlWeight;
+
     std::string seedFilename;
     
     // Number of threads the crawler will create in order to collect the pages
@@ -53,6 +61,8 @@ class Crawler
     
     // Function executed by each thread
     void Crawl();
+
+    void Log();
 };
 
 

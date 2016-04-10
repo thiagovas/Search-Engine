@@ -4,9 +4,13 @@ using namespace std;
 std::string Crawler::folderName = ".\\";
 std::mutex Crawler::scheduler_mutex;
 bool Crawler::stopping = false;
+int Crawler::crawlCount = 0;
+map<string, long long int> Crawler::weights;
 
 Crawler::Crawler()
-{ }
+{
+  this->urlWeight=0;
+}
 
 void Crawler::Start(string pseedFilename, int pnThreads)
 {
@@ -14,7 +18,7 @@ void Crawler::Start(string pseedFilename, int pnThreads)
   this->nThreads = pnThreads;
   this->LoadScheduler();
   Crawler::stopping = false;
-
+  
   vector<thread> running;
   for(int i = 0; i < pnThreads; i++)
     running.push_back(thread(&Crawler::Crawl, this));
@@ -30,10 +34,23 @@ void Crawler::SetOutputFolder(string pfolderName)
   Crawler::folderName = pfolderName;
 }
 
+void Crawler::Log()
+{
+  sleep(10);
+  filebuf fb;
+  if(fb.open(Crawler::folderName+"Log", ios::out))
+  {
+    ostream os(&fb);
+    os << Crawler::crawlCount << " different url's collected\n";
+    fb.close();
+  }
+}
+
 void Crawler::Stop()
 {
-  cout << "Stopping...\n";
+  cout << "\nStopping...\n";
   Crawler::stopping = true;
+  this->Log();
 }
 
 void Crawler::LoadScheduler()
@@ -47,7 +64,8 @@ void Crawler::LoadScheduler()
     {
       getline(is, url);
       if(not is) break;
-      Scheduler::AddURL(url);
+      if(not Scheduler::AddURL(url, -1))
+        cerr << "Discarded: " << url << endl;
     }
     fb.close();
   }
@@ -76,6 +94,10 @@ void Crawler::Crawl()
     Crawler::scheduler_mutex.lock();
     string nextUrl = Scheduler::GetNext();
     Scheduler::RemoveTop();
+    
+    //if(nextUrl!="")
+      cout << Crawler::crawlCount << " " << nextUrl << endl;
+    
     Crawler::scheduler_mutex.unlock();
     if(Crawler::stopping)
     {
@@ -83,7 +105,11 @@ void Crawler::Crawl()
       break;
     }
     if(Scheduler::IsEmpty()) continue;
-
+    
+    Crawler::scheduler_mutex.lock();
+    Crawler::crawlCount++;
+    Crawler::scheduler_mutex.unlock();
+    
     spider.Initialize(nextUrl.c_str());
     spider.CrawlNext();
     spider.get_LastUrl(collectedUrl);
@@ -92,14 +118,15 @@ void Crawler::Crawl()
     dmp.AddPage(collectedUrl.getString(), collectedTitle.getString(), collectedHtml.getString());
     dmp.Dump();
     
-    cout << nextUrl << endl;
     int unspidered = spider.get_NumUnspidered();
     for(int i = 0; i < unspidered; i++)
     {
       spider.GetUnspideredUrl(0, collectedUrl);
       spider.SkipUnspidered(0);
+      string curl = collectedUrl.getString();
       Crawler::scheduler_mutex.lock();
-      Scheduler::AddURL(collectedUrl.getString());
+      long long int newWeight = ++Crawler::weights[Utils::GetDomain(curl)];
+      Scheduler::AddURL(curl, newWeight);
       Crawler::scheduler_mutex.unlock();
     }
   }

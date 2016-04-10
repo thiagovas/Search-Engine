@@ -13,7 +13,7 @@ class Utils {
     static bool Exists(std::string str, std::string pattern);
     
     // This function returns the domain of the url.
-    static std::string GetDomain(std::string url);
+    static std::string GetDomain(std::string &url);
   private:
 };
 
