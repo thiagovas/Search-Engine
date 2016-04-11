@@ -3,6 +3,7 @@
 
 #include <map>
 #include <mutex>
+#include <cctype>
 #include <thread>
 #include <string>
 #include <locale>
@@ -42,13 +43,14 @@ class Crawler
     
     static std::mutex scheduler_mutex;
     
+    static std::mutex crawlCount_mutex;
+    
     static bool stopping;
     
     static int crawlCount;
+
+    static int collecting;
     
-    // A map that keeps how many links the crawler collected for each domain
-    // It's used as a weight at the scheduler
-    static std::map<std::string, long long int> weights;
     
     // Integer used as a url weight for the scheduler
     int urlWeight;

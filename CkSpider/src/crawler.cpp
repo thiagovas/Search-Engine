@@ -3,21 +3,27 @@ using namespace std;
 
 std::string Crawler::folderName = ".\\";
 std::mutex Crawler::scheduler_mutex;
+std::mutex Crawler::crawlCount_mutex;
 bool Crawler::stopping = false;
 int Crawler::crawlCount = 0;
-map<string, long long int> Crawler::weights;
+int Crawler::collecting=0;
 
 Crawler::Crawler()
 {
   this->urlWeight=0;
+  Crawler::crawlCount=0;
+  Crawler::collecting=0;
 }
 
 void Crawler::Start(string pseedFilename, int pnThreads)
 {
+  Scheduler::Initialize(Crawler::folderName+"tmpScheduler");
+  
   this->seedFilename = pseedFilename;
   this->nThreads = pnThreads;
   this->LoadScheduler();
   Crawler::stopping = false;
+  
   
   vector<thread> running;
   for(int i = 0; i < pnThreads; i++)
@@ -54,8 +60,11 @@ void Crawler::BackupScheduler()
 
 void Crawler::ForceBackupScheduler()
 {
+  cout << "Locking mutex to backup scheduler\n";
   Crawler::scheduler_mutex.lock();
+  cout << "Backing up scheduler\n";
   Scheduler::PreProcessBackup();
+  cout << "Finished backing up scheduler\n";
   Crawler::scheduler_mutex.unlock();
   
   Scheduler::Backup(Crawler::folderName+"scheduler_urls");
@@ -84,7 +93,7 @@ void Crawler::LoadScheduler()
     {
       getline(is, url);
       if(not is) break;
-      if(not Scheduler::AddURL(url, -1))
+      if(not Scheduler::AddURL(url))
         cerr << "Discarded: " << url << endl;
     }
     fb.close();
@@ -114,23 +123,43 @@ void Crawler::Crawl()
     Crawler::scheduler_mutex.lock();
     string nextUrl = Scheduler::GetNext();
     Scheduler::RemoveTop();
-    
-    if(nextUrl != "")
-      cout << Crawler::crawlCount << " " << nextUrl << endl;
-    
     Crawler::scheduler_mutex.unlock();
+    
+    Crawler::crawlCount_mutex.lock();
+    if(nextUrl != "")
+    {
+      Crawler::collecting+=1;
+      Crawler::crawlCount++;
+      cout << Crawler::crawlCount << " " << nextUrl << endl;
+    }
+    Crawler::crawlCount_mutex.unlock();
+    
     if(Crawler::stopping)
     {
       dmp.ForceDump();
       break;
     }
-    if(Scheduler::IsEmpty()) continue;
+    if(Scheduler::IsEmpty())
+    {
+      bool loaded=false, isThereThreadCollecting=false;
+      Crawler::crawlCount_mutex.lock();
+      isThereThreadCollecting = (Crawler::collecting>0);
+      Crawler::crawlCount_mutex.unlock();
+      
+      
+      Crawler::scheduler_mutex.lock();
+      loaded=Scheduler::LoadFromDump();
+      Crawler::scheduler_mutex.unlock();
+      if(not loaded && not isThereThreadCollecting)
+      {
+        cout << "There is no more URL's to collect\n";
+        Crawler::stopping=true;
+        break;
+      }
+      continue;
+    }
     
-    Crawler::scheduler_mutex.lock();
-    Crawler::crawlCount++;
-    Crawler::scheduler_mutex.unlock();
-    
-    spider.Initialize(nextUrl.c_str());
+    spider.Initialize(Utils::GetDomain(nextUrl).c_str());
     spider.CrawlNext();
     spider.get_LastUrl(collectedUrl);
     spider.get_LastHtmlTitle(collectedTitle);
@@ -138,17 +167,34 @@ void Crawler::Crawl()
     dmp.AddPage(collectedUrl.getString(), collectedTitle.getString(), collectedHtml.getString());
     dmp.Dump();
     
+    // Adding the non-outbound links to the scheduler
     int unspidered = spider.get_NumUnspidered();
     for(int i = 0; i < unspidered; i++)
     {
       spider.GetUnspideredUrl(0, collectedUrl);
       spider.SkipUnspidered(0);
       string curl = collectedUrl.getString();
+      
       Crawler::scheduler_mutex.lock();
-      long long int newWeight = ++Crawler::weights[Utils::GetDomain(curl)];
-      Scheduler::AddURL(curl, newWeight);
+      Scheduler::AddURL(curl);
       Crawler::scheduler_mutex.unlock();
     }
+    
+    // Adding the outbound links to the scheduler
+    for(int i = 0; i < spider.get_NumOutboundLinks(); i++)
+    {
+      if(not spider.GetOutboundLink(i, collectedUrl)) continue;
+      string curl = collectedUrl.getString();
+      
+      Crawler::scheduler_mutex.lock();
+      Scheduler::AddURL(curl);
+      Crawler::scheduler_mutex.unlock();
+    }
+    spider.ClearOutboundLinks();
+    
+    Crawler::crawlCount_mutex.lock();
+    Crawler::collecting-=1;
+    Crawler::crawlCount_mutex.unlock();
   }
   
   dmp.CloseStream();

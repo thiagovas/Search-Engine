@@ -20,6 +20,25 @@ bool Utils::Exists(string str, string pattern)
   return false;
 }
 
+// This function verifies if [str] has any of the pattern characters
+bool Utils::FindAny(string str, string pattern)
+{
+  for(unsigned i = 0; i < str.size(); i++)
+  {
+    bool found=false;
+    for(unsigned j = 0; j < pattern.size(); j++)
+    {
+      if(str[i] == pattern[j])
+      {
+        found=true;
+        break;
+      }
+    }
+    if(found) return true;
+  }
+  return false;
+}
+
 string Utils::GetDomain(string &url)
 {
   unsigned i, j=0;
@@ -69,4 +88,13 @@ int Utils::CountComponents(string url)
     if(url[i]=='.' || url[i]=='/' || url[i]=='&' || url[i]=='?') c++;
   
   return c;
+}
+
+short Utils::GetURLHash(string url)
+{
+  short hash=0;
+  for(unsigned i = 0; i < url.size(); i++)
+    if(isalpha(url[i]))
+      hash += url[i]-'A';
+  return hash;
 }

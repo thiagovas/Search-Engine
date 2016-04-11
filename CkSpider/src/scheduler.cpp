@@ -2,24 +2,115 @@
 using namespace std;
 
 
-priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison> Scheduler::pq_urls;
-priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison> Scheduler::pq_bkp;
+queue<string> Scheduler::dumpUrls;
+string Scheduler::dumpFilename;
 set<string> Scheduler::visited;
+priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_urls;
+priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_bkp;
+vector<string> Scheduler::vDomains;
+filebuf Scheduler::fbInDump;
+filebuf Scheduler::fbOutDump;
+map<short, long long int> Scheduler::weights;
+
+
 
 Scheduler::Scheduler()
-{}
+{
+  Scheduler::Initialize("tmpScheduler");
+}
+
+void Scheduler::Initialize(string filename)
+{
+  Scheduler::vDomains.push_back(".br");
+  Scheduler::vDomains.push_back("mulher");
+  Scheduler::vDomains.push_back("uol");
+  Scheduler::vDomains.push_back("globo");
+  Scheduler::vDomains.push_back("vida");
+
+  Scheduler::SetDumpFilename(filename);
+  Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
+  Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
+}
+
+void Scheduler::SetDumpFilename(string filename)
+{
+  Scheduler::dumpFilename = filename;
+}
+
+void Scheduler::AddDump(string &url)
+{
+  Scheduler::dumpUrls.push(url);
+  if(Scheduler::dumpUrls.size() > 2000)
+    Scheduler::DumpUrls();
+}
+
+void Scheduler::DumpUrls()
+{
+  ostream os(&Scheduler::fbOutDump);
+  while(not Scheduler::dumpUrls.empty())
+  {
+    os << Scheduler::dumpUrls.front() << endl;
+    Scheduler::dumpUrls.pop();
+  }
+  os.flush();
+}
+
+bool Scheduler::LoadFromDump()
+{
+  istream is(&Scheduler::fbInDump);
+  string url;
+  bool added=false;
+  while(Scheduler::pq_urls.size() < 1000)
+  {
+    getline(is, url);
+    if(not is)
+    {
+      Scheduler::fbOutDump.close();
+      Scheduler::fbInDump.close();
+      Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
+      Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
+      break;
+    }
+    added=true;
+    Scheduler::AddURL(url);
+  }
+  return added || (Scheduler::pq_urls.size() > 0);
+}
 
 // Adds a new well-formed url to the scheduler
-bool Scheduler::AddURL(string url, ll weight)
+bool Scheduler::AddURL(string url)
 {
+  if(url.size() > 200) return false;
+  if(Scheduler::pq_urls.size() > 10000)
+  {
+    Scheduler::AddDump(url);
+    return false;
+  }
+  
   // Here, I'm making sure the scheduler just adds urls that has a .br
-  if(Utils::Exists(Utils::GetDomain(url), ".br"))
+  // or any keyword present at vDomains
+  bool add=false;
+  string domain = Utils::GetDomain(url);
+  for(unsigned i = 0; i < Scheduler::vDomains.size(); i++)
+  {
+    // Ignoring dynamic urls
+    if(Utils::FindAny(url, "{}@")) return false;
+    if(Utils::Exists(domain, Scheduler::vDomains[i]))
+    {
+      add=true;
+      break;
+    }
+  }
+  
+  if(add)
   {
     if(Scheduler::visited.find(url) == Scheduler::visited.end())
     {
+      short hash = Utils::GetURLHash(Utils::GetDomain(url));
+      long long int newWeight = ++Scheduler::weights[hash];
       Scheduler::visited.insert(url);
-      weight = 100000000ll*weight + Utils::CountComponents(url);
-      pq_urls.push(make_pair(url, weight));
+      newWeight = 100000000ll*newWeight + Utils::CountComponents(url);
+      pq_urls.push(make_pair(url, newWeight));
       return true;
     }
   }
@@ -68,4 +159,3 @@ bool Scheduler::IsEmpty()
 {
   return pq_urls.empty();
 }
-

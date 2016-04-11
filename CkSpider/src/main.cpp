@@ -16,8 +16,8 @@ int main()
   signal(SIGINT, stop);
    
   cout << "\nTo Stop, press Ctrl-C\nStarting the crawler...\n";
-  // Name of the file with the seeds, 50 threads
-  _crawler.Start("seeds", 50);
+  // Name of the file with the seeds, 80 threads
+  _crawler.Start("seeds", 80);
   
   return 0;
 }

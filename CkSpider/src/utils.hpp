@@ -14,6 +14,12 @@ class Utils {
     
     // This function returns the domain of the url.
     static std::string GetDomain(std::string &url);
+    
+    // Hash function
+    static short GetURLHash(std::string url);
+    
+    // This function verifies if [str] has any of the pattern characters
+    static bool FindAny(std::string str, std::string pattern);
   private:
 };
 

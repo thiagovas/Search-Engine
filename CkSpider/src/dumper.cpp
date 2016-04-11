@@ -16,7 +16,7 @@ void Dumper::OpenStream()
 
 void Dumper::Dump()
 {
-  if(this->_vp.size() > 1000) this->ForceDump();
+  if(this->_vp.size() > 100) this->ForceDump();
 }
 
 void Dumper::ForceDump()
