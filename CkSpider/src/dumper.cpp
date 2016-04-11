@@ -16,7 +16,7 @@ void Dumper::OpenStream()
 
 void Dumper::Dump()
 {
-  if(this->_vp.size() > 10000) this->ForceDump();
+  if(this->_vp.size() > 1000) this->ForceDump();
 }
 
 void Dumper::ForceDump()
@@ -24,9 +24,8 @@ void Dumper::ForceDump()
   for(unsigned i = 0; i < this->_vp.size(); i++)
   {
     ostream out(&this->_fb);
-    out << this->_vp[i].GetUrl() << endl;
-    out << this->_vp[i].GetHtml() << endl << endl;
-    out << "|||\n\n";
+    out << "|||\n" << this->_vp[i].GetUrl() << "\n|\n";
+    out << this->_vp[i].GetHtml() << endl;
   }
   this->_vp.clear();
 }

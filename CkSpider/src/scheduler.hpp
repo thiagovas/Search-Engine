@@ -5,6 +5,8 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <iostream>
 #include <algorithm>
 #include <functional>
 #include "utils.hpp"
@@ -40,10 +42,17 @@ class Scheduler
     // It returns if the scheduler has no more urls
     static bool IsEmpty();
     
+    // Function that copies the urls to another data structure used to 
+    // save the urls at a file
+    static void PreProcessBackup();
+    
+    // This function saves the urls at the [filename] file
+    static void Backup(std::string filename);
   private:
     
     static std::set<std::string> visited;
     static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_urls;
+    static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_bkp;
 };
 
 #endif

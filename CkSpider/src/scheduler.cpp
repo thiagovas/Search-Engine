@@ -3,6 +3,7 @@ using namespace std;
 
 
 priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison> Scheduler::pq_urls;
+priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison> Scheduler::pq_bkp;
 set<string> Scheduler::visited;
 
 Scheduler::Scheduler()
@@ -24,6 +25,26 @@ bool Scheduler::AddURL(string url, ll weight)
   }
   else return false;
   return true;
+}
+
+void Scheduler::PreProcessBackup()
+{
+  Scheduler::pq_bkp = Scheduler::pq_urls;
+}
+
+void Scheduler::Backup(string filename)
+{
+  filebuf fb;
+  if(fb.open(filename, ios::out))
+  {
+    ostream os(&fb);
+    while(not Scheduler::pq_bkp.empty())
+    {
+      os << Scheduler::pq_bkp.top().first << endl;
+      Scheduler::pq_bkp.pop();
+    }
+    fb.close();
+  }
 }
 
 // It returns the next url available on the scheduler

@@ -29,14 +29,41 @@ void Crawler::Start(string pseedFilename, int pnThreads)
   cout << "Stopped crawling\n";
 }
 
+void Crawler::Stop()
+{
+  cout << "\nStopping...\n";
+  Crawler::stopping = true;
+  this->Log();
+  this->ForceBackupScheduler();
+}
+
 void Crawler::SetOutputFolder(string pfolderName)
 {
   Crawler::folderName = pfolderName;
 }
 
+void Crawler::BackupScheduler()
+{
+  while(true)
+  {
+    sleep(120);
+    if(Crawler::stopping) break;
+    ForceBackupScheduler();
+  }
+}
+
+void Crawler::ForceBackupScheduler()
+{
+  Crawler::scheduler_mutex.lock();
+  Scheduler::PreProcessBackup();
+  Crawler::scheduler_mutex.unlock();
+  
+  Scheduler::Backup(Crawler::folderName+"scheduler_urls");
+}
+
 void Crawler::Log()
 {
-  sleep(10);
+  sleep(20);
   filebuf fb;
   if(fb.open(Crawler::folderName+"Log", ios::out))
   {
@@ -44,13 +71,6 @@ void Crawler::Log()
     os << Crawler::crawlCount << " different url's collected\n";
     fb.close();
   }
-}
-
-void Crawler::Stop()
-{
-  cout << "\nStopping...\n";
-  Crawler::stopping = true;
-  this->Log();
 }
 
 void Crawler::LoadScheduler()
@@ -95,7 +115,7 @@ void Crawler::Crawl()
     string nextUrl = Scheduler::GetNext();
     Scheduler::RemoveTop();
     
-    //if(nextUrl!="")
+    if(nextUrl != "")
       cout << Crawler::crawlCount << " " << nextUrl << endl;
     
     Crawler::scheduler_mutex.unlock();

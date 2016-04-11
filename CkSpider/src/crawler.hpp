@@ -43,9 +43,11 @@ class Crawler
     static std::mutex scheduler_mutex;
     
     static bool stopping;
-
+    
     static int crawlCount;
     
+    // A map that keeps how many links the crawler collected for each domain
+    // It's used as a weight at the scheduler
     static std::map<std::string, long long int> weights;
     
     // Integer used as a url weight for the scheduler
@@ -61,8 +63,17 @@ class Crawler
     
     // Function executed by each thread
     void Crawl();
-
+    
+    // This function Logs the statistics of the crawler
     void Log();
+    
+    // Function that runs constantly and backups the scheduler
+    // Every x minutes
+    void BackupScheduler();
+    
+    // Auxiliar function for BackupScheduler
+    // It's also used when a kill signal is received.
+    void ForceBackupScheduler();
 };
 
 
