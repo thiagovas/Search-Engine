@@ -75,6 +75,8 @@ class Scheduler
     static std::filebuf fbInDump;
     static std::filebuf fbOutDump;
     
+    static std::vector<std::string> forbidden;
+
     // A map that keeps how many links the crawler collected for each domain
     // It's used as a weight at the scheduler
     static std::map<short, long long int> weights;

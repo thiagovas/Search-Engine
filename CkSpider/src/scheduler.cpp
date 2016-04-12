@@ -7,7 +7,7 @@ string Scheduler::dumpFilename;
 set<string> Scheduler::visited;
 priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_urls;
 priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_bkp;
-vector<string> Scheduler::vDomains;
+vector<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
 map<short, long long int> Scheduler::weights;
@@ -27,6 +27,11 @@ void Scheduler::Initialize(string filename)
   Scheduler::vDomains.push_back("globo");
   Scheduler::vDomains.push_back("vida");
 
+  Scheduler::forbidden.push_back("xvideos");
+  Scheduler::forbidden.push_back("porno");
+  Scheduler::forbidden.push_back("redtube");
+  Scheduler::forbidden.push_back("xxx");
+  
   Scheduler::SetDumpFilename(filename);
   Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
@@ -82,6 +87,10 @@ bool Scheduler::AddURL(string url)
 {
   if(url.size() > 200) return false;
   
+  // Making sure the url doesn't have any of the forbidden keywords
+  for(unsigned i = 0; i < Scheduler::forbidden.size(); i++)
+    if(Utils::Exists(url, Scheduler::forbidden[i])) return false;
+  
   // Here, I'm making sure the scheduler just adds urls that has a .br
   // or any keyword present at vDomains
   bool add=false;
@@ -111,6 +120,7 @@ bool Scheduler::AddURL(string url)
 // Adds the url to the scheduler without making any verification
 void Scheduler::ForceAddURL(string url)
 {
+  if(url.size() < 3) return;
   if(Scheduler::pq_urls.size() > 10000)
   {
     Scheduler::AddDump(url);
