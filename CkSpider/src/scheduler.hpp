@@ -61,6 +61,9 @@ class Scheduler
     // This function loads some urls from the temporary file of urls
     static bool LoadFromDump();
     
+    // Adds the url to the scheduler without making any verification
+    static void ForceAddURL(std::string url);
+    
   private:
     
     static std::queue<std::string> dumpUrls;

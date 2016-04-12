@@ -51,7 +51,7 @@ string Utils::GetDomain(string &url)
     if(url[i]==http[j]) j++;
     else break;
   }
-  if(j >= http.size()-1) i+=3;
+  if(j+1 >= http.size()) i+=3;
   
   for(;i < url.size(); i++)
     if(url[i]=='/') break;
@@ -73,7 +73,7 @@ int Utils::CountComponents(string url)
     if(url[i]==http[j]) j++;
     else break;
   }
-  if(j >= http.size()-1) i+=3;
+  if(j+1 >= http.size()) i+=3;
   
   // Ignoring the www in front of the url
   const string www = "www."; j=0;
@@ -83,8 +83,8 @@ int Utils::CountComponents(string url)
     else break;
   }
   if(j != www.size()) i-=j;
-  
-  for(;i < url.size()-1; i++)
+   
+  for(;i+1 < url.size(); i++)
     if(url[i]=='.' || url[i]=='/' || url[i]=='&' || url[i]=='?') c++;
   
   return c;

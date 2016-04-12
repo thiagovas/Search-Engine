@@ -81,11 +81,6 @@ bool Scheduler::LoadFromDump()
 bool Scheduler::AddURL(string url)
 {
   if(url.size() > 200) return false;
-  if(Scheduler::pq_urls.size() > 10000)
-  {
-    Scheduler::AddDump(url);
-    return false;
-  }
   
   // Here, I'm making sure the scheduler just adds urls that has a .br
   // or any keyword present at vDomains
@@ -106,16 +101,28 @@ bool Scheduler::AddURL(string url)
   {
     if(Scheduler::visited.find(url) == Scheduler::visited.end())
     {
-      short hash = Utils::GetURLHash(Utils::GetDomain(url));
-      long long int newWeight = ++Scheduler::weights[hash];
-      Scheduler::visited.insert(url);
-      newWeight = 100000000ll*newWeight + Utils::CountComponents(url);
-      pq_urls.push(make_pair(url, newWeight));
+      Scheduler::ForceAddURL(url);
       return true;
     }
   }
-  else return false;
-  return true;
+  return false;
+}
+
+// Adds the url to the scheduler without making any verification
+void Scheduler::ForceAddURL(string url)
+{
+  if(Scheduler::pq_urls.size() > 10000)
+  {
+    Scheduler::AddDump(url);
+  }
+  else
+  {
+    short hash = Utils::GetURLHash(Utils::GetDomain(url));
+    long long int newWeight = ++Scheduler::weights[hash];
+    Scheduler::visited.insert(url);
+    newWeight = 100000000ll*newWeight + Utils::CountComponents(url);
+    Scheduler::pq_urls.push(make_pair(url, newWeight));
+  }
 }
 
 void Scheduler::PreProcessBackup()
