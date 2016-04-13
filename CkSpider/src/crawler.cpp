@@ -199,7 +199,9 @@ void Crawler::Crawl()
       Crawler::scheduler_mutex.unlock();
     }
     spider.ClearOutboundLinks();
-    
+    spider.ClearSpideredUrls();
+    spider.ClearFailedUrls();
+
     Crawler::crawlCount_mutex.lock();
     Crawler::collecting-=1;
     Crawler::crawlCount_mutex.unlock();
