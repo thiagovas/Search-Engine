@@ -1,25 +1,6 @@
 #include "utils.hpp"
 using namespace std;
 
-bool Utils::Exists(string str, string pattern)
-{
-  int u[256], i, j, k;
-  if(str.size() < pattern.size()) return false;
-  
-  for(i = 0; i < 256; i++) u[i] = 0;
-  for(i = 0; i < (int)pattern.size(); i++) u[(int)pattern[i]] = i;
-  k = pattern.size()-1;
-  while(k < (int)str.size())
-  {
-    i = pattern.size()-1, j = k;
-    while(i >= 0 && str[j] == pattern[i]) i--, j--;
-    if(i < 0) return true;
-    if(k == (int)str.size()-1) break;
-    k += pattern.size() - u[(int)str[k+1]];
-  }
-  return false;
-}
-
 // This function verifies if [str] has any of the pattern characters
 bool Utils::FindAny(string str, string pattern)
 {

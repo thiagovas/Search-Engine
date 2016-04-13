@@ -68,7 +68,7 @@ class Scheduler
     
     static std::queue<std::string> dumpUrls;
     static std::string dumpFilename;
-    static std::set<std::string> visited;
+    static std::set<long long int> visited;
     static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_urls;
     static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_bkp;
     static std::vector<std::string> vDomains;
@@ -83,7 +83,9 @@ class Scheduler
 
     static void AddDump(std::string &url);
     
-    static void DumpUrls();    
+    static void DumpUrls();
+    
+    static long long int VisitedHash(std::string url);
 };
 
 #endif

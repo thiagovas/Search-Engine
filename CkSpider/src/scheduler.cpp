@@ -4,7 +4,7 @@ using namespace std;
 
 queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
-set<string> Scheduler::visited;
+set<long long int> Scheduler::visited;
 priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_urls;
 priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_bkp;
 vector<string> Scheduler::vDomains, Scheduler::forbidden;
@@ -60,6 +60,15 @@ void Scheduler::DumpUrls()
   os.flush();
 }
 
+long long int Scheduler::VisitedHash(string url)
+{
+  long long int hash=0;
+  for(int i = 0; i < (int)url.size(); i++)
+    if(isalpha(url[i]))
+      hash ^= ((url[i]-'A')<<(i%('z'-'A'+2)));
+  return hash;
+}
+
 bool Scheduler::LoadFromDump()
 {
   istream is(&Scheduler::fbInDump);
@@ -89,7 +98,7 @@ bool Scheduler::AddURL(string url)
   
   // Making sure the url doesn't have any of the forbidden keywords
   for(unsigned i = 0; i < Scheduler::forbidden.size(); i++)
-    if(Utils::Exists(url, Scheduler::forbidden[i])) return false;
+    if(url.find(Scheduler::forbidden[i]) != string::npos) return false;
   
   // Here, I'm making sure the scheduler just adds urls that has a .br
   // or any keyword present at vDomains
@@ -99,7 +108,7 @@ bool Scheduler::AddURL(string url)
   {
     // Ignoring dynamic urls
     if(Utils::FindAny(url, "{}@")) return false;
-    if(Utils::Exists(domain, Scheduler::vDomains[i]))
+    if(domain.find(Scheduler::vDomains[i]) != string::npos)
     {
       add=true;
       break;
@@ -108,7 +117,8 @@ bool Scheduler::AddURL(string url)
   
   if(add)
   {
-    if(Scheduler::visited.find(url) == Scheduler::visited.end())
+    long long int hash=Scheduler::VisitedHash(url);
+    if(Scheduler::visited.find(hash) == Scheduler::visited.end())
     {
       Scheduler::ForceAddURL(url);
       return true;
@@ -127,9 +137,10 @@ void Scheduler::ForceAddURL(string url)
   }
   else
   {
+    long long int vhash = Scheduler::VisitedHash(url);
     short hash = Utils::GetURLHash(Utils::GetDomain(url));
     long long int newWeight = ++Scheduler::weights[hash];
-    Scheduler::visited.insert(url);
+    Scheduler::visited.insert(vhash);
     newWeight = 100000000ll*newWeight + Utils::CountComponents(url);
     Scheduler::pq_urls.push(make_pair(url, newWeight));
   }
