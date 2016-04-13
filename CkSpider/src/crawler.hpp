@@ -2,6 +2,7 @@
 #define _crawler_hpp
 
 #include <map>
+#include <list>
 #include <mutex>
 #include <cctype>
 #include <thread>
@@ -68,10 +69,6 @@ class Crawler
     
     // This function Logs the statistics of the crawler
     void Log();
-    
-    // Function that runs constantly and backups the scheduler
-    // Every x minutes
-    void BackupScheduler();
     
     // Auxiliar function for BackupScheduler
     // It's also used when a kill signal is received.

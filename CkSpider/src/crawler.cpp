@@ -25,12 +25,12 @@ void Crawler::Start(string pseedFilename, int pnThreads)
   Crawler::stopping = false;
   
   
-  vector<thread> running;
+  list<thread> running;
   for(int i = 0; i < pnThreads; i++)
     running.push_back(thread(&Crawler::Crawl, this));
   
-  for(int i = 0; i < pnThreads; i++)
-    running[i].join();
+  for(list<thread>::iterator it = running.begin(); it != running.end(); it++)
+    it->join();
   
   cout << "Stopped crawling\n";
 }
@@ -46,16 +46,6 @@ void Crawler::Stop()
 void Crawler::SetOutputFolder(string pfolderName)
 {
   Crawler::folderName = pfolderName;
-}
-
-void Crawler::BackupScheduler()
-{
-  while(true)
-  {
-    sleep(120);
-    if(Crawler::stopping) break;
-    ForceBackupScheduler();
-  }
 }
 
 void Crawler::ForceBackupScheduler()
@@ -109,7 +99,7 @@ void Crawler::Crawl()
 {
   Dumper dmp;
   CkSpider spider;
-  CkString collectedUrl, collectedTitle, collectedHtml;
+  CkString collectedUrl, collectedHtml;
   
   stringstream ss;
   ss << this_thread::get_id();
@@ -170,9 +160,9 @@ void Crawler::Crawl()
     Crawler::crawlCount_mutex.unlock();
     
     spider.get_LastUrl(collectedUrl);
-    spider.get_LastHtmlTitle(collectedTitle);
     spider.get_LastHtml(collectedHtml);
-    dmp.AddPage(collectedUrl.getString(), collectedTitle.getString(), collectedHtml.getString());
+    
+    dmp.AddPage(collectedUrl, collectedHtml);
     dmp.Dump();
     
     // Adding the non-outbound links to the scheduler
@@ -180,8 +170,9 @@ void Crawler::Crawl()
     for(int i = 0; i < unspidered; i++)
     {
       spider.GetUnspideredUrl(0, collectedUrl);
-      spider.SkipUnspidered(0);
       string curl = collectedUrl.getString();
+      curl.shrink_to_fit();
+      spider.SkipUnspidered(0);
       
       Crawler::scheduler_mutex.lock();
       Scheduler::AddURL(curl);
@@ -193,6 +184,7 @@ void Crawler::Crawl()
     {
       if(not spider.GetOutboundLink(i, collectedUrl)) continue;
       string curl = collectedUrl.getString();
+      curl.shrink_to_fit();
       
       Crawler::scheduler_mutex.lock();
       Scheduler::AddURL(curl);
@@ -201,7 +193,7 @@ void Crawler::Crawl()
     spider.ClearOutboundLinks();
     spider.ClearSpideredUrls();
     spider.ClearFailedUrls();
-
+    
     Crawler::crawlCount_mutex.lock();
     Crawler::collecting-=1;
     Crawler::crawlCount_mutex.unlock();

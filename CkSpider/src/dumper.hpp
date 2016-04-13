@@ -1,11 +1,12 @@
 #ifndef _dumper_hpp
 #define _dumper_hpp
 
+#include <queue>
 #include <string>
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include "page.hpp"
+#include "CkString.h"
 
 class Dumper {
   public:
@@ -13,7 +14,7 @@ class Dumper {
     Dumper();
     void SetFilename(std::string filename);
     void OpenStream();
-    void AddPage(std::string url, std::string title, std::string html);
+    void AddPage(CkString &url, CkString &html);
     void Dump();
     void ForceDump();
     void CloseStream();
@@ -21,7 +22,7 @@ class Dumper {
   private:
     std::string _filename;
     std::filebuf _fb;
-    std::vector<Page> _vp;
+    std::queue<std::pair<std::string, std::string> > _vp;
 };
 
 #endif

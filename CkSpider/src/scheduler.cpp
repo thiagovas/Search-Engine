@@ -5,12 +5,12 @@ using namespace std;
 queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
 set<long long int> Scheduler::visited;
-priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_urls;
-priority_queue<pair<string, ll>, vector<pair<string, ll> >, QueueComparison > Scheduler::pq_bkp;
-vector<string> Scheduler::vDomains, Scheduler::forbidden;
+priority_queue<pair<string, int>, vector<pair<string, int> >, QueueComparison > Scheduler::pq_urls;
+priority_queue<pair<string, int>, vector<pair<string, int> >, QueueComparison > Scheduler::pq_bkp;
+list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
-map<short, long long int> Scheduler::weights;
+map<short, int> Scheduler::weights;
 
 
 
@@ -52,6 +52,7 @@ void Scheduler::AddDump(string &url)
 void Scheduler::DumpUrls()
 {
   ostream os(&Scheduler::fbOutDump);
+  os.sync_with_stdio(false);
   while(not Scheduler::dumpUrls.empty())
   {
     os << Scheduler::dumpUrls.front() << endl;
@@ -60,7 +61,7 @@ void Scheduler::DumpUrls()
   os.flush();
 }
 
-long long int Scheduler::VisitedHash(string url)
+long long int Scheduler::VisitedHash(string &url)
 {
   long long int hash=0;
   for(int i = 0; i < (int)url.size(); i++)
@@ -92,23 +93,23 @@ bool Scheduler::LoadFromDump()
 }
 
 // Adds a new well-formed url to the scheduler
-bool Scheduler::AddURL(string url)
+bool Scheduler::AddURL(string &url)
 {
   if(url.size() > 200) return false;
   
   // Making sure the url doesn't have any of the forbidden keywords
-  for(unsigned i = 0; i < Scheduler::forbidden.size(); i++)
-    if(url.find(Scheduler::forbidden[i]) != string::npos) return false;
+  for(list<string>::iterator it = Scheduler::forbidden.begin(); it != Scheduler::forbidden.end(); it++)
+    if(url.find(*it) != string::npos) return false;
   
   // Here, I'm making sure the scheduler just adds urls that has a .br
   // or any keyword present at vDomains
   bool add=false;
   string domain = Utils::GetDomain(url);
-  for(unsigned i = 0; i < Scheduler::vDomains.size(); i++)
+  for(list<string>::iterator it = Scheduler::vDomains.begin(); it != Scheduler::vDomains.end(); it++)
   {
     // Ignoring dynamic urls
     if(Utils::FindAny(url, "{}@")) return false;
-    if(domain.find(Scheduler::vDomains[i]) != string::npos)
+    if(domain.find(*it) != string::npos)
     {
       add=true;
       break;
@@ -117,8 +118,8 @@ bool Scheduler::AddURL(string url)
   
   if(add)
   {
-    long long int hash=Scheduler::VisitedHash(url);
-    if(Scheduler::visited.find(hash) == Scheduler::visited.end())
+    long long int vhash=Scheduler::VisitedHash(url);
+    if(Scheduler::visited.find(vhash) == Scheduler::visited.end())
     {
       Scheduler::ForceAddURL(url);
       return true;
@@ -128,9 +129,10 @@ bool Scheduler::AddURL(string url)
 }
 
 // Adds the url to the scheduler without making any verification
-void Scheduler::ForceAddURL(string url)
+void Scheduler::ForceAddURL(string &url)
 {
   if(url.size() < 3) return;
+  url.shrink_to_fit();
   if(Scheduler::pq_urls.size() > 10000)
   {
     Scheduler::AddDump(url);
@@ -139,9 +141,9 @@ void Scheduler::ForceAddURL(string url)
   {
     long long int vhash = Scheduler::VisitedHash(url);
     short hash = Utils::GetURLHash(Utils::GetDomain(url));
-    long long int newWeight = ++Scheduler::weights[hash];
+    int newWeight = ++Scheduler::weights[hash];
     Scheduler::visited.insert(vhash);
-    newWeight = 100000000ll*newWeight + Utils::CountComponents(url);
+    newWeight = 100*newWeight + Utils::CountComponents(url);
     Scheduler::pq_urls.push(make_pair(url, newWeight));
   }
 }
@@ -157,11 +159,14 @@ void Scheduler::Backup(string filename)
   if(fb.open(filename, ios::out))
   {
     ostream os(&fb);
+    os.sync_with_stdio(false);
+    
     while(not Scheduler::pq_bkp.empty())
     {
       os << Scheduler::pq_bkp.top().first << endl;
       Scheduler::pq_bkp.pop();
     }
+    os.flush();
     fb.close();
   }
 }
@@ -170,20 +175,20 @@ void Scheduler::Backup(string filename)
 // If there is none, it returns an empty string
 string Scheduler::GetNext()
 {
-  if(pq_urls.empty()) return "";
-  return pq_urls.top().first;
+  if(Scheduler::pq_urls.empty()) return "";
+  return Scheduler::pq_urls.top().first;
 }
 
 // This method removes the url from the top of the scheduler
 // If there is no url, nothing happens
 void Scheduler::RemoveTop()
 {
-  if(!pq_urls.empty())
-    pq_urls.pop();
+  if(!Scheduler::pq_urls.empty())
+    Scheduler::pq_urls.pop();;
 }
 
 // It returns if the scheduler has no more urls
 bool Scheduler::IsEmpty()
 {
-  return pq_urls.empty();
+  return Scheduler::pq_urls.empty();
 }

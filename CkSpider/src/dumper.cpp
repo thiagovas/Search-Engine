@@ -21,19 +21,24 @@ void Dumper::Dump()
 
 void Dumper::ForceDump()
 {
-  for(unsigned i = 0; i < this->_vp.size(); i++)
+  ostream out(&this->_fb);
+  out.sync_with_stdio(false);
+  while(not this->_vp.empty())
   {
-    ostream out(&this->_fb);
-    out << "|||\n" << this->_vp[i].GetUrl() << "\n|\n";
-    out << this->_vp[i].GetHtml() << endl;
+    out << "|||\n" << this->_vp.front().first << "\n|\n";
+    out << this->_vp.front().second << endl;
+    this->_vp.pop();
   }
-  this->_vp.clear();
+  out.flush();
 }
 
-void Dumper::AddPage(string url, string title, string html)
+void Dumper::AddPage(CkString &ckurl, CkString &ckhtml)
 {
-  Page p(url, title, html);
-  this->_vp.push_back(p);
+  string url = ckurl.getString();
+  string html = ckhtml.getString();
+  url.shrink_to_fit();
+  html.shrink_to_fit();
+  this->_vp.push(make_pair(url, html));
 }
 
 void Dumper::CloseStream()

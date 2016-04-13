@@ -3,6 +3,8 @@
 
 #include <map>
 #include <set>
+#include <list>
+#include <stack>
 #include <queue>
 #include <string>
 #include <vector>
@@ -18,7 +20,7 @@ typedef long long int ll;
 class QueueComparison {
   public:
     QueueComparison(){}
-    bool operator()(const std::pair<std::string, ll>& lhs, const std::pair<std::string, ll>& rhs)
+    bool operator()(const std::pair<std::string, int>& lhs, const std::pair<std::string, int>& rhs)
     {
       return lhs.second > rhs.second;
     }
@@ -31,7 +33,7 @@ class Scheduler
     Scheduler();
     
     // Adds a new well-formed url to the scheduler
-    static bool AddURL(std::string url);
+    static bool AddURL(std::string &url);
     
     // It returns the next url available on the scheduler
     // If there is none, it returns an empty string
@@ -62,30 +64,30 @@ class Scheduler
     static bool LoadFromDump();
     
     // Adds the url to the scheduler without making any verification
-    static void ForceAddURL(std::string url);
+    static void ForceAddURL(std::string &url);
     
   private:
     
     static std::queue<std::string> dumpUrls;
     static std::string dumpFilename;
     static std::set<long long int> visited;
-    static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_urls;
-    static std::priority_queue<std::pair<std::string, ll>, std::vector<std::pair<std::string, ll> >, QueueComparison > pq_bkp;
-    static std::vector<std::string> vDomains;
+    static std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int> >, QueueComparison > pq_urls;
+    static std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int> >, QueueComparison > pq_bkp;
+    static std::list<std::string> vDomains;
     static std::filebuf fbInDump;
     static std::filebuf fbOutDump;
     
-    static std::vector<std::string> forbidden;
-
+    static std::list<std::string> forbidden;
+    
     // A map that keeps how many links the crawler collected for each domain
     // It's used as a weight at the scheduler
-    static std::map<short, long long int> weights;
-
+    static std::map<short, int> weights;
+    
     static void AddDump(std::string &url);
     
     static void DumpUrls();
     
-    static long long int VisitedHash(std::string url);
+    static long long int VisitedHash(std::string &url);
 };
 
 #endif
