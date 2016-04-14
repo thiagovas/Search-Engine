@@ -10,7 +10,7 @@ priority_queue<pair<string, int>, vector<pair<string, int> >, QueueComparison > 
 list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
-map<short, int> Scheduler::weights;
+int Scheduler::weights[256];
 
 
 
@@ -26,7 +26,7 @@ void Scheduler::Initialize(string filename)
   Scheduler::vDomains.push_back("uol");
   Scheduler::vDomains.push_back("globo");
   Scheduler::vDomains.push_back("vida");
-
+  
   Scheduler::forbidden.push_back("xvideos");
   Scheduler::forbidden.push_back("porno");
   Scheduler::forbidden.push_back("redtube");
@@ -35,6 +35,8 @@ void Scheduler::Initialize(string filename)
   Scheduler::SetDumpFilename(filename);
   Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
+  
+  memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
 }
 
 void Scheduler::SetDumpFilename(string filename)
@@ -64,7 +66,7 @@ void Scheduler::DumpUrls()
 long long int Scheduler::VisitedHash(string &url)
 {
   long long int hash=0;
-  for(int i = 0; i < (int)url.size(); i++)
+  for(unsigned i = 0; i < url.size(); i++)
     if(isalpha(url[i]))
       hash ^= ((url[i]-'A')<<(i%('z'-'A'+2)));
   return hash;
@@ -75,7 +77,7 @@ bool Scheduler::LoadFromDump()
   istream is(&Scheduler::fbInDump);
   string url;
   bool added=false;
-  while(Scheduler::pq_urls.size() < 1000)
+  while(Scheduler::pq_urls.size() < 4000)
   {
     getline(is, url);
     if(not is)
@@ -133,14 +135,15 @@ void Scheduler::ForceAddURL(string &url)
 {
   if(url.size() < 3) return;
   url.shrink_to_fit();
-  if(Scheduler::pq_urls.size() > 10000)
+  if(Scheduler::pq_urls.size() > 5000)
   {
     Scheduler::AddDump(url);
   }
   else
   {
     long long int vhash = Scheduler::VisitedHash(url);
-    short hash = Utils::GetURLHash(Utils::GetDomain(url));
+    string domain = Utils::GetDomain(url);
+    unsigned char hash = Utils::GetURLHash(domain);
     int newWeight = ++Scheduler::weights[hash];
     Scheduler::visited.insert(vhash);
     newWeight = 100*newWeight + Utils::CountComponents(url);
@@ -184,7 +187,7 @@ string Scheduler::GetNext()
 void Scheduler::RemoveTop()
 {
   if(!Scheduler::pq_urls.empty())
-    Scheduler::pq_urls.pop();;
+    Scheduler::pq_urls.pop();
 }
 
 // It returns if the scheduler has no more urls

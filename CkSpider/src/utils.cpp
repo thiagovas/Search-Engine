@@ -71,9 +71,9 @@ int Utils::CountComponents(string url)
   return c;
 }
 
-short Utils::GetURLHash(string url)
+unsigned char Utils::GetURLHash(string &url)
 {
-  short hash=0;
+  unsigned char hash=0;
   for(unsigned i = 0; i < url.size(); i++)
     if(isalpha(url[i]))
       hash += url[i]-'A';

@@ -8,8 +8,10 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <cstring>
 #include <fstream>
 #include <utility>
+#include <cstdlib>
 #include <iostream>
 #include <algorithm>
 #include <functional>
@@ -81,7 +83,7 @@ class Scheduler
     
     // A map that keeps how many links the crawler collected for each domain
     // It's used as a weight at the scheduler
-    static std::map<short, int> weights;
+    static int weights[256];
     
     static void AddDump(std::string &url);
     
