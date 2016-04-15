@@ -1,7 +1,7 @@
 CC=g++
-OP=-L/home/thiago/Softwares/chilkat-9.5.0-x86_64-linux-gcc/lib -O2 -std=c++11 -Wall -lpthread -lchilkat-9.5.0 -lresolv -pthread -Wl,--no-as-needed
-IOP=-I/home/thiago/Softwares/chilkat-9.5.0-x86_64-linux-gcc/include
-BINLIB=/home/thiago/Softwares/chilkat-9.5.0-x86_64-linux-gcc/lib/libchilkat-9.5.0.so
+OP=-L./chilkat/lib -O2 -std=c++11 -Wall -lpthread -lchilkat-9.5.0 -lresolv -pthread -Wl,--no-as-needed
+IOP=-I./chilkat/include
+BINLIB=./chilkat/lib/libchilkat-9.5.0.so
 OBJ_DIR=./bin
 SRC_DIR=./src
 
