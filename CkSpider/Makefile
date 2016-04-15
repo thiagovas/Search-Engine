@@ -32,10 +32,11 @@ binaryheap:
 prep:
 	clear
 	mkdir -p $(OBJ_DIR)
+	mkdir -p ./documents
 
 clean:
 	clear
 	rm -f main
 	rm -rf *~
 	rm -rf $(OBJ_DIR)/*.o
-
+  
