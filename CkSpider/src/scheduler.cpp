@@ -5,8 +5,8 @@ using namespace std;
 queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
 set<long long int> Scheduler::visited;
-priority_queue<pair<string, int>, vector<pair<string, int> >, QueueComparison > Scheduler::pq_urls;
-priority_queue<pair<string, int>, vector<pair<string, int> >, QueueComparison > Scheduler::pq_bkp;
+BinaryHeap Scheduler::pq_urls;
+vector<pair<string, int> > Scheduler::pq_bkp;
 list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
@@ -37,6 +37,8 @@ void Scheduler::Initialize(string filename)
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
   
   memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
+  
+  Scheduler::pq_urls.Initialize(Scheduler::max_size);
 }
 
 void Scheduler::SetDumpFilename(string filename)
@@ -77,7 +79,7 @@ bool Scheduler::LoadFromDump()
   istream is(&Scheduler::fbInDump);
   string url;
   bool added=false;
-  while(Scheduler::pq_urls.size() < 4000)
+  while(Scheduler::pq_urls.Size() < 4000)
   {
     getline(is, url);
     if(not is)
@@ -91,7 +93,7 @@ bool Scheduler::LoadFromDump()
     added=true;
     Scheduler::AddURL(url);
   }
-  return added || (Scheduler::pq_urls.size() > 0);
+  return added || (Scheduler::pq_urls.Size() > 0);
 }
 
 // Adds a new well-formed url to the scheduler
@@ -135,7 +137,7 @@ void Scheduler::ForceAddURL(string &url)
 {
   if(url.size() < 3) return;
   url.shrink_to_fit();
-  if(Scheduler::pq_urls.size() > 5000)
+  if(Scheduler::pq_urls.Size() > Scheduler::max_size)
   {
     Scheduler::AddDump(url);
   }
@@ -147,13 +149,13 @@ void Scheduler::ForceAddURL(string &url)
     int newWeight = ++Scheduler::weights[hash];
     Scheduler::visited.insert(vhash);
     newWeight = 100*newWeight + Utils::CountComponents(url);
-    Scheduler::pq_urls.push(make_pair(url, newWeight));
+    Scheduler::pq_urls.Push(make_pair(url, newWeight));
   }
 }
 
 void Scheduler::PreProcessBackup()
 {
-  Scheduler::pq_bkp = Scheduler::pq_urls;
+  Scheduler::pq_bkp = Scheduler::pq_urls.GetElements();
 }
 
 void Scheduler::Backup(string filename)
@@ -164,11 +166,9 @@ void Scheduler::Backup(string filename)
     ostream os(&fb);
     os.sync_with_stdio(false);
     
-    while(not Scheduler::pq_bkp.empty())
-    {
-      os << Scheduler::pq_bkp.top().first << endl;
-      Scheduler::pq_bkp.pop();
-    }
+    for(unsigned i = 0; i < pq_bkp.size(); i++)
+      os << pq_bkp[i].first << endl;
+    pq_bkp.clear();
     os.flush();
     fb.close();
   }
@@ -178,20 +178,20 @@ void Scheduler::Backup(string filename)
 // If there is none, it returns an empty string
 string Scheduler::GetNext()
 {
-  if(Scheduler::pq_urls.empty()) return "";
-  return Scheduler::pq_urls.top().first;
+  if(Scheduler::pq_urls.Empty()) return "";
+  return Scheduler::pq_urls.Top().first;
 }
 
 // This method removes the url from the top of the scheduler
 // If there is no url, nothing happens
 void Scheduler::RemoveTop()
 {
-  if(!Scheduler::pq_urls.empty())
-    Scheduler::pq_urls.pop();
+  if(!Scheduler::pq_urls.Empty())
+    Scheduler::pq_urls.Pop();
 }
 
 // It returns if the scheduler has no more urls
 bool Scheduler::IsEmpty()
 {
-  return Scheduler::pq_urls.empty();
+  return Scheduler::pq_urls.Empty();
 }

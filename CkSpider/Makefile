@@ -7,8 +7,8 @@ SRC_DIR=./src
 
 all: prep build
 
-build: main crawler scheduler utils dumper
-	$(CC) $(IOP) $(OBJ_DIR)/main.o $(OBJ_DIR)/crawler.o $(OBJ_DIR)/scheduler.o $(OBJ_DIR)/utils.o $(OBJ_DIR)/dumper.o $(BINLIB) -o main $(OP)
+build: main crawler scheduler utils dumper binaryheap
+	$(CC) $(IOP) $(OBJ_DIR)/main.o $(OBJ_DIR)/crawler.o $(OBJ_DIR)/scheduler.o $(OBJ_DIR)/utils.o $(OBJ_DIR)/dumper.o $(OBJ_DIR)/binaryheap.o $(BINLIB) -o main $(OP)
 
 main: crawler
 	$(CC) $(IOP) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o $(OP)
@@ -16,7 +16,7 @@ main: crawler
 crawler: scheduler utils dumper
 	$(CC) $(IOP) -c $(SRC_DIR)/crawler.cpp -o $(OBJ_DIR)/crawler.o $(OP)
 
-scheduler: utils
+scheduler: utils binaryheap
 	$(CC) $(IOP) -c $(SRC_DIR)/scheduler.cpp -o $(OBJ_DIR)/scheduler.o $(OP)
 
 utils:
@@ -24,6 +24,9 @@ utils:
 
 dumper:
 	$(CC) $(IOP) -c $(SRC_DIR)/dumper.cpp -o $(OBJ_DIR)/dumper.o $(OP)
+
+binaryheap:
+	$(CC) -c $(SRC_DIR)/binaryheap.cpp -o $(OBJ_DIR)/binaryheap.o $(OP)
 
 
 prep:

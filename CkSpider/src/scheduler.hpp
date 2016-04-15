@@ -6,6 +6,7 @@
 #include <list>
 #include <stack>
 #include <queue>
+#include <deque>
 #include <string>
 #include <vector>
 #include <cstring>
@@ -16,17 +17,9 @@
 #include <algorithm>
 #include <functional>
 #include "utils.hpp"
+#include "binaryheap.hpp"
 
 typedef long long int ll;
-
-class QueueComparison {
-  public:
-    QueueComparison(){}
-    bool operator()(const std::pair<std::string, int>& lhs, const std::pair<std::string, int>& rhs)
-    {
-      return lhs.second > rhs.second;
-    }
-};
 
 class Scheduler
 {
@@ -70,11 +63,12 @@ class Scheduler
     
   private:
     
+    static const int max_size=5000;
     static std::queue<std::string> dumpUrls;
     static std::string dumpFilename;
     static std::set<long long int> visited;
-    static std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int> >, QueueComparison > pq_urls;
-    static std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int> >, QueueComparison > pq_bkp;
+    static BinaryHeap pq_urls;
+    static std::vector<std::pair<std::string, int> > pq_bkp;
     static std::list<std::string> vDomains;
     static std::filebuf fbInDump;
     static std::filebuf fbOutDump;
