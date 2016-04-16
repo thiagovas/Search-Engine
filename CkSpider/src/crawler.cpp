@@ -121,10 +121,8 @@ void Crawler::Crawl()
     Crawler::crawlCount_mutex.unlock();
     
     if(Crawler::stopping)
-    {
       break;
-    }
-
+    
     if(Scheduler::IsEmpty())
     {
       bool loaded=false, isThereThreadCollecting=false;

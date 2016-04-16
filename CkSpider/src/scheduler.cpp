@@ -2,6 +2,7 @@
 using namespace std;
 
 
+queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
 set<long long int> Scheduler::visited;
 BinaryHeap Scheduler::pq_urls;
@@ -9,8 +10,8 @@ vector<pair<string, int> > Scheduler::pq_bkp;
 list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
-int Scheduler::weights[256], Scheduler::dumpCount;
-ostream *Scheduler::dumpOs;
+int Scheduler::weights[256];
+
 
 
 Scheduler::Scheduler()
@@ -34,9 +35,7 @@ void Scheduler::Initialize(string filename)
   Scheduler::SetDumpFilename(filename);
   Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
-  Scheduler::dumpOs = new ostream(&Scheduler::fbOutDump);
-  Scheduler::dumpOs->sync_with_stdio(false);
-
+  
   memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
   
   Scheduler::pq_urls.Initialize(Scheduler::max_size);
@@ -47,15 +46,22 @@ void Scheduler::SetDumpFilename(string filename)
   Scheduler::dumpFilename = filename;
 }
 
-void Scheduler::DumpUrl(string &url)
+void Scheduler::AddDump(string &url)
 {
-  (*Scheduler::dumpOs) << url << endl;
-  Scheduler::dumpCount++;
-  if(Scheduler::dumpCount > 1000)
+  Scheduler::dumpUrls.push(url);
+  if(Scheduler::dumpUrls.size() > 100)
+    Scheduler::DumpUrls();
+}
+
+void Scheduler::DumpUrls()
+{
+  ostream os(&Scheduler::fbOutDump);
+  while(not Scheduler::dumpUrls.empty())
   {
-    Scheduler::dumpCount=0;
-    Scheduler::dumpOs->flush();
+    os << Scheduler::dumpUrls.front() << endl;
+    Scheduler::dumpUrls.pop();
   }
+  os.flush();
 }
 
 long long int Scheduler::VisitedHash(string &url)
@@ -132,7 +138,7 @@ void Scheduler::ForceAddURL(string &url)
   url.shrink_to_fit();
   if(Scheduler::pq_urls.Size() > Scheduler::max_size)
   {
-    Scheduler::DumpUrl(url);
+    Scheduler::AddDump(url);
   }
   else
   {
