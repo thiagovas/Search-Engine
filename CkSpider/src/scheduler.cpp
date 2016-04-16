@@ -81,6 +81,8 @@ bool Scheduler::LoadFromDump()
       Scheduler::fbInDump.close();
       Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
       Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
+      delete Scheduler::dumpos;
+      Scheduler::dumpos = new ostream(&Scheduler::fbOutDump);
       break;
     }
     added=true;

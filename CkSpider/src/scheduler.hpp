@@ -63,7 +63,7 @@ class Scheduler
     
   private:
     
-    static const int max_size=5000;
+    static const int max_size=10000;
     static int dumpCount;
     static std::string dumpFilename;
     static std::set<long long int> visited;
