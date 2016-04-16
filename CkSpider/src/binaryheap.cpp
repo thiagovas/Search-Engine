@@ -43,6 +43,7 @@ bool BinaryHeap::Push(pair<string, int> neue)
 void BinaryHeap::Pop()
 {
   unsigned i=1;
+  this->vHeap[1].first.clear();
   this->vHeap[1] = this->vHeap[this->number_elements];
   this->vHeap[this->number_elements] = make_pair("", -this->INF);
   this->number_elements--;

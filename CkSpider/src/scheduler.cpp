@@ -123,11 +123,11 @@ bool Scheduler::AddURL(string &url)
   if(add)
   {
     long long int vhash=Scheduler::VisitedHash(url);
-    if(Scheduler::visited.find(vhash) == Scheduler::visited.end())
-    {
+    //if(Scheduler::visited.find(vhash) == Scheduler::visited.end())
+    //{
       Scheduler::ForceAddURL(url);
       return true;
-    }
+    //}
   }
   return false;
 }
@@ -143,11 +143,11 @@ void Scheduler::ForceAddURL(string &url)
   }
   else
   {
-    long long int vhash = Scheduler::VisitedHash(url);
+    //long long int vhash = Scheduler::VisitedHash(url);
     string domain = Utils::GetDomain(url);
     unsigned char hash = Utils::GetURLHash(domain);
     int newWeight = ++Scheduler::weights[hash];
-    Scheduler::visited.insert(vhash);
+    //Scheduler::visited.insert(vhash);
     newWeight = 100*newWeight + Utils::CountComponents(url);
     Scheduler::pq_urls.Push(make_pair(url, newWeight));
   }
