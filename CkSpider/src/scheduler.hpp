@@ -64,7 +64,7 @@ class Scheduler
   private:
     
     static const int max_size=5000;
-    static std::queue<std::string> dumpUrls;
+    static int dumpCount;
     static std::string dumpFilename;
     static std::set<long long int> visited;
     static BinaryHeap pq_urls;
@@ -72,16 +72,15 @@ class Scheduler
     static std::list<std::string> vDomains;
     static std::filebuf fbInDump;
     static std::filebuf fbOutDump;
-    
+    static std::ostream *dumpos;
+
     static std::list<std::string> forbidden;
     
     // A map that keeps how many links the crawler collected for each domain
     // It's used as a weight at the scheduler
     static int weights[256];
     
-    static void AddDump(std::string &url);
-    
-    static void DumpUrls();
+    static void DumpUrl(std::string &url);
     
     static long long int VisitedHash(std::string &url);
 };

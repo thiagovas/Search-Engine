@@ -2,7 +2,6 @@
 using namespace std;
 
 
-queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
 set<long long int> Scheduler::visited;
 BinaryHeap Scheduler::pq_urls;
@@ -10,8 +9,8 @@ vector<pair<string, int> > Scheduler::pq_bkp;
 list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
-int Scheduler::weights[256];
-
+int Scheduler::weights[256], Scheduler::dumpCount;
+ostream *Scheduler::dumpos;
 
 
 Scheduler::Scheduler()
@@ -21,6 +20,7 @@ Scheduler::Scheduler()
 
 void Scheduler::Initialize(string filename)
 {
+  Scheduler::dumpCount=0;
   Scheduler::vDomains.push_back(".br");
   Scheduler::vDomains.push_back("mulher");
   Scheduler::vDomains.push_back("uol");
@@ -35,6 +35,7 @@ void Scheduler::Initialize(string filename)
   Scheduler::SetDumpFilename(filename);
   Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
+  Scheduler::dumpos = new ostream(&Scheduler::fbOutDump);
   
   memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
   
@@ -46,22 +47,15 @@ void Scheduler::SetDumpFilename(string filename)
   Scheduler::dumpFilename = filename;
 }
 
-void Scheduler::AddDump(string &url)
+void Scheduler::DumpUrl(string &url)
 {
-  Scheduler::dumpUrls.push(url);
-  if(Scheduler::dumpUrls.size() > 100)
-    Scheduler::DumpUrls();
-}
-
-void Scheduler::DumpUrls()
-{
-  ostream os(&Scheduler::fbOutDump);
-  while(not Scheduler::dumpUrls.empty())
+  (*Scheduler::dumpos) << url << "\n";
+  Scheduler::dumpCount++;
+  if(Scheduler::dumpCount > 2000)
   {
-    os << Scheduler::dumpUrls.front() << endl;
-    Scheduler::dumpUrls.pop();
+    Scheduler::dumpCount=0;
+    dumpos->flush();
   }
-  os.flush();
 }
 
 long long int Scheduler::VisitedHash(string &url)
@@ -138,7 +132,7 @@ void Scheduler::ForceAddURL(string &url)
   url.shrink_to_fit();
   if(Scheduler::pq_urls.Size() > Scheduler::max_size)
   {
-    Scheduler::AddDump(url);
+    Scheduler::DumpUrl(url);
   }
   else
   {
@@ -166,7 +160,7 @@ void Scheduler::Backup(string filename)
     os.sync_with_stdio(false);
     
     for(unsigned i = 0; i < pq_bkp.size(); i++)
-      os << pq_bkp[i].first << endl;
+      os << pq_bkp[i].first << "\n";
     pq_bkp.clear();
     os.flush();
     fb.close();
