@@ -2,7 +2,9 @@
 using namespace std;
 
 Dumper::Dumper()
-{}
+{
+  this->dumpCount=0;
+}
 
 void Dumper::SetFilename(string filename)
 {
@@ -12,36 +14,18 @@ void Dumper::SetFilename(string filename)
 void Dumper::OpenStream()
 {
   this->_fb.open(this->_filename, ios::out);
+  this->out = new ostream(&this->_fb);
 }
 
-void Dumper::Dump()
+void Dumper::Dump(CkString &ckurl, CkString &ckhtml)
 {
-  if(this->_vp.size() > 100) this->ForceDump();
-}
-
-void Dumper::ForceDump()
-{
-  ostream out(&this->_fb);
-  out.sync_with_stdio(false);
-  while(not this->_vp.empty())
-  {
-    out << "|||\n" << this->_vp.front().first << "\n|\n";
-    out << this->_vp.front().second << endl;
-    this->_vp.pop();
-  }
-  out.flush();
-}
-
-void Dumper::AddPage(CkString &ckurl, CkString &ckhtml)
-{
-  string url = ckurl.getString();
-  string html = ckhtml.getString();
-  url.shrink_to_fit();
-  html.shrink_to_fit();
-  this->_vp.push(make_pair(url, html));
+  (*this->out) << "|||\n" << ckurl.getString() << "\n|\n";
+  (*this->out) << ckhtml.getString() << endl;
+  if(this->dumpCount > 50) this->out->flush();
 }
 
 void Dumper::CloseStream()
 {
+  delete this->out;
   this->_fb.close();
 }

@@ -14,15 +14,14 @@ class Dumper {
     Dumper();
     void SetFilename(std::string filename);
     void OpenStream();
-    void AddPage(CkString &url, CkString &html);
-    void Dump();
-    void ForceDump();
+    void Dump(CkString &url, CkString &html);
     void CloseStream();
 
   private:
     std::string _filename;
     std::filebuf _fb;
-    std::queue<std::pair<std::string, std::string> > _vp;
+    std::ostream *out;
+    int dumpCount;
 };
 
 #endif

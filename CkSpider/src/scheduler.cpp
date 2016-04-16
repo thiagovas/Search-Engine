@@ -2,7 +2,6 @@
 using namespace std;
 
 
-queue<string> Scheduler::dumpUrls;
 string Scheduler::dumpFilename;
 set<long long int> Scheduler::visited;
 BinaryHeap Scheduler::pq_urls;
@@ -10,8 +9,8 @@ vector<pair<string, int> > Scheduler::pq_bkp;
 list<string> Scheduler::vDomains, Scheduler::forbidden;
 filebuf Scheduler::fbInDump;
 filebuf Scheduler::fbOutDump;
-int Scheduler::weights[256];
-
+int Scheduler::weights[256], Scheduler::dumpCount;
+ostream *Scheduler::dumpOs;
 
 
 Scheduler::Scheduler()
@@ -35,7 +34,9 @@ void Scheduler::Initialize(string filename)
   Scheduler::SetDumpFilename(filename);
   Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
   Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
-  
+  Scheduler::dumpOs = new ostream(&Scheduler::fbOutDump);
+  Scheduler::dumpOs->sync_with_stdio(false);
+
   memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
   
   Scheduler::pq_urls.Initialize(Scheduler::max_size);
@@ -46,23 +47,15 @@ void Scheduler::SetDumpFilename(string filename)
   Scheduler::dumpFilename = filename;
 }
 
-void Scheduler::AddDump(string &url)
+void Scheduler::DumpUrl(string &url)
 {
-  Scheduler::dumpUrls.push(url);
-  if(Scheduler::dumpUrls.size() > 2000)
-    Scheduler::DumpUrls();
-}
-
-void Scheduler::DumpUrls()
-{
-  ostream os(&Scheduler::fbOutDump);
-  os.sync_with_stdio(false);
-  while(not Scheduler::dumpUrls.empty())
+  (*Scheduler::dumpOs) << url << endl;
+  Scheduler::dumpCount++;
+  if(Scheduler::dumpCount > 1000)
   {
-    os << Scheduler::dumpUrls.front() << endl;
-    Scheduler::dumpUrls.pop();
+    Scheduler::dumpCount=0;
+    Scheduler::dumpOs->flush();
   }
-  os.flush();
 }
 
 long long int Scheduler::VisitedHash(string &url)
@@ -123,11 +116,11 @@ bool Scheduler::AddURL(string &url)
   if(add)
   {
     long long int vhash=Scheduler::VisitedHash(url);
-    //if(Scheduler::visited.find(vhash) == Scheduler::visited.end())
-    //{
+    if(Scheduler::visited.find(vhash) == Scheduler::visited.end())
+    {
       Scheduler::ForceAddURL(url);
       return true;
-    //}
+    }
   }
   return false;
 }
@@ -139,15 +132,15 @@ void Scheduler::ForceAddURL(string &url)
   url.shrink_to_fit();
   if(Scheduler::pq_urls.Size() > Scheduler::max_size)
   {
-    Scheduler::AddDump(url);
+    Scheduler::DumpUrl(url);
   }
   else
   {
-    //long long int vhash = Scheduler::VisitedHash(url);
+    long long int vhash = Scheduler::VisitedHash(url);
     string domain = Utils::GetDomain(url);
     unsigned char hash = Utils::GetURLHash(domain);
     int newWeight = ++Scheduler::weights[hash];
-    //Scheduler::visited.insert(vhash);
+    Scheduler::visited.insert(vhash);
     newWeight = 100*newWeight + Utils::CountComponents(url);
     Scheduler::pq_urls.Push(make_pair(url, newWeight));
   }

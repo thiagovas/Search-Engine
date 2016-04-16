@@ -1,4 +1,4 @@
-CC=g++
+CC=g++-4.8
 OP=-L./chilkat/lib -O2 -std=c++11 -Wall -lpthread -lchilkat-9.5.0 -lresolv -pthread -Wl,--no-as-needed
 IOP=-I./chilkat/include
 BINLIB=./chilkat/lib/libchilkat-9.5.0.so

@@ -97,7 +97,7 @@ void Crawler::LoadScheduler()
 
 void Crawler::Crawl()
 {
-  //Dumper dmp;
+  Dumper dmp;
   CkSpider spider;
   CkString collectedUrl, collectedHtml;
   
@@ -105,8 +105,8 @@ void Crawler::Crawl()
   ss << this_thread::get_id();
   
   string filename = Crawler::folderName + "f" + ss.str();
-  //dmp.SetFilename(filename);
-  //dmp.OpenStream();
+  dmp.SetFilename(filename);
+  dmp.OpenStream();
   
   while(true)
   {
@@ -120,11 +120,6 @@ void Crawler::Crawl()
       Crawler::collecting+=1;
     Crawler::crawlCount_mutex.unlock();
     
-    if(Crawler::stopping)
-    {
-      //dmp.ForceDump();
-      break;
-    }
     if(Scheduler::IsEmpty())
     {
       bool loaded=false, isThereThreadCollecting=false;
@@ -162,8 +157,7 @@ void Crawler::Crawl()
     spider.get_LastUrl(collectedUrl);
     spider.get_LastHtml(collectedHtml);
     
-    //dmp.AddPage(collectedUrl, collectedHtml);
-    //dmp.Dump();
+    dmp.Dump(collectedUrl, collectedHtml);
     
     // Adding the non-outbound links to the scheduler
     int unspidered = spider.get_NumUnspidered();
@@ -199,5 +193,5 @@ void Crawler::Crawl()
     Crawler::crawlCount_mutex.unlock();
   }
   
-  //dmp.CloseStream();
+  dmp.CloseStream();
 }
