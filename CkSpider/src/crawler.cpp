@@ -140,6 +140,7 @@ void Crawler::Crawl()
     }
     
     spider.Initialize(Utils::GetDomain(nextUrl).c_str());
+    spider.AddUnspidered(url.c_str());
     if(not spider.CrawlNext())
     {
       Crawler::scheduler_mutex.lock();
@@ -150,7 +151,7 @@ void Crawler::Crawl()
     
     Crawler::crawlCount_mutex.lock();
     Crawler::crawlCount++;
-    cout << Crawler::crawlCount << " " << nextUrl << "\n";
+    cout << Crawler::crawlCount << " " << nextUrl << endl;
     Crawler::crawlCount_mutex.unlock();
     
     spider.get_LastUrl(collectedUrl);
