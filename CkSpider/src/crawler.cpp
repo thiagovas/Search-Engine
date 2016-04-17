@@ -84,7 +84,7 @@ void Crawler::LoadScheduler()
       getline(is, url);
       if(not is) break;
       if(not Scheduler::AddURL(url))
-        cerr << "Discarded: " << url << endl;
+        cerr << "Discarded: " << url << "\n";
     }
     fb.close();
   }
@@ -125,22 +125,18 @@ void Crawler::Crawl()
     
     if(Scheduler::IsEmpty())
     {
-      bool loaded=false, isThereThreadCollecting=false;
+      bool isThereThreadCollecting=false;
       Crawler::crawlCount_mutex.lock();
       isThereThreadCollecting = (Crawler::collecting>0);
       Crawler::crawlCount_mutex.unlock();
       
-      
-      Crawler::scheduler_mutex.lock();
-      loaded=Scheduler::LoadFromDump();
-      Crawler::scheduler_mutex.unlock();
-      if(not loaded && not isThereThreadCollecting)
+      if(not isThereThreadCollecting)
       {
         cout << "There is no more URL's to collect\n";
         Crawler::stopping=true;
         break;
       }
-      continue;
+      else continue;
     }
     
     spider.Initialize(Utils::GetDomain(nextUrl).c_str());
@@ -154,7 +150,7 @@ void Crawler::Crawl()
     
     Crawler::crawlCount_mutex.lock();
     Crawler::crawlCount++;
-    cout << Crawler::crawlCount << " " << nextUrl << endl;
+    cout << Crawler::crawlCount << " " << nextUrl << "\n";
     Crawler::crawlCount_mutex.unlock();
     
     spider.get_LastUrl(collectedUrl);

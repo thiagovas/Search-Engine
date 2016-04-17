@@ -7,10 +7,7 @@ set<long long int> Scheduler::visited;
 BinaryHeap Scheduler::pq_urls;
 vector<pair<string, int> > Scheduler::pq_bkp;
 list<string> Scheduler::vDomains, Scheduler::forbidden;
-filebuf Scheduler::fbInDump;
-filebuf Scheduler::fbOutDump;
-int Scheduler::weights[256], Scheduler::dumpCount;
-ostream *Scheduler::dumpos;
+int Scheduler::weights[256];
 
 
 Scheduler::Scheduler()
@@ -20,7 +17,6 @@ Scheduler::Scheduler()
 
 void Scheduler::Initialize(string filename)
 {
-  Scheduler::dumpCount=0;
   Scheduler::vDomains.push_back(".br");
   Scheduler::vDomains.push_back("mulher");
   Scheduler::vDomains.push_back("uol");
@@ -33,9 +29,6 @@ void Scheduler::Initialize(string filename)
   Scheduler::forbidden.push_back("xxx");
   
   Scheduler::SetDumpFilename(filename);
-  Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
-  Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
-  Scheduler::dumpos = new ostream(&Scheduler::fbOutDump);
   
   memset(Scheduler::weights, 0, sizeof(Scheduler::weights));
   
@@ -47,17 +40,6 @@ void Scheduler::SetDumpFilename(string filename)
   Scheduler::dumpFilename = filename;
 }
 
-void Scheduler::DumpUrl(string &url)
-{
-  (*Scheduler::dumpos) << url << "\n";
-  Scheduler::dumpCount++;
-  if(Scheduler::dumpCount > 2000)
-  {
-    Scheduler::dumpCount=0;
-    dumpos->flush();
-  }
-}
-
 long long int Scheduler::VisitedHash(string &url)
 {
   long long int hash=0;
@@ -65,30 +47,6 @@ long long int Scheduler::VisitedHash(string &url)
     if(isalpha(url[i]))
       hash ^= ((url[i]-'A')<<(i%('z'-'A'+2)));
   return hash;
-}
-
-bool Scheduler::LoadFromDump()
-{
-  istream is(&Scheduler::fbInDump);
-  string url;
-  bool added=false;
-  while(Scheduler::pq_urls.Size() < 4000)
-  {
-    getline(is, url);
-    if(not is)
-    {
-      Scheduler::fbOutDump.close();
-      Scheduler::fbInDump.close();
-      Scheduler::fbOutDump.open(Scheduler::dumpFilename, ios::out);
-      Scheduler::fbInDump.open(Scheduler::dumpFilename, ios::in);
-      delete Scheduler::dumpos;
-      Scheduler::dumpos = new ostream(&Scheduler::fbOutDump);
-      break;
-    }
-    added=true;
-    Scheduler::AddURL(url);
-  }
-  return added || (Scheduler::pq_urls.Size() > 0);
 }
 
 // Adds a new well-formed url to the scheduler
@@ -131,21 +89,18 @@ bool Scheduler::AddURL(string &url)
 void Scheduler::ForceAddURL(string &url)
 {
   if(url.size() < 3) return;
+  
   url.shrink_to_fit();
   if(Scheduler::pq_urls.Size() > Scheduler::max_size)
-  {
-    Scheduler::DumpUrl(url);
-  }
-  else
-  {
-    long long int vhash = Scheduler::VisitedHash(url);
-    string domain = Utils::GetDomain(url);
-    unsigned char hash = Utils::GetURLHash(domain);
-    int newWeight = ++Scheduler::weights[hash];
-    Scheduler::visited.insert(vhash);
-    newWeight = 100*newWeight + Utils::CountComponents(url);
-    Scheduler::pq_urls.Push(make_pair(url, newWeight));
-  }
+    return;
+  
+  long long int vhash = Scheduler::VisitedHash(url);
+  string domain = Utils::GetDomain(url);
+  unsigned char hash = Utils::GetURLHash(domain);
+  int newWeight = ++Scheduler::weights[hash];
+  Scheduler::visited.insert(vhash);
+  newWeight = 100*newWeight + Utils::CountComponents(url);
+  Scheduler::pq_urls.Push(make_pair(url, newWeight));
 }
 
 void Scheduler::PreProcessBackup()
