@@ -140,6 +140,7 @@ void Crawler::Crawl()
     }
     
     spider.Initialize(Utils::GetDomain(nextUrl).c_str());
+    spider.AddUnspidered(nextUrl.c_str());
     if(not spider.CrawlNext())
     {
       Crawler::scheduler_mutex.lock();
@@ -150,7 +151,7 @@ void Crawler::Crawl()
     
     Crawler::crawlCount_mutex.lock();
     Crawler::crawlCount++;
-    cout << Crawler::crawlCount << " " << nextUrl << "\n";
+    cout << Crawler::crawlCount << " " << nextUrl << endl;
     Crawler::crawlCount_mutex.unlock();
     
     spider.get_LastUrl(collectedUrl);
@@ -176,10 +177,12 @@ void Crawler::Crawl()
     for(int i = 0; i < spider.get_NumOutboundLinks(); i++)
     {
       if(not spider.GetOutboundLink(i, collectedUrl)) continue;
-      string curl = collectedUrl.getString();
+      string curl = collectedUrl.getString(), domain=Utils::GetDomain(curl);
       curl.shrink_to_fit();
+      domain.shrink_to_fit();
       
       Crawler::scheduler_mutex.lock();
+      Scheduler::AddURL(domain);
       Scheduler::AddURL(curl);
       Crawler::scheduler_mutex.unlock();
     }

@@ -24,7 +24,7 @@ void Dumper::Dump(CkString &ckurl, CkString &ckhtml)
   (*this->out) << "|||\n" << ckurl.getString() << "\n|\n";
   (*this->out) << ckhtml.getString();
   
-  if(this->dumpCount > 50)
+  if(this->dumpCount > 100)
   {
     (*this->out) << endl;
     this->out->flush();
