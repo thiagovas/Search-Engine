@@ -1,0 +1,7 @@
+Para executar o crawler, basta preencher o arquivo seeds com as urls iniciais do coletor.
+
+Para parar o crawler voce pode apertar Ctrl-C ou mandar um SIGINT -> kill -SIGINT [pid do crawler]
+
+Para executar o makefile voce precisa ter o g++-4.8 instalado.
+Basta digitar make no terminal que o arquivo main eh criado.
+Para executa-lo basta digitar ./main
