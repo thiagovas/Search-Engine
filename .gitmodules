@@ -1,0 +1,3 @@
+[submodule "Indexer/gumbo-parser"]
+	path = Indexer/gumbo-parser
+	url = https://github.com/google/gumbo-parser.git
