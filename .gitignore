@@ -26,5 +26,6 @@
 *.out
 *.app
 
-./Indexer/bin/*
-./Indexer/.tmp/*
+Indexer/bin
+Indexer/bin/*
+Indexer/.tmp/*
