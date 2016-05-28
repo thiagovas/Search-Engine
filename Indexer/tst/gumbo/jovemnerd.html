@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://jovemnerd.com.br/ -->
+<html><script type="text/javascript" src="./jovemnerd_files/56f7facff4"></script><script src="./jovemnerd_files/nr-918.min.js"></script><script async="" type="text/javascript" src="./jovemnerd_files/gpt.js"></script><script async="" src="./jovemnerd_files/analytics.js"></script><script id="tinyhippos-injected">if (window.top.ripple) { window.top.ripple("bootstrap").inject(window, document); }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UQcOWVJbGwADXFdWBAg="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var o,i=t("ee"),a=t(14),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,-1!==o.indexOf("dev")&&(s.dev=!0),-1!==o.indexOf("nr_dev")&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,o){try{d?d-=1:i("err",[o||new UncaughtException(t,e,n)])}catch(s){try{i("ierr",[s,(new Date).getTime(),!0])}catch(c){}}return"function"==typeof f?f.apply(this,a(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t){i("err",[t,(new Date).getTime()])}var i=t("handle"),a=t(15),s=t("ee"),c=t("loader"),f=window.onerror,u=!1,d=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(l){"stack"in l&&(t(8),t(7),"addEventListener"in window&&t(5),c.xhrWrappable&&t(9),u=!0)}s.on("fn-start",function(t,e,n){u&&(d+=1)}),s.on("fn-err",function(t,e,n){u&&(this.thrown=!0,o(n))}),s.on("fn-end",function(){u&&!this.thrown&&d>0&&(d-=1)}),s.on("internal-error",function(t){i("ierr",[t,(new Date).getTime(),!0])})},{}],3:[function(t,e,n){t("loader").features.ins=!0},{}],4:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(8),s=t(7);t("loader").features.stn=!0,t(6);var c=NREUM.o.EV;o.on("fn-start",function(t,e){var n=t[0];n instanceof c&&(this.bstStart=Date.now())}),o.on("fn-end",function(t,e){var n=t[0];n instanceof c&&i("bst",[n,e,this.bstStart,Date.now()])}),a.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),a.on("fn-end",function(t,e){i("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),s.on("fn-start",function(){this.bstStart=Date.now()}),s.on("fn-end",function(t,e){i("bstTimer",[e,this.bstStart,Date.now(),"requestAnimationFrame"])}),o.on("pushState-start",function(t){this.time=Date.now(),this.startPath=location.pathname+location.hash}),o.on("pushState-end",function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.clearResourceTimings?window.performance.addEventListener("resourcetimingbufferfull",function(t){i("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1):window.performance.addEventListener("webkitresourcetimingbufferfull",function(t){i("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1)),document.addEventListener("scroll",r,!1),document.addEventListener("keypress",r,!1),document.addEventListener("click",r,!1)}},{}],5:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&o(e)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),s=t(16)(a),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){if(t[1]){var n=t[1];if("function"==typeof n){var r=c(n,"nr@wrapped",function(){return s(n,"fn-",null,n.name||"anonymous")});this.wrapped=t[1]=r}else"function"==typeof n.handleEvent&&s.inPlace(n,["handleEvent"],"fn-")}}),a.on(d+"-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{}],6:[function(t,e,n){var r=t("ee").get("history"),o=t(16)(r);e.exports=r,o.inPlace(window.history,["pushState","replaceState"],"-")},{}],7:[function(t,e,n){var r=t("ee").get("raf"),o=t(16)(r);e.exports=r,o.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],8:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration="number"==typeof t[1]?t[1]:0,t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t(16)(i);e.exports=i,a.inPlace(window,["setTimeout","setImmediate"],"setTimer-"),a.inPlace(window,["setInterval"],"setInterval-"),a.inPlace(window,["clearTimeout","clearImmediate"],"clearTimeout-"),i.on("setInterval-start",r),i.on("setTimer-start",o)},{}],9:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function o(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,v,"fn-",s)}function i(t){w.push(t),h&&(g=-g,b.data=g)}function a(){for(var t=0;t<w.length;t++)r([],w[t]);w.length&&(w=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(5);var f=t("ee"),u=f.get("xhr"),d=t(16)(u),l=NREUM.o,p=l.XHR,h=l.MO,m="readystatechange",v=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],w=[];e.exports=u;var y=window.XMLHttpRequest=function(t){var e=new p(t);try{u.emit("new-xhr",[e],e),e.addEventListener(m,o,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(p,y),y.prototype=p.prototype,d.inPlace(y.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),h){var g=1,b=document.createTextNode(g);new h(a).observe(b,{characterData:!0})}else f.on("fn-end",function(t){t[0]&&t[0].type===m||a()})},{}],10:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;l>r;r++)t.removeEventListener(d[r],this.listener,!1);if(!e.aborted){if(n.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var i=o(t,this.lastSize);if(i&&(n.rxSize=i),this.sameOrigin){var a=t.getResponseHeader("X-NewRelic-App-Data");a&&(e.cat=a.split(", ").pop())}}else e.status=0;n.cbTime=this.cbTime,u.emit("xhr-done",[t],t),c("xhr",[e,n,this.startTime])}}}function o(t,e){var n=t.responseType;if("json"===n&&null!==e)return e;var r="arraybuffer"===n||"blob"===n||"json"===n?t.response:t.responseText;return i(r)}function i(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}function a(t,e){var n=f(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}var s=t("loader");if(s.xhrWrappable){var c=t("handle"),f=t(11),u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(13),m=window.XMLHttpRequest;s.features.xhr=!0,t(9),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,h&&(h>34||10>h)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},a(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&&r){var a=i(r);a&&(n.txSize=a)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof e.onload))&&o.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var s=0;l>s;s++)e.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,e){e instanceof m&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof m&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof m&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{}],11:[function(t,e,n){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!e.protocol||":"===e.protocol||e.protocol===n.protocol,a=e.hostname===document.domain&&e.port===n.port;return r.sameOrigin=i&&(!e.hostname||a),r}},{}],12:[function(t,e,n){function r(t,e){return function(){o(t,[(new Date).getTime()].concat(a(arguments)),null,e)}}var o=t("handle"),i=t(14),a=t(15);"undefined"==typeof window.newrelic&&(newrelic=NREUM);var s=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit"],c=["addPageAction"],f="api-";i(s,function(t,e){newrelic[e]=r(f+e,"api")}),i(c,function(t,e){newrelic[e]=r(f+e)}),e.exports=newrelic,newrelic.noticeError=function(t){"string"==typeof t&&(t=new Error(t)),o("err",[t,(new Date).getTime()])}},{}],13:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),e.exports=r},{}],14:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],15:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],16:[function(t,e,n){function r(t){return!(t&&"function"==typeof t&&t.apply&&!t[a])}var o=t("ee"),i=t(15),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;e.exports=function(t){function e(t,e,n,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof n?n(r,a):n||{}}catch(u){d([u,"",[r,a,o],s])}f(e+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(l){throw f(e+"err",[r,a,l],s),l}finally{f(e+"end",[r,a,c],s)}}return r(t)?t:(e||(e=""),nrWrapper[a]=t,u(t,nrWrapper),nrWrapper)}function n(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function f(e,n,r){if(!c){c=!0;try{t.emit(e,n,r)}catch(o){d([o,e,n,r])}c=!1}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){d([r])}for(var o in t)s.call(t,o)&&(e[o]=t[o]);return e}function d(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=o),e.inPlace=n,e.flag=a,e}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?s(t,a,i):i()}function n(n,r,o){t&&t(n,r,o);for(var i=e(o),a=l(n),s=a.length,c=0;s>c;c++)a[c].apply(i,r);var u=f[v[n]];return u&&u.push([w,n,r,i]),i}function d(t,e){m[t]=l(t).concat(e)}function l(t){return m[t]||[]}function p(t){return u[t]=u[t]||o(n)}function h(t,e){c(t,function(t,n){e=e||"feature",v[n]=e,e in f||(f[e]=[])})}var m={},v={},w={on:d,emit:n,get:p,listeners:l,context:e,buffer:h};return w}function i(){return new r}var a="nr@context",s=t("gos"),c=t(14),f={},u={},d=e.exports=o();d.backlog=f},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!m++){var t=h.info=NREUM.info,e=u.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){c(l,function(e,n){t[e]||(t[e]=n)});var n="https"===d.split(":")[0]||t.sslForHttp;h.proto=n?"https://":"http://",s("mark",["onload",a()],null,"api");var r=u.createElement("script");r.src=h.proto+t.agent,e.parentNode.insertBefore(r,e)}}}function o(){"complete"===u.readyState&&i()}function i(){s("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var s=t("handle"),c=t(14),f=window,u=f.document;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:f.XMLHttpRequest,REQ:f.Request,EV:f.Event,PR:f.Promise,MO:f.MutationObserver},t(12);var d=""+location,l={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-918.min.js"},p=window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent),h=e.exports={offset:a(),origin:d,features:{},xhrWrappable:p};u.addEventListener?(u.addEventListener("DOMContentLoaded",i,!1),f.addEventListener("load",r,!1)):(u.attachEvent("onreadystatechange",o),f.attachEvent("onload",r)),s("mark",["firstbyte",a()],null,"api");var m=0},{}]},{},["loader",2,10,4,3]);</script>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		
+		<link rel="stylesheet" media="screen" href="./jovemnerd_files/hd-stylesheet.css">
+		<link rel="stylesheet" media="screen" href="./jovemnerd_files/font-awesome.min.css">
+		<!--
+			<link rel="stylesheet" media="screen and (min-width:801px) and (max-width:1080px)" href="https://jovemnerd.com.br/wp-content/themes/jovemnerd/css/stylesheet.css?cachebuster=8d02b0855eda9ab28384aa7e5a7e2c71" />
+			<link rel="stylesheet" media="screen and (min-width:721px) and (max-width:800px)" href="https://jovemnerd.com.br/wp-content/themes/jovemnerd/css/stylesheet-tablet.css?cachebuster=8d02b0855eda9ab28384aa7e5a7e2c71" />
+		-->
+		<link rel="stylesheet" media="screen and (min-width:721px) and (max-width:1280px)" href="./jovemnerd_files/stylesheet.css">
+		<link rel="stylesheet" media="screen and (max-width:720px)" href="./jovemnerd_files/stylesheet-mobile.css">
+		<link rel="stylesheet" href="./jovemnerd_files/animate.min.css">
+		<link rel="stylesheet" data-file="" href="./jovemnerd_files/dist.css">
+		<script src="./jovemnerd_files/jquery.min.js"></script><style type="text/css"></style>
+		<script type="text/javascript" src="./jovemnerd_files/mediaelement-and-player.min.js"></script>
+		<script type="text/javascript" src="./jovemnerd_files/jquery.mobile.custom.min.js"></script>
+		
+<!-- This site is optimized with the Yoast SEO plugin v3.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Jovem Nerd » O mundo pop vira piada no Jovem Nerd</title>
+<meta name="description" content="O mundo pop vira piada no Jovem Nerd">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://jovemnerd.com.br/">
+<link rel="next" href="https://jovemnerd.com.br/page/2/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jovem Nerd » O mundo pop vira piada no Jovem Nerd">
+<meta property="og:description" content="O mundo pop vira piada no Jovem Nerd">
+<meta property="og:url" content="https://jovemnerd.com.br">
+<meta property="og:site_name" content="Jovem Nerd">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="O mundo pop vira piada no Jovem Nerd">
+<meta name="twitter:title" content="Jovem Nerd » O mundo pop vira piada no Jovem Nerd">
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"WebSite","url":"https:\/\/jovemnerd.com.br\/","name":"Jovem Nerd","potentialAction":{"@type":"SearchAction","target":"https:\/\/jovemnerd.com.br\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<!-- / Yoast SEO plugin. -->
+
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/jovemnerd.com.br\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;return g&&g.fillText?(g.textBaseline="top",g.font="600 32px Arial","flag"===a?(g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3):"diversity"===a?(g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e):("simple"===a?g.fillText(h(55357,56835),0,0):g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./jovemnerd_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="contact-form-7-css" href="./jovemnerd_files/styles.css" type="text/css" media="all">
+<script type="text/javascript" src="./jovemnerd_files/jquery.js"></script>
+<script type="text/javascript" src="./jovemnerd_files/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="https://jovemnerd.com.br/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jovemnerd.com.br/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://jovemnerd.com.br/wp-includes/wlwmanifest.xml"> 
+
+<link rel="me" href="https://twitter.com/jovemnerdnews">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Jovem Nerd"><meta name="twitter:site" content="@jovemnerdnews"><meta name="twitter:description" content="O mundo pop vira piada no Jovem Nerd">
+<meta name="twitter:widgets:csp" content="on"><meta name="twitter:partner" content="tfwp">		<!-- Hotjar Tracking Code for jovemnerd.com.br -->
+		<script>
+		(function(f,b){
+			var c;
+			f.hj=f.hj||function(){(f.hj.q=f.hj.q||[]).push(arguments)};
+			f._hjSettings={hjid:45317, hjsv:4};
+			c=b.createElement("script");c.async=1;
+			c.src="//static.hotjar.com/c/hotjar-"+f._hjSettings.hjid+".js?sv="+f._hjSettings.hjsv;
+			b.getElementsByTagName("head")[0].appendChild(c); 
+		})(window,document);
+		</script><script async="" src="./jovemnerd_files/hotjar-45317.js"></script>
+        
+        <!-- Meta Tags do Twitter e Facebook -->
+        <meta name="description" content="O mundo pop vira piada no Jovem Nerd">
+		<meta property="og:title" content="O mundo pop vira piada no Jovem Nerd">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="O mundo pop vira piada no Jovem Nerd">
+        <meta property="og:site_name" content="Jovem Nerd">
+        <meta property="og:url" content="jovemnerd.com.br/">
+        <meta property="og:image" content="">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@jovemnerdnews">
+        <meta name="twitter:title" content="O mundo pop vira piada no Jovem Nerd">
+        <meta name="twitter:description" content="O mundo pop vira piada no Jovem Nerd">
+        <meta name="twitter:image" content="">
+	<script src="./jovemnerd_files/pubads_impl_88.js" async=""></script><script src="./jovemnerd_files/modules-3b3d6a2fa2a862b4b053257495a0ff00.js"></script><script async="" type="text/javascript" src="./jovemnerd_files/count.js"></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html"></head>
+	<body class="home" data-pinterest-extension-installed="cr1.39.1">
+		<div id="site-content">
+			<div id="wrapper-intervencao"></div>
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-98571-1', 'auto');
+			  ga('send', 'pageview');
+			</script>
+			<!-- /22837869/intervention -->
+			<script type="text/javascript">
+			  var googletag = googletag || {};
+			  googletag.cmd = googletag.cmd || [];
+			  (function() {
+			    var gads = document.createElement('script');
+			    gads.async = true;
+			    gads.type = 'text/javascript';
+			    var useSSL = 'https:' == document.location.protocol;
+			    gads.src = (useSSL ? 'https:' : 'http:') +
+			      '//www.googletagservices.com/tag/js/gpt.js';
+			    var node = document.getElementsByTagName('script')[0];
+			    node.parentNode.insertBefore(gads, node);
+			  })();
+			</script>
+			<script type="text/javascript">
+			  googletag.cmd.push(function() {
+			    googletag.defineOutOfPageSlot('/22837869/intervention', 'div-gpt-ad-1458854981188-0').addService(googletag.pubads());
+			    googletag.pubads().enableSingleRequest();
+			    googletag.enableServices();
+			  });
+			</script>
+			<!-- /22837869/intervention END -->
+						
+			<header>
+				<div class="wrapper">
+					<a href="https://jovemnerd.com.br/" class="logo default">
+						<h1>Jovem Nerd</h1>
+					</a>
+					<nav id="main-menu">
+						<ul id="menu-menu-principal" class="menu"><li id="menu-item-131558" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-131558"><a href="https://jovemnerd.com.br/categoria/nerdnews/">NerdNews</a></li>
+<li id="menu-item-112944" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112944"><a href="https://jovemnerd.com.br/categoria/nerdcast/">NerdCast</a></li>
+<li id="menu-item-112945" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112945"><a href="https://jovemnerd.com.br/categoria/nerdoffice/">NerdOffice</a></li>
+<li id="menu-item-112946" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112946"><a href="https://jovemnerd.com.br/categoria/nerdplayer/">NerdPlayer</a></li>
+<li id="menu-item-112947" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-112947"><a href="http://nerdstore.com.br/">NerdStore</a></li>
+<li id="menu-item-112948" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-112948"><a href="http://ftpi.me/m_2016/JN_MK.pdf">Anuncie Aqui</a></li>
+</ul><form action="https://jovemnerd.com.br/" method="get">
+	<fieldset>
+		<input type="text" name="s" id="search" value="" placeholder="Busca">
+		<button></button>
+	</fieldset>
+</form>
+					</nav>
+				</div>
+			</header>
+			<!-- /22837869/intervention -->
+			<div id="div-gpt-ad-1458854981188-0">
+				<script type="text/javascript">
+				googletag.cmd.push(function() { googletag.display('div-gpt-ad-1458854981188-0'); });
+				</script>
+			<div id="google_ads_iframe_/22837869/intervention_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/22837869/intervention_0" title="3rd party ad content" name="google_ads_iframe_/22837869/intervention_0" width="1" height="1" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:&quot;&lt;html&gt;&lt;body style=&#39;background:transparent&#39;&gt;&lt;/body&gt;&lt;/html&gt;&quot;" style="border: 0px; vertical-align: bottom;" src="./jovemnerd_files/saved_resource.html"></iframe></div><iframe id="google_ads_iframe_/22837869/intervention_0__hidden__" title="" name="google_ads_iframe_/22837869/intervention_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:&quot;&lt;html&gt;&lt;body style=&#39;background:transparent&#39;&gt;&lt;/body&gt;&lt;/html&gt;&quot;" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;" src="./jovemnerd_files/saved_resource(1).html"></iframe></div>	<section id="home">
+		<section class="carousel">
+							<div class="entry carousel-entry-1 active" style="display: none; background-image: url(&quot;https://jovemnerd.com.br/wp-content/uploads/NO-s07e20-HUGE-01.jpg&quot;);"></div>
+							<div class="entry carousel-entry-2 " style="display: none; background-image: url(&quot;https://jovemnerd.com.br/wp-content/uploads/Sr.K_s01e58_HUGE-01.jpg&quot;);"></div>
+							<div class="entry carousel-entry-3 " style="display: none; background-image: url(&quot;https://jovemnerd.com.br/wp-content/uploads/huge-banner-dia-da-toalha.jpg&quot;);"></div>
+							<div class="entry carousel-entry-4 " style="display: none; background-image: url(&quot;https://jovemnerd.com.br/wp-content/uploads/NP-226-HUGE-01.jpg&quot;);"></div>
+							<div class="entry carousel-entry-5 " style="display: block; background-image: url(&quot;https://jovemnerd.com.br/wp-content/uploads/MRG-E49-HUGE-01.jpg&quot;);"></div>
+					</section>
+		<section class="content">
+			<div class="main">
+				<div class="wrapper">
+					<div class="captions">
+													<a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/" class="link-highlight-full carousel-entry-1 " style="display: none;">
+								</a><blockquote class="carousel-entry-1 active" style="display: none;"><a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/" class="link-highlight-full carousel-entry-1 " style="display: none;">
+									</a><a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/">
+										<p><span>The Witcher 3: Blood and Wine - Evento
+</span></p><h3><span>NerdOffice S07E20<p></p></span></h3>									</a>
+								</blockquote>
+							
+													<a href="https://youtu.be/4dsYRfGu1X8" class="link-highlight-full carousel-entry-2 " style="display: none;">
+								</a><blockquote class="carousel-entry-2 " style="display: none;"><a href="https://youtu.be/4dsYRfGu1X8" class="link-highlight-full carousel-entry-2 " style="display: none;">
+									</a><a href="https://youtu.be/4dsYRfGu1X8">
+										<p><span>Ela não sai do meu pé
+</span></p><h3><span>Sr. K Responde<p></p></span></h3>									</a>
+								</blockquote>
+							
+													<a href="http://www.nerdstore.com.br/?lid=67cbe269-e51a-4af9-9b64-6550f3959b2c" class="link-highlight-full carousel-entry-3 " style="display: none;">
+								</a><blockquote class="carousel-entry-3 " style="display: none;"><a href="http://www.nerdstore.com.br/?lid=67cbe269-e51a-4af9-9b64-6550f3959b2c" class="link-highlight-full carousel-entry-3 " style="display: none;">
+									</a><a href="http://www.nerdstore.com.br/?lid=67cbe269-e51a-4af9-9b64-6550f3959b2c">
+																			</a>
+								</blockquote>
+							
+													<a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/" class="link-highlight-full carousel-entry-4 " style="display: none;">
+								</a><blockquote class="carousel-entry-4 " style="display: none;"><a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/" class="link-highlight-full carousel-entry-4 " style="display: none;">
+									</a><a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/">
+										<p><span>The Witcher 3: Blood and Wine
+</span></p><p><span><strong>Grita!</strong>
+</span></p><h3><span>NerdPlayer 226<p></p></span></h3>									</a>
+								</blockquote>
+							
+													<a href="https://jovemnerd.com.br/matando-robos-gigantes/x-men-mrg-show/" class="link-highlight-full carousel-entry-5 " style="display: block;">
+								</a><blockquote class="carousel-entry-5 " style="display: block;"><a href="https://jovemnerd.com.br/matando-robos-gigantes/x-men-mrg-show/" class="link-highlight-full carousel-entry-5 " style="display: block;">
+									</a><a href="https://jovemnerd.com.br/matando-robos-gigantes/x-men-mrg-show/">
+										<p><span>X-Men
+</span></p><h3><span>Matando Robôs Gigantes Show!<p></p></span></h3>									</a>
+								</blockquote>
+							
+											</div>
+					<a href="javascript:void(0);" class="navigation-arrows previous">
+						<i class="fa fa-angle-left"></i>
+					</a>
+					<a href="javascript:void(0);" class="navigation-arrows next">
+						<i class="fa fa-angle-right"></i>
+					</a>
+					<nav class="dots">
+													<a href="javascript:void(0);" data-target="carousel-entry-1" class=""><figure></figure></a>
+													<a href="javascript:void(0);" data-target="carousel-entry-2" class=""><figure></figure></a>
+													<a href="javascript:void(0);" data-target="carousel-entry-3" class=""><figure></figure></a>
+													<a href="javascript:void(0);" data-target="carousel-entry-4" class=""><figure></figure></a>
+													<a href="javascript:void(0);" data-target="carousel-entry-5" class="current"><figure></figure></a>
+											</nav>
+					<div class="banner super">
+						<iframe src="./jovemnerd_files/superbanner.html" data-desktop-src="https://jovemnerd.com.br/wp-content/themes/jovemnerd/banners/home/superbanner.html?" data-mobile-src="https://jovemnerd.com.br/wp-content/themes/jovemnerd/banners/home/mobile.html?" data-mobile-size="320x50" data-desktop-size="728x90"></iframe>					</div>
+				</div>
+			</div>
+			<div class="section nerdnews">
+				<div class="wrapper">					
+										
+					<a href="https://jovemnerd.com.br/categoria/nerdnews/">
+						<h2>
+							<span>Nerd</span>News
+						</h2>
+					</a>					
+					<ul class="filter">
+						<li class="active"><a href="javascript:void(0);" data-category-id="nerdnews">Todas</a></li>
+						<li><a href="javascript:void(0);" data-category-id="games">Games</a></li>
+						<li><a href="javascript:void(0);" data-category-id="cinema">Cinema</a></li>
+						<li><a href="javascript:void(0);" data-category-id="tv">Séries</a></li>
+						<li><a href="javascript:void(0);" data-category-id="internet">Internet</a></li>
+						<li><a href="javascript:void(0);" data-category-id="hq-livros">HQ's e Livros</a></li>
+						<li><a href="javascript:void(0);" data-category-id="colecionaveis">Colecionáveis</a></li>
+						<li><a href="javascript:void(0);" data-category-id="tecnologia">Tecnologia</a></li>
+					</ul>
+
+                    					<ul class="news-list">
+                                                    <li class="big">
+                                <a href="https://jovemnerd.com.br/nerdnews/game-of-thrones-dubladores-falam-sobre-dificuldade-de-localizar-o-episodio-the-door/">
+                                    <figure class="masked">
+                                        <img width="567" height="254" src="./jovemnerd_files/game-of-thrones-the-door-1-567x254.jpg" class="attachment-jnn-home-big size-jnn-home-big wp-post-image" alt="game-of-thrones-the-door-1">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Game of Thrones | Dubladores falam sobre a dificuldade de localizar o episódio The Door</h4>
+                                        <p>
+                                                                                            <small>Segure os Spoilers</small>
+                                                Este post contém Spoilers sobre o quinto episódio da sexta temporada de Game of Thrones                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="big">
+                                <a href="https://jovemnerd.com.br/nerdnews/dia-da-toalha-15-obras-essenciais-para-todo-nerd/">
+                                    <figure class="masked">
+                                        <img width="567" height="254" src="./jovemnerd_files/dia-da-toalha-jovem-nerd-567x254.jpg" class="attachment-jnn-home-big size-jnn-home-big wp-post-image" alt="dia da toalha jovem nerd">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Dia da Toalha | 15 obras que influenciaram a produção nerd atual</h4>
+                                        <p>
+                                                                                            <small>De Akira Kurosawa a Machado de Assis!</small>
+                                                Para celebrar o Dia da Toalha, a equipe Jovem Nerd News separou 15 obras essenciais para todo nerd                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/dory-continua-nadar-no-novo-trailer-de-procurando-dory/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/finding-dory-xlarge-154x115.jpg" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="finding-dory-xlarge">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Dory continua a nadar no novo trailer de Procurando Dory [atualizado]</h4>
+                                        <p>
+                                                                                            Aventura Inesquecível                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/invocacao-do-mal-2-featurette-mostra-as-gravacoes-originais-do-casal-warren/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/invocacao-do-mal-2-154x115.jpg" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="invocacao-do-mal-2">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Invocação do Mal 2 | Featurette mostra as gravações originais do casal Warren</h4>
+                                        <p>
+                                                                                            Gravações reais                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/jojos-bizarre-adventure-primeiro-capitulo-ja-esta-disponivel/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/jojos-1-154x115.png" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="bizarre adventure">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>JoJo’s Bizarre Adventure: Eyes of Heaven | Demo do primeiro capítulo do Modo História já está disponível</h4>
+                                        <p>
+                                                                                            Seja parte do clã Joestar!                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/luke-cage-novas-fotos-revelam-o-visual-do-vilao/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/Luke-Cage-top-154x115.jpg" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="Luke-Cage-top">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Luke Cage | Novas fotos revelam o visual do vilão</h4>
+                                        <p>
+                                                                                            Vilão clássico                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/marco-polo-segunda-temporada-ganha-imagens/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/MP2_08_01041_R-154x115.jpg" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="marco polo segunda temporada">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Marco Polo | Segunda temporada ganha novas imagens</h4>
+                                        <p>
+                                                                                            Ano dois estreia em julho                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                                                    <li class="small">
+                                <a href="https://jovemnerd.com.br/nerdnews/game-of-thrones-confira-as-fotos-de-blood-of-my-blood/">
+                                    <figure class="masked">
+                                        <img width="154" height="115" src="./jovemnerd_files/got_mp_091615_ep606-26461-154x115.jpg" class="attachment-jnn-home-medium size-jnn-home-medium wp-post-image" alt="got_mp_091615_ep606-26461">                                    </figure>
+                                    <div class="news-heading">
+                                        <h4>Game of Thrones | Confira as fotos do sexto episódio da sexta temporada</h4>
+                                        <p>
+                                                                                            Blood of my Blood                                                                                    </p>
+                                    </div>
+                                </a>
+                            </li>
+                        					</ul>
+					<a class="button default outline" href="https://jovemnerd.com.br/categoria/nerdnews/">Ver mais notícias</a>
+				</div>
+				<div class="banner super banner-mid">
+					<iframe src="./jovemnerd_files/superbanner_mid.html" data-desktop-src="https://jovemnerd.com.br/wp-content/themes/jovemnerd/banners/nerdnews/superbanner_mid.html?" data-mobile-src="https://jovemnerd.com.br/wp-content/themes/jovemnerd/banners/nerdnews/mobile.html?" data-mobile-size="320x50" data-desktop-size="728x90"></iframe>				</div>
+			</div>
+										<section class="main-attraction section darker nerdcast">
+					<div class="wrapper">
+						<div class="column">
+							<a href="https://jovemnerd.com.br/categoria/nerdcast/">
+								<h2><span>Nerd</span>Cast</h2>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows previous" data-target="#nerdcast-home-latest">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows next" data-target="#nerdcast-home-latest">
+								<i class="fa fa-angle-right"></i>
+							</a>
+							<ul class="latest-posts" id="nerdcast-home-latest">
+																		<li class="active">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-517-monstros-do-cinema/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/GIGA_MONSTRO_01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="GIGA_MONSTRO_01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-517-monstros-do-cinema/">
+																										<h4>
+														Monstros do cinema														<span>
+															Nerdcast 517 &nbsp;&nbsp; | &nbsp;&nbsp;01h41min														</span>
+													</h4>
+													</a><p><a href="https://jovemnerd.com.br/nerdcast/nerdcast-517-monstros-do-cinema/">Hoje </a><a href="http://www.twitter.com/JovemNerd">Alexandre Ottoni o Jovem Nerd</a>, <a href="https://twitter.com/affonsosolano?lang=pt">Affonso Solano</a>, <a href="https://twitter.com/afonso3d?lang=pt">Tresdê</a>, <a href="https://twitter.com/carlosvoltor">Carlos Voltor</a>&nbsp;e <a href="http://twitter.com/Azaghal">Deive Pazos o Azaghal</a>&nbsp;relembram os grandes monstros do cinema!</p>
+												
+												<a class="button filled nerdcast" href="https://jovemnerd.com.br/nerdcast/nerdcast-517-monstros-do-cinema/">
+													<i class="fa fa-play"></i>
+													Escutar Nerdcast 517 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-516-ciencia-do-aprendizado/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/GIGA_APRENDER_01-1-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="GIGA_APRENDER_01 (1)"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-516-ciencia-do-aprendizado/">
+																										<h4>
+														A ciência do aprendizado														<span>
+															Nerdcast 516 &nbsp;&nbsp; | &nbsp;&nbsp;01h24min														</span>
+													</h4>
+													</a><p><a href="https://jovemnerd.com.br/nerdcast/nerdcast-516-ciencia-do-aprendizado/">Hoje </a><a href="http://www.twitter.com/JovemNerd">Alexandre Ottoni o Jovem Nerd</a>, <a href="https://twitter.com/oatila?lang=pt">Átila</a>, <a href="https://twitter.com/caiocgomes?lang=pt">Caio Gomes</a>, <a href="https://twitter.com/andrelesouza">André Souza</a>&nbsp;e <a href="http://twitter.com/Azaghal">Deive Pazos o Azaghal</a>&nbsp;tentam descobrir porque ainda não aprenderam nada com esses Nerdcasts!
+</p>
+												
+												<a class="button filled nerdcast" href="https://jovemnerd.com.br/nerdcast/nerdcast-516-ciencia-do-aprendizado/">
+													<i class="fa fa-play"></i>
+													Escutar Nerdcast 516 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-515-no-octogono-com-demian-maia/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/GIGA_DEMIAN_01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="GIGA_DEMIAN_01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-515-no-octogono-com-demian-maia/">
+																										<h4>
+														No octógono com Demian Maia														<span>
+															Nerdcast 515 &nbsp;&nbsp; | &nbsp;&nbsp;01h41min														</span>
+													</h4>
+													</a><p><a href="https://jovemnerd.com.br/nerdcast/nerdcast-515-no-octogono-com-demian-maia/">Hoje </a><a href="http://www.twitter.com/JovemNerd">Alexandre Ottoni o Jovem Nerd</a>,&nbsp;<a href="https://twitter.com/demianmaia">Demian Maia</a>, <a href="https://twitter.com/cancerjack?lang=pt">Tucano</a>, <a href="https://twitter.com/eduardospohr">Eduardo Spohr</a>&nbsp;e <a href="http://twitter.com/Azaghal">Deive Pazos o Azaghal</a>&nbsp;entram no octógono&nbsp;e abrem o&nbsp;Clube da Luta - Dieta &amp; SPA!</p>
+												
+												<a class="button filled nerdcast" href="https://jovemnerd.com.br/nerdcast/nerdcast-515-no-octogono-com-demian-maia/">
+													<i class="fa fa-play"></i>
+													Escutar Nerdcast 515 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdtech-03-velocidade-performance-e-otimizacao/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NTCH_3_giga-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NTCH_3_giga"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdtech-03-velocidade-performance-e-otimizacao/">
+																										<h4>
+														Velocidade, performance e otimização														<span>
+															Nerdtech 03 &nbsp;&nbsp; | &nbsp;&nbsp;44min														</span>
+													</h4>
+													</a><p><a href="https://jovemnerd.com.br/nerdcast/nerdtech-03-velocidade-performance-e-otimizacao/">Hoje </a><a href="http://www.twitter.com/JovemNerd">Alexandre Ottoni o Jovem Nerd</a>, <a href="https://twitter.com/paulo_caelum">Paulo Silveira</a>, <a href="https://twitter.com/sergio_caelum">Sérgio Lopes</a>&nbsp;e <a href="http://twitter.com/Azaghal">Deive Pazos o Azaghal</a>&nbsp;se reúnem para mais um episódio especial sobre tecnologia!</p>
+												
+												<a class="button filled nerdcast" href="https://jovemnerd.com.br/nerdcast/nerdtech-03-velocidade-performance-e-otimizacao/">
+													<i class="fa fa-play"></i>
+													Escutar Nerdtech 03 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-514-turistas-babacas-2/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/GIGA_TURISTA2_02-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="GIGA_TURISTA2_02"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdcast/nerdcast-514-turistas-babacas-2/">
+																										<h4>
+														Turistas Babacas 2														<span>
+															Nerdcast 514 &nbsp;&nbsp; | &nbsp;&nbsp;01h41min														</span>
+													</h4>
+													</a><p><a href="https://jovemnerd.com.br/nerdcast/nerdcast-514-turistas-babacas-2/">Hoje </a><a href="http://www.twitter.com/JovemNerd">Alexandre Ottoni o Jovem Nerd</a>, <a href="https://twitter.com/sr_k_">Sr. K</a>, <a href="https://twitter.com/gugamafra">Guga Mafra</a>, <a href="https://twitter.com/Portuguesa_NC">Portuguesa</a>&nbsp;e <a href="http://twitter.com/Azaghal">Deive Pazos o Azaghal</a>&nbsp;colocam seus monóculos para a segunda parte de Turistas Babacas!</p>
+												
+												<a class="button filled nerdcast" href="https://jovemnerd.com.br/nerdcast/nerdcast-514-turistas-babacas-2/">
+													<i class="fa fa-play"></i>
+													Escutar Nerdcast 514 												</a>
+											</div>
+										</li>
+															</ul>
+						</div>
+						
+						<div class="column">
+							<h3><span>Mais</span> Ouvidos</h3>
+							<ul class="highlights">
+																								<li>
+									<a href="https://jovemnerd.com.br/nerdcast/nerdcast-395-rpg-cyberpunk-1-o-grande-assalto/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/NC395_SUPER_VITRINE1-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="NC395_SUPER_VITRINE"></figure>
+																				<h5>RPG Cyberpunk 1: O grande assalto										<span>EP. 395																					&nbsp;&nbsp;|&nbsp;&nbsp; 156min.</span></h5>
+																			</a>
+								</li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdcast/nerdcast-291-especial-rpg-o-duque-a-rosa-e-o-beholder/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/Sem-Título-19-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="Sem-Título-1"></figure>
+																				<h5>Especial RPG										<span>EP. 291																					&nbsp;&nbsp;|&nbsp;&nbsp; 135min.</span></h5>
+																			</a>
+								</li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdcast/nerdcast-341-especial-rpg-o-corvo-a-periguete-e-o-bucentauro/" rel="bookmark">
+										<figure class="masked"><img width="105" height="56" src="./jovemnerd_files/destaque_podcast_RPG3.jpeg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="destaque_podcast_RPG3" srcset="https://jovemnerd.com.br/wp-content/uploads/destaque_podcast_RPG3-300x160.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/destaque_podcast_RPG3-413x220.jpg 413w, https://jovemnerd.com.br/wp-content/uploads/destaque_podcast_RPG3.jpeg 585w" sizes="(max-width: 105px) 100vw, 105px"></figure>
+																				<h5>Especial RPG										<span>EP. 341																					&nbsp;&nbsp;|&nbsp;&nbsp; 161min.</span></h5>
+																			</a>
+								</li>
+																<li>
+									<a class="button nerdcast outline" href="https://jovemnerd.com.br/categoria/nerdcast/">
+										Ver todos <span>Nerd</span>Casts
+									</a>
+								</li>
+							</ul>
+						</div>
+												
+					</div>
+				</section>
+							<section class="main-attraction section  nerdoffice">
+					<div class="wrapper">
+						<div class="column">
+							<a href="https://jovemnerd.com.br/categoria/nerdoffice/">
+								<h2><span>Nerd</span>Office</h2>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows previous" data-target="#nerdoffice-home-latest">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows next" data-target="#nerdoffice-home-latest">
+								<i class="fa fa-angle-right"></i>
+							</a>
+							<ul class="latest-posts" id="nerdoffice-home-latest">
+																		<li class="active">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NO-s07e20-HUGE-01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NO-s07e20-HUGE-01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/">
+																										<h4>
+														The Witcher 3														<span>
+															 Blood and Wine – Evento 														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Alexandre Ottoni o Jovem Nerd e Deive Pazos o Azaghal,  visitam a convite da CD Projekt Red, um castelo na Itália para ter uma prévia da expansão de The Witcher 3, Blood and Wine. Além disso os nerds também participam de uma quest inspirada no jogo.</p>
+												</a>
+												<a class="button filled nerdoffice" href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/">
+													<i class="fa fa-play"></i>
+													Assistir  Blood and Wine – Evento 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdoffice/justiceiro-punisher-e-psicopata-nerdoffice-s07e19/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NO-s07e18-HUGE_01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NO-s07e18-HUGE_01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdoffice/justiceiro-punisher-e-psicopata-nerdoffice-s07e19/">
+																										<h4>
+														Justiceiro, Punisher e Psicopata														<span>
+															 NerdOffice S07E19														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Alexandre Ottoni o Jovem Nerd e Deive Pazos o Azaghal, contam um pouco da origem do Justiceiro e também falam sobre as melhores histórias do personagens nas HQs e os piores filmes já lançados do personagem. </p>
+												</a>
+												<a class="button filled nerdoffice" href="https://jovemnerd.com.br/nerdoffice/justiceiro-punisher-e-psicopata-nerdoffice-s07e19/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdOffice S07E19												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdoffice/trailer-de-battlefield-1-nerdoffice-s07e18/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NO-s07e18-HUGE-03-GAV-1-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NO-s07e18-HUGE 03 GAV"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdoffice/trailer-de-battlefield-1-nerdoffice-s07e18/">
+																										<h4>
+														Trailer de Battlefield 1														<span>
+															 NerdOffice S07E18														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Alexandre Ottoni o Jovem Nerd e Deive Pazos o Azaghal, comentam o fantástico trailer de Battlefield 1, relembrando a Grande Guerra. Confira nos detalhes todas as referências históricas que o trailer faz sobre a 1ª Guerra Mundial. </p>
+												</a>
+												<a class="button filled nerdoffice" href="https://jovemnerd.com.br/nerdoffice/trailer-de-battlefield-1-nerdoffice-s07e18/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdOffice S07E18												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdoffice/x-men-apocalipse-e-elon-musk-nerdoffice-s07e17/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NO-s07e17-HUGE-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NO-s07e17-HUGE"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdoffice/x-men-apocalipse-e-elon-musk-nerdoffice-s07e17/">
+																										<h4>
+														X-Men														<span>
+															 Apocalipse e Elon Musk 														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Alexandre Ottoni o Jovem Nerd e Deive Pazos o Azaghal, falam sobre o Elon Musk, o Tony Stark da vida real, dono da Tesla Motors e da SpaceX. E como este senhor está do lado das máquinas e será o principal responsável pela revolução das máquinas. </p>
+												</a>
+												<a class="button filled nerdoffice" href="https://jovemnerd.com.br/nerdoffice/x-men-apocalipse-e-elon-musk-nerdoffice-s07e17/">
+													<i class="fa fa-play"></i>
+													Assistir  Apocalipse e Elon Musk 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdoffice/superman-heroi-adulto-vr-nerdoffice-s07e16/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NO-s07e16-HUGE_02-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NO-s07e16-HUGE_02"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdoffice/superman-heroi-adulto-vr-nerdoffice-s07e16/">
+																										<h4>
+														SUPERMAN HERÓI ADULTO? + VR														<span>
+															 NerdOffice S07E16														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Alexandre Ottoni o Jovem Nerd e Deive Pazos o Azaghal, comentam sobre realidade virtual e os gadgets para isso como Gear VR Gear, Oculus, PlayStation VR (Project Morpheus). Também falam sobre Batman vs Superman, e se os heróis são coisas de criança ou coisas de adulto.</p>
+												</a>
+												<a class="button filled nerdoffice" href="https://jovemnerd.com.br/nerdoffice/superman-heroi-adulto-vr-nerdoffice-s07e16/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdOffice S07E16												</a>
+											</div>
+										</li>
+															</ul>
+						</div>
+						
+						<div class="column">
+							<h3><span>Mais</span> Assistidos</h3>
+							<ul class="highlights">
+																								<li>
+									<a href="https://jovemnerd.com.br/nerdoffice/arquivo-nerdoffice-nerd-nerf-wars/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/maxresdefault1-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="maxresdefault"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdoffice/arquivo-nerdoffice-nerd-nerf-wars/" rel="bookmark">Nerd Nerf Wars										<span>EP. Arquivo NerdOffice																			</span></a>
+								</h5></li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdoffice/top-10-filmes-de-terror-nerdoffice-s04e34/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/Sem-Título-1-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="Sem-Título-1"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdoffice/top-10-filmes-de-terror-nerdoffice-s04e34/" rel="bookmark">										<span>EP. Top 10 filmes de terror | NerdOffice S04E34																			</span></a>
+								</h5></li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdoffice/nerdoffice-s04e27-zeramos-a-vida/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/Sem-Título-11-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="Sem-Título-1"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdoffice/nerdoffice-s04e27-zeramos-a-vida/" rel="bookmark">Zeramos a vida!!!										<span>EP. NerdOffice S04E27																			</span></a>
+								</h5></li>
+																<li>
+									<a class="button nerdoffice outline" href="https://jovemnerd.com.br/categoria/nerdoffice/">
+										Ver todos <span>Nerd</span>Offices
+									</a>
+								</li>
+							</ul>
+						</div>
+												
+					</div>
+				</section>
+							<section class="main-attraction section darker nerdplayer">
+					<div class="wrapper">
+						<div class="column">
+							<a href="https://jovemnerd.com.br/categoria/nerdplayer/">
+								<h2><span>Nerd</span>Player</h2>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows previous" data-target="#nerdplayer-home-latest">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a href="javascript:void(0);" class="navigation-arrows next" data-target="#nerdplayer-home-latest">
+								<i class="fa fa-angle-right"></i>
+							</a>
+							<ul class="latest-posts" id="nerdplayer-home-latest">
+																		<li class="active">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NP-226-HUGE-01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NP-226-HUGE-01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/">
+																										<h4>
+														The Witcher 3														<span>
+															 Blood and Wine – Grita! 														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Hoje Alexandre Ottoni o Jovem Nerd e Deive Pazos, o Azaghal, diretamente de um castelo na Itália, jogam The Witcher : Blood and Wine!</p>
+												</a>
+												<a class="button filled nerdplayer" href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/">
+													<i class="fa fa-play"></i>
+													Assistir  Blood and Wine – Grita! 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdplayer/xcom-2-esquadrao-cyberpunk-nerdplayer-225/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NP-225-HUGE-01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NP-225-HUGE-01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdplayer/xcom-2-esquadrao-cyberpunk-nerdplayer-225/">
+																										<h4>
+														XCOM 2 – Esquadrão Cyberpunk														<span>
+															 NerdPlayer 225														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Hoje Alexandre Ottoni o Jovem Nerd e Deive Pazos, o Azaghal, convocam o esquadrão Cyberpunk para chutar a bunda de alguns alienígenas em XCOM 2.</p>
+												</a>
+												<a class="button filled nerdplayer" href="https://jovemnerd.com.br/nerdplayer/xcom-2-esquadrao-cyberpunk-nerdplayer-225/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdPlayer 225												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdplayer/broforce-nerdplayer-224/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NP-224-HUGE-02-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NP-224---HUGE-02"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdplayer/broforce-nerdplayer-224/">
+																										<h4>
+														Broforce – A Honra do Resgate														<span>
+															 NerdPlayer 224														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Hoje Alexandre Ottoni o Jovem Nerd e Deive Pazos, o Azaghal, chamam mais uma série de brucutus dos anos 80 e 90 para encarar oss vilões e terroristas de Broforce!</p>
+												</a>
+												<a class="button filled nerdplayer" href="https://jovemnerd.com.br/nerdplayer/broforce-nerdplayer-224/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdPlayer 224												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdplayer/mad-max-missao-chegar-na-missao-nerdplayer-223/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NP-223-HUGE-01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NP-223---HUGE-01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdplayer/mad-max-missao-chegar-na-missao-nerdplayer-223/">
+																										<h4>
+														Mad Max – Missão														<span>
+															 Chegar na missão! 														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Hoje Alexandre Ottoni o Jovem Nerd e Deive Pazos, o Azaghal, enchem as botas de areia se aventurando no mundo de Mad Max!</p>
+												</a>
+												<a class="button filled nerdplayer" href="https://jovemnerd.com.br/nerdplayer/mad-max-missao-chegar-na-missao-nerdplayer-223/">
+													<i class="fa fa-play"></i>
+													Assistir  Chegar na missão! 												</a>
+											</div>
+										</li>
+																		<li class="pull-left">
+											<div class="post-thumbnail">
+												<a href="https://jovemnerd.com.br/nerdplayer/gta-v-famiglia-noob-nerdplayer-222/">
+													<figure class="masked"><img width="562" height="363" src="./jovemnerd_files/NP-222-HUGE-01-562x363.jpg" class="attachment-attraction-home size-attraction-home wp-post-image" alt="NP-222-HUGE-01"></figure>
+												</a>
+											</div>
+											<div class="post-data">
+												<a href="https://jovemnerd.com.br/nerdplayer/gta-v-famiglia-noob-nerdplayer-222/">
+																										<h4>
+														GTA V – Famiglia Noob														<span>
+															 NerdPlayer 222														</span>
+													</h4>
+													<p>Lambda, lambda, lambda nerds! Hoje Alexandre Ottoni o Jovem Nerd, Mau e Didi Braguinha tentam agiar como uma máfia em GTA V, tomará que eles não se distraiam para fazendo outras coisas...</p>
+												</a>
+												<a class="button filled nerdplayer" href="https://jovemnerd.com.br/nerdplayer/gta-v-famiglia-noob-nerdplayer-222/">
+													<i class="fa fa-play"></i>
+													Assistir  NerdPlayer 222												</a>
+											</div>
+										</li>
+															</ul>
+						</div>
+						
+						<div class="column">
+							<h3><span>Mais</span> Assistidos</h3>
+							<ul class="highlights">
+																								<li>
+									<a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-36-battlefield-3-esquadrao-noob-rises/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/Sem-Título-18-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="Sem-Título-1"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-36-battlefield-3-esquadrao-noob-rises/" rel="bookmark">Esquadrão Noob Rises | NerdPlayer 36										<span>EP. Battlefield 3																			</span></a>
+								</h5></li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-50-o-melhor-de-50-nerdplayers/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/maxresdefault-1-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="maxresdefault (1)"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-50-o-melhor-de-50-nerdplayers/" rel="bookmark">										<span>EP. O melhor de 50 NerdPlayers | NerdPlayer 50																			</span></a>
+								</h5></li>
+																<li>
+									<a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-59-god-of-war-ascension-beta-cocou-bateu/" rel="bookmark">
+										<figure class="masked"><img width="105" height="86" src="./jovemnerd_files/maxresdefault-2-105x86.jpg" class="attachment-highlight-home size-highlight-home wp-post-image" alt="maxresdefault (2)"></figure>
+																				</a><h5><a href="https://jovemnerd.com.br/nerdplayer/nerdplayer-59-god-of-war-ascension-beta-cocou-bateu/" rel="bookmark">Coçou, bateu! | Nerdplayer 59										<span>EP. God of War: Ascension BETA																			</span></a>
+								</h5></li>
+																<li>
+									<a class="button nerdplayer outline" href="https://jovemnerd.com.br/categoria/nerdplayer/">
+										Ver todos <span>Nerd</span>Players
+									</a>
+								</li>
+							</ul>
+						</div>
+												
+					</div>
+				</section>
+			
+			<div class="section multiple-attractions mrg">
+				<div class="wrapper">
+                                                <div class="column mrg">
+                                <a href="https://jovemnerd.com.br/">                                    <h2><span>MRG</span></h2>
+                                </a>                                <nav class="pagination" data-target="#mrg-home-latest">
+                                    <a class="previous" href="javascript:void(0);"></a>
+                                    <a class="next" href="javascript:void(0);"></a>
+                                </nav>
+                                <ul class="latest-posts" id="mrg-home-latest">
+                                                                                <li class="active">
+                                                <a href="https://jovemnerd.com.br/matando-robos-gigantes/dirty-rally-robovision-2000/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/RBV-e41_HUGE_01-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="RBV-e41_HUGE_01"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/matando-robos-gigantes/dirty-rally-robovision-2000/">
+                                                                                                                <h4>
+                                                            Robovision 2000                                                            <span>
+                                                                Criança no Volante!!!                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No episódio de hoje do Robovision 2000, @BetoMRG @DiogoMRG e seu pimpolho, o Bruninho, tentam correm a toda velocidade em Dirty Rally!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/matando-robos-gigantes/mrg-321-o-cavaleiro-das-trevas-3-raca-superior/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/DK3BIG-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="DK3BIG"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/matando-robos-gigantes/mrg-321-o-cavaleiro-das-trevas-3-raca-superior/">
+                                                                                                                <h4>
+                                                            O Cavaleiro das Trevas 3                                                            <span>
+                                                                MRG 321                                                                                                                                    &nbsp;&nbsp;|&nbsp;&nbsp; 32min.
+                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Neste episódio, Affonso Solano, Didi Braguinha e Beto Estrada retornam para a Gotham City de Dark Knight 3!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/matando-robos-gigantes/x-men-mrg-show/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/MRG-E49-HUGE-01-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="MRG-E49-HUGE-01"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/matando-robos-gigantes/x-men-mrg-show/">
+                                                                                                                <h4>
+                                                            MRG Show!                                                            <span>
+                                                                X-Men                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Matando Robôs Gigantes Show de hoje @AffonsoSolano @DiogoMRG e @BetoMRG tentam entender as diferenças entre mídias, linhas temporais e músculos dos X-Men!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/matando-robos-gigantes/injusto-mega-man-parte-2-robovision-2000/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/RBV-e40-HUGE-01-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="RBV-e40-HUGE-01"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/matando-robos-gigantes/injusto-mega-man-parte-2-robovision-2000/">
+                                                                                                                <h4>
+                                                            ROBOVISION 2000                                                            <span>
+                                                                Injusto!!! – Mega Man (Parte 2)                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No episódio de hoje do Robovision 2000, @betomrg, @affonsosolano e @diogomrg voltam para mais uma aventura pixelada no clássico MEGA MAN. E hj finalmente, Solano consegue provar que um jogo pode ser injusto! </p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/matando-robos-gigantes/mrg-320-papa-capim/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/MRG_PapaCapim_-1-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="MRG_PapaCapim_"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/matando-robos-gigantes/mrg-320-papa-capim/">
+                                                                                                                <h4>
+                                                            Papa-Capim – Noite Branca!                                                            <span>
+                                                                MRG 320                                                                                                                                    &nbsp;&nbsp;|&nbsp;&nbsp; min.
+                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Neste episódio, Affonso Solano, Didi Braguinha e Beto Estrada aguardam a Noite Branca chegar na aldeia do Papa Capim!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                    </ul>
+	                            <a class="button mrg outline" href="https://jovemnerd.com.br/matando-robos-gigantes">
+		                            Ver todos <span>MRG</span>s
+	                            </a>
+                            </div>
+                                                <div class="column srk">
+                                <a href="https://jovemnerd.com.br/">                                    <h2><span>SR.</span>K</h2>
+                                </a>                                <nav class="pagination" data-target="#srk-home-latest">
+                                    <a class="previous" href="javascript:void(0);"></a>
+                                    <a class="next" href="javascript:void(0);"></a>
+                                </nav>
+                                <ul class="latest-posts" id="srk-home-latest">
+                                                                                <li class="active">
+                                                <a href="https://jovemnerd.com.br/sr-k/ela-nao-sai-do-meu-pe-sr-k-responde/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/Sr.K_s01e58_HUGE-01-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="Sr.K_s01e58_HUGE-01"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/sr-k/ela-nao-sai-do-meu-pe-sr-k-responde/">
+                                                                                                                <h4>
+                                                            Sr. K Responde                                                            <span>
+                                                                Ela não sai do meu pé                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Olá, bípedes, Sr. K está aqui para acabar com a sua agonia e responder as suas dúvidas em mais um Sr. K Responde!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/sr-k/sr-k-joga/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/SrK-Joga-HUGE-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="SrK-Joga-HUGE"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/sr-k/sr-k-joga/">
+                                                                                                                <h4>
+                                                            Sr. K Joga                                                            <span>
+                                                                Rayman Legends                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Olá, bípedes, vamos entrar no mundo de Rayman Legends, para ver se este universo fofinho consegue derreter o coração de Sr. K</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/sr-k/voce-e-um-animal-realmente-sr-k-responde/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/SrK-58-HUGE-01-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="SrK-58-HUGE-01"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/sr-k/voce-e-um-animal-realmente-sr-k-responde/">
+                                                                                                                <h4>
+                                                            Sr. K Responde                                                            <span>
+                                                                Você é um animal, realmente!                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Olá, bípedes, hoje Sr. K irá adentrar nas mentes dos duvidosos, para solucionar as dúvidas existenciais, amorosas e profissionais dos espectadores!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/sr-k/jockey-sr-k-visita/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/SrK-s01e55-HUGE-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="SrK-s01e55-HUGE"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/sr-k/jockey-sr-k-visita/">
+                                                                                                                <h4>
+                                                            Sr. K Visita                                                            <span>
+                                                                Jockey                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Olá, bípedes! Vamos apostar das patas dos cavalos, hoje Sr. K se encontra com Natália Kreuser e Lully de Verdade para uma tarde de garbo and elegância, torrando MILHÕES no Jockey Club!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/sr-k/todo-mundo-sabia-sr-k-responde/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/Sr.K_s01e54_huge-1-377x358.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="Sr.K_s01e54_huge"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/sr-k/todo-mundo-sabia-sr-k-responde/">
+                                                                                                                <h4>
+                                                            Sr. K Responde                                                            <span>
+                                                                Todo Mundo Sabia                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>Olá, bípedes! O sábio Sr. K irá hoje dar mais alguns conselhos para aqueles que tem dúvidas existenciais, e provar que TODO MUNDO sabe o que você estava fazendo!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                    </ul>
+	                            <a class="button mrg outline" href="https://www.youtube.com/playlist?list=PLB_vaUBxT31U48y7nOJbY5RgX8WLskSfS">
+		                            Ver todos <span>SR.</span>Ks
+	                            </a>
+                            </div>
+                                                <div class="column nerdologia">
+                                <a href="https://jovemnerd.com.br/categoria/nerdologia/">                                    <h2><span>NERDOLOGIA</span></h2>
+                                </a>                                <nav class="pagination" data-target="#nerdologia-home-latest">
+                                    <a class="previous" href="javascript:void(0);"></a>
+                                    <a class="next" href="javascript:void(0);"></a>
+                                </nav>
+                                <ul class="latest-posts" id="nerdologia-home-latest">
+                                                                                <li class="active">
+                                                <a href="https://jovemnerd.com.br/nerdologia/apocalipse-nerdologia-135/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/vitrineNH135_B.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="vitrineNH135_B" srcset="https://jovemnerd.com.br/wp-content/uploads/vitrineNH135_B-300x285.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/vitrineNH135_B.jpg 377w" sizes="(max-width: 377px) 100vw, 377px"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/nerdologia/apocalipse-nerdologia-135/">
+                                                                                                                <h4>
+                                                            Nerdologia 135                                                            <span>
+                                                                Apocalipse                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Nerdologia de hoje, veremos interpretações do que pode ser o Apocalipse, além do primeiro mutante e vilão de X-Men: Apocalipse, é claro.</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/nerdologia/como-fazer-um-supersoldado-nerdologia-133/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/vitrine_133_B.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="vitrine_133_B" srcset="https://jovemnerd.com.br/wp-content/uploads/vitrine_133_B-300x285.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/vitrine_133_B.jpg 377w" sizes="(max-width: 377px) 100vw, 377px"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/nerdologia/como-fazer-um-supersoldado-nerdologia-133/">
+                                                                                                                <h4>
+                                                            Nerdologia 133                                                            <span>
+                                                                Como fazer um Supersoldado                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Nerdologia de hoje, vamos finalmente ver como poderíamos fazer um super-soldado!
+</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/nerdologia/origem-da-vida-nerdologia-132/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/vitrine_origem_da_vida_B.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="vitrine_origem_da_vida_B" srcset="https://jovemnerd.com.br/wp-content/uploads/vitrine_origem_da_vida_B-300x285.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/vitrine_origem_da_vida_B.jpg 377w" sizes="(max-width: 377px) 100vw, 377px"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/nerdologia/origem-da-vida-nerdologia-132/">
+                                                                                                                <h4>
+                                                            Nerdologia 132                                                            <span>
+                                                                A Origem da Vida                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Nerdologia de hoje, vamos fazer uma regressão às vidas passadas. Ou melhor, à formas de vida passadas!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/nerdologia/diluvio-de-dados-nerdologia-131/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/vitrine_131_B.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="vitrine_131_B" srcset="https://jovemnerd.com.br/wp-content/uploads/vitrine_131_B-300x285.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/vitrine_131_B.jpg 377w" sizes="(max-width: 377px) 100vw, 377px"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/nerdologia/diluvio-de-dados-nerdologia-131/">
+                                                                                                                <h4>
+                                                            Nerdologia 131                                                            <span>
+                                                                Dilúvio de dados                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Nerdologia de hoje, vamos ver porque estamos em um dilúvio de dados cada vez maior!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                                <li class="pull-right">
+                                                <a href="https://jovemnerd.com.br/nerdologia/quem-sobrevive-no-topo-do-mundo-nerdologia-130/">
+                                                    <figure class="masked"><img width="377" height="358" src="./jovemnerd_files/vitrine_130_sherpas_B_v2.jpg" class="attachment-multiple-attraction-home size-multiple-attraction-home wp-post-image" alt="vitrine_130_sherpas_B_v2" srcset="https://jovemnerd.com.br/wp-content/uploads/vitrine_130_sherpas_B_v2-300x285.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/vitrine_130_sherpas_B_v2.jpg 377w" sizes="(max-width: 377px) 100vw, 377px"></figure>
+                                                </a>
+                                                <div class="post-data">
+                                                    <a href="https://jovemnerd.com.br/nerdologia/quem-sobrevive-no-topo-do-mundo-nerdologia-130/">
+                                                                                                                <h4>
+                                                            Nerdologia 130                                                            <span>
+                                                                Quem sobrevive no topo do mundo                                                                                                                            </span>
+                                                        </h4>
+                                                        <p>No Nerdologia de hoje, vamos entender porque é preciso evoluir pra viver no teto do mundo!</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                                                    </ul>
+	                            <a class="button mrg outline" href="https://www.youtube.com/user/nerdologia/videos">
+		                            Ver todos <span>NERDOLOGIA</span>s
+	                            </a>
+                            </div>
+                    				</div>
+			</div>
+			<div class="section nerdstore darker">
+				<div class="wrapper">
+					<h2><a href="http://nerdstore.com.br/"><span>Nerd</span>Store</a></h2>
+					<ul>
+												<li>
+							<a href="http://www.nerdstore.com.br/camiseta-silly-walk-nrdcm00126/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure class="masked">
+									<img width="380" height="254" src="./jovemnerd_files/380x254-CAMISETA-SILLY-WALK-1-1-380x254.jpg" class="attachment-nerdstore-home-big size-nerdstore-home-big wp-post-image" alt="380x254-CAMISETA-SILLY-WALK (1)" srcset="https://jovemnerd.com.br/wp-content/uploads/380x254-CAMISETA-SILLY-WALK-1-1-300x201.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/380x254-CAMISETA-SILLY-WALK-1-1.jpg 380w" sizes="(max-width: 380px) 100vw, 380px">								</figure>
+								<div class="content">
+									<h5>Camiseta The Ministry of Silly Walks</h5>
+									<p>Lançamento Exclusivo</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-los-pollos-hermanos/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure class="masked">
+									<img width="380" height="254" src="./jovemnerd_files/380x254-CAMISETA-LOS-POLLOS-HERMANOS-380x254.jpg" class="attachment-nerdstore-home-big size-nerdstore-home-big wp-post-image" alt="380x254-CAMISETA-LOS-POLLOS-HERMANOS" srcset="https://jovemnerd.com.br/wp-content/uploads/380x254-CAMISETA-LOS-POLLOS-HERMANOS-300x201.jpg 300w, https://jovemnerd.com.br/wp-content/uploads/380x254-CAMISETA-LOS-POLLOS-HERMANOS.jpg 380w" sizes="(max-width: 380px) 100vw, 380px">								</figure>
+								<div class="content">
+									<h5>Camiseta Los Pollos Hermanos</h5>
+									<p>A melhor camiseta direto do Novo México</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-john-snownrdcm00097/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure class="masked">
+									<img width="155" height="114" src="./jovemnerd_files/380x254-CAMISETA-JON-SNOW-155x114.jpg" class="attachment-nerdstore-home-small size-nerdstore-home-small wp-post-image" alt="380x254-CAMISETA-JON-SNOW">								</figure>
+								<div class="content">
+									<h5>Camiseta You Know Nothing</h5>
+									<p>Exclusiva Nerdstore</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-night-s-watchnrdcm00095/p">
+								<figure class="masked">
+									<img width="155" height="114" src="./jovemnerd_files/380x254-CAMISETA-NIGHT_S-WATCH-155x114.jpg" class="attachment-nerdstore-home-small size-nerdstore-home-small wp-post-image" alt="380x254-CAMISETA-NIGHT_S-WATCH">								</figure>
+								<div class="content">
+									<h5>Camiseta Night’s Watch</h5>
+									<p>Campeão de Vendas</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-hobbit-anoes/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure class="masked">
+									<img width="155" height="114" src="./jovemnerd_files/380x254-CAMISETA-HOBBITS-ANOES-155x114.jpg" class="attachment-nerdstore-home-small size-nerdstore-home-small wp-post-image" alt="380x254-CAMISETA-HOBBITS-ANOES">								</figure>
+								<div class="content">
+									<h5>Camiseta Hobbit Anões</h5>
+									<p>Exclusiva Nerdstore</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+										</ul>
+				</div>
+			</div>
+		</section>
+	</section>
+			<footer>
+				<section class="sitemap">
+					<div class="wrapper">
+						<nav>
+							<ul>
+								<li>Quem Somos</li>
+								<li id="menu-item-112993" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112993"><a href="https://jovemnerd.com.br/quem-somos/">Quem Somos</a></li>
+<li id="menu-item-112991" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112991"><a href="https://jovemnerd.com.br/fale-conosco/">Fale Conosco</a></li>
+<li id="menu-item-112992" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112992"><a href="https://jovemnerd.com.br/premios/">Prêmios</a></li>
+<li id="menu-item-122224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122224"><a href="https://jovemnerd.com.br/eventos/">Eventos</a></li>
+							</ul>
+							<ul>
+								<li>Programas</li>
+								<li id="menu-item-112998" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112998"><a href="https://jovemnerd.com.br/categoria/nerdcast/">NerdCast</a></li>
+<li id="menu-item-112997" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112997"><a href="https://jovemnerd.com.br/categoria/nerdplayer/">NerdPlayer</a></li>
+<li id="menu-item-112999" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112999"><a href="https://jovemnerd.com.br/categoria/nerdoffice/">NerdOffice</a></li>
+<li id="menu-item-112995" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-112995"><a href="https://jovemnerd.com.br/categoria/matando-robos-gigantes/">MRG</a></li>
+<li id="menu-item-113000" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113000"><a href="http://youtube.com/nerdologia">Nerdologia</a></li>
+<li id="menu-item-113001" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113001"><a href="https://www.youtube.com/playlist?list=PLB_vaUBxT31U48y7nOJbY5RgX8WLskSfS">Sr. K</a></li>
+							</ul>
+							<ul>
+								<li>NerdStore</li>
+								<li id="menu-item-113004" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113004"><a href="http://www.nerdstore.com.br/camisetas?O=OrderByReleaseDateDESC">Camisetas</a></li>
+<li id="menu-item-113005" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113005"><a href="http://www.nerdstore.com.br/livros?O=OrderByReleaseDateDESC">Livros</a></li>
+<li id="menu-item-113006" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113006"><a href="http://www.nerdstore.com.br/acessorios?O=OrderByReleaseDateDESC">Acessórios</a></li>
+<li id="menu-item-113007" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113007"><a href="http://www.nerdstore.com.br/colecionaveis?O=OrderByReleaseDateDESC">Colecionáveis</a></li>
+<li id="menu-item-113008" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113008"><a href="http://www.nerdstore.com.br/cozinha?O=OrderByReleaseDateDESC">Cozinha</a></li>
+<li id="menu-item-113009" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113009"><a href="http://www.nerdstore.com.br/decoracao?O=OrderByReleaseDateDESC">Decoração</a></li>
+<li id="menu-item-113010" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113010"><a href="http://www.nerdstore.com.br/games?O=OrderByReleaseDateDESC">Games</a></li>
+							</ul>
+							<ul>
+								<li>NerdNews</li>
+								<li id="menu-item-113019" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113019"><a href="https://jovemnerd.com.br/categoria/nerdnews/games/">Games</a></li>
+<li id="menu-item-113018" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113018"><a href="https://jovemnerd.com.br/categoria/nerdnews/cinema/">Cinema</a></li>
+<li id="menu-item-113020" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113020"><a href="https://jovemnerd.com.br/categoria/nerdnews/internet/">Internet</a></li>
+<li id="menu-item-113025" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113025"><a>Séries</a></li>
+<li id="menu-item-113027" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113027"><a href="https://jovemnerd.com.br/categoria/nerdnews/internet/">Internet</a></li>
+<li id="menu-item-113030" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113030"><a href="https://jovemnerd.com.br/categoria/nerdnews/colecionaveis/">Colecionáveis</a></li>
+<li id="menu-item-113028" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113028"><a href="https://jovemnerd.com.br/categoria/nerdnews/hq-livros/">HQ &amp; Livros</a></li>
+<li id="menu-item-117437" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-117437"><a href="https://jovemnerd.com.br/categoria/nerdnews/tecnologia/">Tecnologia</a></li>
+							</ul>
+							<ul>
+								<li>Redes Sociais</li>
+								<li id="menu-item-113039" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113039"><a href="https://www.facebook.com/jovemnerd">Facebook</a></li>
+<li id="menu-item-113041" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113041"><a href="http://twitter.com/jovemnerd">Twitter – Jovem Nerd</a></li>
+<li id="menu-item-113042" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113042"><a href="http://twitter.com/azaghal">Twitter – Azaghal</a></li>
+<li id="menu-item-113043" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113043"><a href="http://instagram.com/alottoni">Instagram – Jovem Nerd</a></li>
+<li id="menu-item-113044" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113044"><a href="http://instagram.com/azaghal">Instagram – Azaghal</a></li>
+<li id="menu-item-113045" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113045"><a href="http://youtube.com/jovemnerd">YouTube</a></li>
+<li id="menu-item-113046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113046"><a href="https://plus.google.com/u/0/118256430211458620184/posts">Google Plus</a></li>
+							</ul>
+							<ul class="negative-margin">
+								<li>Anuncie Aqui</li>
+								<li id="menu-item-113048" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113048"><a href="http://ftpi.me/m_2016/JN_MK.pdf">Midia Kit</a></li>
+							</ul>
+							<figure class="nerdinho">
+								<img src="./jovemnerd_files/nerdinho.png">
+							</figure>
+						</nav>
+					</div>
+				</section>
+				<section class="copyright">
+					<div class="wrapper">
+						<p>© 2002-2016 Jovem Nerd | Pazos e Ottoni | Versão 6.0 (Lambda)</p>
+						<p>Todas as imagens de filmes, séries e etc são marcas registradas dos seus respectivos proprietários</p>
+						
+						<figure>
+							<img src="./jovemnerd_files/logo-ftpi.png">
+						</figure>
+					</div>
+				</section>
+			</footer>
+		</div>
+		<aside id="side-menu">
+			<nav class="menu">
+				<ul>
+					<li>
+						<a href="javascript:void(0);" class="main-menu" data-target="main-menu">
+							Main Menu
+							<figure></figure>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="podcastplayer" data-target="podcastplayer">
+							NerdCast
+							<figure></figure>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="videos" data-target="videos">
+							YouTube
+							<figure></figure>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="nerdnews" data-target="nerdnews">
+							NerdNews
+							<figure></figure>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="nerdstore" data-target="nerdstore">
+							NerdStore
+							<figure></figure>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="bugreport" data-target="bugreport">
+							BugReport
+							<figure></figure>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<section class="menu main-menu">
+				<h5><a href="https://jovemnerd.com.br/"><span>Jovem</span>Nerd</a></h5>
+				<nav>
+					<ul id="menu-lateral" class="menu"><li id="menu-item-113049" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113049"><a href="https://jovemnerd.com.br/categoria/nerdnews/">NerdNews</a></li>
+<li id="menu-item-113051" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113051"><a href="https://jovemnerd.com.br/categoria/nerdcast/">Nerdcast</a></li>
+<li id="menu-item-113053" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113053"><a href="https://jovemnerd.com.br/categoria/nerdoffice/">NerdOffice</a></li>
+<li id="menu-item-113052" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113052"><a href="https://jovemnerd.com.br/categoria/nerdplayer/">NerdPlayer</a></li>
+<li id="menu-item-113050" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-113050"><a href="https://jovemnerd.com.br/categoria/matando-robos-gigantes/">Matando Robôs Gigantes</a></li>
+<li id="menu-item-113055" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113055"><a href="https://www.youtube.com/playlist?list=PLB_vaUBxT31U48y7nOJbY5RgX8WLskSfS">Sr. K</a></li>
+<li id="menu-item-113054" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-113054"><a href="http://youtube.com/nerdologia">Nerdologia</a></li>
+</ul>				</nav>
+			</section>
+			<section class="menu bugreport">
+				<h5><span>Bug</span>Report</h5>
+				<div class="bugreport">
+					<p>
+						Encontrou algum problema no site? Tem alguma sugestão de melhoria? Ajude-nos!
+					</p>
+					<p>
+						Envie-nos um email para <a href="mailto:bugreport@jovemnerd.com">bugreport@jovemnerd.com</a> contendo: <br>
+						- Qual o problema (e como) que acontece; <br>
+						- Navegador e Sistema operacional utilizado; <br>
+						- Screenshot; <br>
+					</p>
+					<p>Obrigado!</p>
+				</div>
+			</section>
+			<section class="menu podcastplayer">
+				<h5 class="nerdcast">Lista de <span>Reprodução</span></h5>
+				<div id="player" class="audio-player">
+        			<h2></h2>
+        			
+				</div>
+				
+				<div class="up-next">
+					<h6>A Seguir</h6>
+					<ul>
+						<li class="empty-playlist">Nenhum programa na sua lista de reprodução</li>
+					</ul>
+				</div>
+				
+				<div class="most-recent">
+					<h6>Programas Recentes</h6>
+					<ul>
+												<li>
+							<a class="start-playback" href="http://stats.jovemnerd.com.br/nc517.mp3" data-file-title="ALTA QUALIDADE (96 KBPS)" data-post="Nerdcast 517 – Monstros do cinema" data-permalink="https://jovemnerd.com.br/nerdcast/nerdcast-517-monstros-do-cinema/">NERDCAST 517 – Monstros do cinema</a></li>
+												<li>
+							<a class="start-playback" href="http://mrg.jovemnerd.com.br/MRG321_Cavaleiro_Trevas3.mp3" data-file-title="MP3 - ALTA QUALIDADE  (96 KBPS)" data-post="MRG 321: O Cavaleiro das Trevas 3: A Raça Superior!" data-permalink="https://jovemnerd.com.br/matando-robos-gigantes/mrg-321-o-cavaleiro-das-trevas-3-raca-superior/">MRG 321: O Cavaleiro das Trevas 3: A Raça Superior!</a></li>
+												<li>
+							<a class="start-playback" href="http://stats.jovemnerd.com.br/nc516.mp3" data-file-title="ALTA QUALIDADE (96 KBPS)" data-post="Nerdcast 516 – A ciência do aprendizado" data-permalink="https://jovemnerd.com.br/nerdcast/nerdcast-516-ciencia-do-aprendizado/">NERDCAST 516 – A ciência do aprendizado</a></li>
+												<li>
+							<a class="start-playback" href="http://mrg.jovemnerd.com.br/MRG320_Papa_Capim.mp3" data-file-title="MP3 - ALTA QUALIDADE  (96 KBPS)" data-post="MRG 320: Papa-Capim – Noite Branca!" data-permalink="https://jovemnerd.com.br/matando-robos-gigantes/mrg-320-papa-capim/">MRG 320: Papa-Capim – Noite Branca!</a></li>
+												<li>
+							<a class="start-playback" href="http://stats.jovemnerd.com.br/nc515.mp3" data-file-title="ALTA QUALIDADE (96 KBPS)" data-post="Nerdcast 515 – No octógono com Demian Maia" data-permalink="https://jovemnerd.com.br/nerdcast/nerdcast-515-no-octogono-com-demian-maia/">NERDCAST 515 – No octógono com Demian Maia</a></li>
+												<li>
+							<a class="start-playback" href="http://stats.jovemnerd.com.br/tech03.mp3" data-file-title="ALTA QUALIDADE (96 KBPS)" data-post="Nerdtech 03 – Velocidade, performance e otimização" data-permalink="https://jovemnerd.com.br/nerdcast/nerdtech-03-velocidade-performance-e-otimizacao/">Nerdtech 03 – Velocidade, performance e otimização</a></li>
+												<li>
+							<a class="start-playback" href="http://mrg.jovemnerd.com.br/MRG319_Capitao_America_Guerra_Civil.mp3" data-file-title="MP3 - ALTA QUALIDADE  (96 KBPS)" data-post="MRG 319: Capitão América: Guerra Civil!" data-permalink="https://jovemnerd.com.br/matando-robos-gigantes/mrg-319-capitao-america-guerra-civil/">MRG 319: Capitão América: Guerra Civil!</a></li>
+												<li>
+							<a class="start-playback" href="http://mrg.jovemnerd.com.br/MRG318_Mata_ou_Pilota_Kratos_Nordico.mp3" data-file-title="MP3 - ALTA QUALIDADE  (96 KBPS)" data-post="MRG 318: Kratos agora é nórdico?! – Mata ou Pilota" data-permalink="https://jovemnerd.com.br/matando-robos-gigantes/mrg-318-mata-ou-pilota/">MRG 318: Kratos agora é nórdico?! – Mata ou Pilota</a></li>
+											</ul>
+				</div>
+			</section>
+			<section class="menu videos">
+				<h5 class="nerdoffice"><span>Nerd</span>Office</h5>
+				<ul>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdoffice/the-witcher-3-blood-and-wine-evento-nerdoffice-s07e20/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/NO-s07e20-HUGE-01-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="NO-s07e20-HUGE-01"></figure>
+									<div class="content">
+																				<h5>
+											The Witcher 3: Blood and Wine &amp;#8211; Evento											<span>S07E20</span>
+										</h5>
+										<p>
+											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdoffice/justiceiro-punisher-e-psicopata-nerdoffice-s07e19/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/NO-s07e18-HUGE_01-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="NO-s07e18-HUGE_01"></figure>
+									<div class="content">
+																				<h5>
+											Justiceiro, Punisher e Psicopata											<span>S07E19</span>
+										</h5>
+										<p>
+											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+									</ul>
+				<h5 class="nerdplayer"><span>Nerd</span>Player</h5>
+				<ul>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdplayer/the-witcher-3-blood-and-wine-grita-nerdplayer-226/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/NP-226-HUGE-01-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="NP-226-HUGE-01"></figure>
+									<div class="content">
+																				<h5>
+											The Witcher 3: Blood and Wine – Grita!											<span>EP. 226</span>
+										</h5>
+										<p>
+											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdplayer/xcom-2-esquadrao-cyberpunk-nerdplayer-225/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/NP-225-HUGE-01-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="NP-225-HUGE-01"></figure>
+									<div class="content">
+																				<h5>
+											XCOM 2 – Esquadrão Cyberpunk											<span>EP. 225</span>
+										</h5>
+										<p>
+											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+									</ul>
+			</section>
+			<section class="menu nerdnews">
+				<h5><span>Nerd</span>News</h5>
+				<ul>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdnews/dory-continua-nadar-no-novo-trailer-de-procurando-dory/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/finding-dory-xlarge-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="finding-dory-xlarge"></figure>
+									<div class="content">
+										<h5>Dory continua a nadar no novo trailer de Procurando Dory [atualizado]</h5>
+										<p>
+											Aventura Inesquecível											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdnews/invocacao-do-mal-2-featurette-mostra-as-gravacoes-originais-do-casal-warren/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/invocacao-do-mal-2-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="invocacao-do-mal-2"></figure>
+									<div class="content">
+										<h5>Invocação do Mal 2 | Featurette mostra as gravações originais do casal Warren</h5>
+										<p>
+											Gravações reais											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdnews/jojos-bizarre-adventure-primeiro-capitulo-ja-esta-disponivel/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/jojos-1-119x110.png" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="bizarre adventure"></figure>
+									<div class="content">
+										<h5>JoJo’s Bizarre Adventure: Eyes of Heaven | Demo do primeiro capítulo do Modo História já está disponível</h5>
+										<p>
+											Seja parte do clã Joestar!											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdnews/luke-cage-novas-fotos-revelam-o-visual-do-vilao/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/Luke-Cage-top-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="Luke-Cage-top"></figure>
+									<div class="content">
+										<h5>Luke Cage | Novas fotos revelam o visual do vilão</h5>
+										<p>
+											Vilão clássico											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+												<li>
+								<a href="https://jovemnerd.com.br/nerdnews/marco-polo-segunda-temporada-ganha-imagens/">
+									<figure><img width="119" height="110" src="./jovemnerd_files/MP2_08_01041_R-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="marco polo segunda temporada"></figure>
+									<div class="content">
+										<h5>Marco Polo | Segunda temporada ganha novas imagens</h5>
+										<p>
+											Ano dois estreia em julho											<span>Saiba Mais</span>
+										</p>
+									</div>
+								</a>
+							</li>
+									</ul>
+			</section>
+			<section class="menu nerdstore">
+				<h5><span>Nerd</span>Store</h5>
+				<ul>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-silly-walk-nrdcm00126/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure><img width="119" height="110" src="./jovemnerd_files/380x254-CAMISETA-SILLY-WALK-1-1-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="380x254-CAMISETA-SILLY-WALK (1)"></figure>
+								<div class="content">
+									<h5>Camiseta The Ministry of Silly Walks</h5>
+									<p>Lançamento Exclusivo</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-los-pollos-hermanos/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure><img width="119" height="110" src="./jovemnerd_files/380x254-CAMISETA-LOS-POLLOS-HERMANOS-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="380x254-CAMISETA-LOS-POLLOS-HERMANOS"></figure>
+								<div class="content">
+									<h5>Camiseta Los Pollos Hermanos</h5>
+									<p>A melhor camiseta direto do Novo México</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-john-snownrdcm00097/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure><img width="119" height="110" src="./jovemnerd_files/380x254-CAMISETA-JON-SNOW-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="380x254-CAMISETA-JON-SNOW"></figure>
+								<div class="content">
+									<h5>Camiseta You Know Nothing</h5>
+									<p>Exclusiva Nerdstore</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-night-s-watchnrdcm00095/p">
+								<figure><img width="119" height="110" src="./jovemnerd_files/380x254-CAMISETA-NIGHT_S-WATCH-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="380x254-CAMISETA-NIGHT_S-WATCH"></figure>
+								<div class="content">
+									<h5>Camiseta Night’s Watch</h5>
+									<p>Campeão de Vendas</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="http://www.nerdstore.com.br/camiseta-hobbit-anoes/p?&amp;utm_source=jovemnerd&amp;utm_medium=vitrine&amp;utm_campaign=jovemnerd">
+								<figure><img width="119" height="110" src="./jovemnerd_files/380x254-CAMISETA-HOBBITS-ANOES-119x110.jpg" class="attachment-nerdstore-sidebar size-nerdstore-sidebar wp-post-image" alt="380x254-CAMISETA-HOBBITS-ANOES"></figure>
+								<div class="content">
+									<h5>Camiseta Hobbit Anões</h5>
+									<p>Exclusiva Nerdstore</p>
+									<button>Comprar</button>
+								</div>
+							</a>
+						</li>
+									</ul>
+			</section>
+		</aside>
+		<script type="text/javascript">
+			// Common vars and options
+						AJAX_BASE_PATH = "https://jovemnerd.com.br/";
+			HOME_BANNERS_SHOULD_ROTATE = true;
+		</script>
+		<script type="text/javascript" src="./jovemnerd_files/main.js"></script>
+		<script type="text/javascript" src="./jovemnerd_files/ajax-nav.js"></script>
+		<script type="text/javascript" src="./jovemnerd_files/jquery.cookie.js"></script>
+
+		
+		<script type="text/javascript" src="./jovemnerd_files/jquery.form.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"https:\/\/jovemnerd.com.br\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","recaptchaEmpty":"Please verify that you are not a robot.","sending":"Enviando ...","cached":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./jovemnerd_files/scripts.js"></script>
+<script type="text/javascript" src="./jovemnerd_files/wp-embed.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"jovemnerd"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./jovemnerd_files/count(1).js"></script>
+	<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"56f7facff4","applicationID":"3386439","transactionName":"ZlIDYxQCDUtXARdcDV8YIFQSCgxWGQsNUQdJ","queueTime":0,"applicationTime":284,"atts":"ShUAFVwYHkU=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+
+
+<!-- Dynamic page generated in 0.283 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2016-05-25 20:19:48 -->
+
+<!-- super cache --><div id="ads"></div><span style="height: 20px; width: 40px; position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAoCAYAAABpYH0BAAAHjElEQVR4Ae1bBXAbvRLO0GNmpv+VmflnZmZmZi4zMzMzM4Y58ZwTz4SZnZzpjLWzBa38Zs8aO332pdy7ma9JPmml1XfSaqXacfgYjRIcPrwP9u7dqSMKHDq0D5hmiLi4vDwJEH6/H86dOxcFdAQCfq5ZQUEexOHM8/l8cPbsWR0xADVD7eJwSuqCaANqpwt4MQTU9uiPLuDFErC1tVUDdFw0AV0l5VA1dS4Y7n4SUv7VD+J/0QHif3YT/1168Dmonb8MfBbr9StgIBDQBE9DE+Q//zYX69QP/3NBJP6pO1TPXgwBvx9trwu0S0BblgFSOwwigRJ+1xnyn3wVqqfNh6aVG6Fu7mIofudzSL1poCCk6aX3wO/1XV8C4ikkFjgKSiD5b71IlIIX3oHTbDayR5ji/GEdVU+dK8zS0m8mYDvXPLQJyDLw7CH3khjlTAx8LmSDYtbOXEg28b/sAPb8Qir3ebxg3ncY5MTUiz5Ir80BTTv2UX+R4KyownraBcRjSbRo3LaHhDDc8Ri0BgKcd5lboOTL0ZDPZqOclBpmh/XSuwwj2+IPv+a81+2B3DsfI75+/VbkLwpczTKkdx+B7fKNzSblCeVl42dA8j/78PLaZWtjbl+TgManXqPBWk4mBXmvF7KH3U98CnOKCRNmW/zul1QnvdfNnDMfPkEcomzklIsmYOWMBULbTdv3Ik8+J/+9N5UpRSXaBfR6vVEj5d99sUMeA/3/4xp3H0ROgFJbF2ZbMW66uun8thPnbAaJ4mMKG5CztAL5i4LGDduov6w+t4FPUahMzjJQWep/B6EgMbdPAno8nqhx6sfBTrMH3k1c6feTwlIW1kGYbdk3E9U4+PMOyPF69uQMqF+8Gk43y2R3MYBxSt5zCJpWb4ZWl1AmzM6CF9/V0r42AZP/3CP4RgfcRVzozEIYH3kxom3Bqx+qb/3f/ThXtXAlSI+9xPAytJxIpLp2FtilJ14F6dGXoPCT78AqmcDI4mtqx8Ec+S+/D0pdwwV9Lfl6QrDtJ14BW1Ep5/JZGpVz+6NsJfUnX9I6D+WcxMKTJgHdbnfUyBn+QHAJ/rojOOobOGfef0QQsHbBioi2Wf3vFDYgxqHzxDEBqW7l3MWq2DcNYEu+c1iYMDz0XJt+Kk1mnOU0251sk7MyEck+AnKDPkULbQJWz1LTEdNbn3FOzsolDpe4s7I6zM5aXAanfqrmgpVs1lpNheqy/2M38DjV+sYnXxUHd/ODUP7VeBbLbicOd9a2/KzbskuwRc7O/Cr7gmUKT71OZXjcLPt8JIclMUWbgE6nM2p4HQ4ekPlO2n045yoox2Nct+HYeJid6d0vQuLff3nuVTl/GXHSwy+o9RVFSNSL3vqMck1bcoa6Ef2+c5t+Fryj9lf+7STOoV/YRtWUuVRW+PrHyCFwWcakBQmoKEpM8LHlYHrmDXSM/y09qaY2mBo4mmWhfgNb4vE/+68QtNEBSZ1lbGYvovpNKapIyX/thUkuldWG7KzZg+9p08eMPreGhgahzHDvU2reuW4LcpqgWUAcfCCYQOPfbBn0FWMTu4FpZstaLiyCEpasJvymkxrP/jOAX0IoDgfmi8RbDRK1XzZ5NvGm594W+i54T51ZpZ+PiuifpbwCQwmd0d0O9QU4rFZI/EMXCjeYbrVbQIfDoRnNBkm4UMD8LkKApnzLXVwanGWpmULizV4KtRk6Q+qWrRX6ywiGDw7zgWMRfapavl59mXc/IZQ1HDlJZRhP0RetY78oAlYuWK7GMTZw64nE0CMbxaoSFgNPt8gkVPm0+VRufPwVag9nT8KvO1CZrbhMLauqoY0Iz9NOiyWiT/mvfED2FSOnCGWYCtFxkvmEXLsFtNvtmmF87i11Z500BwXCKxlQciSQ9x0BR1oWtHr4sQ47JTvp6deF2xniX3qPePYiBJvaXQeoLKPXzW36lNlX3anrWMwkexaLQzOBavbyeRl7EebMnJjHTgJarVbNSOs0hBySU7OQQ1CsxJ+R7LIG3k12Eku8G1nMzHv9I+IQhW98LNhUhOSGiSyhrz8eDzVMVF6uAlMiqpfDLipq2Xm7YulqtBETfnYZ3HAqCQwsiY9ns95skGIae7sFtDQ20hvFkwVuDNHaSvc/g3YC8EysxlC+Qwo2dZt2Ih+G8oUrhXrGR1+KWA83Ddq4RODlL852bQJaLBZNMEt56i0KW4ax2MrH4zE2CsvVcugEJP6e75Bs5+4ItqoawUaxWjEpFs7TRW9+CoosC/W8DCUffsN2224hu39/MG/cCbb4FDyrE48XGHhXiSEm1vG3W8Bmo4kuD5Sa2phscWkHZAvfdFySCeMmcvgf1vj5E/yJbznMLoCpU7YB7EyIQIscceBoh5cSGHudBiO4C0rwZpxCSiuDkmXAfpHHBBvttAsoy7I2VFUHA/WC5dhgrPZoQ5tEDHZYH+3+b59YjnVR0Eg89asR2gVUHaFTBfHXPy6egAhcQtrtdQERuoAtLS06NEAX8GIJaDabdWgAFxA/ptrQUBejsQ7UDLXjHzLPzExjREOUxjpQK9SsoMAIcewf/jWHQ4e0fM1B/5rDebD10oZZukwlAAAAAElFTkSuQmCC&quot;); background-color: transparent; background-size: 40px 20px;"></span></body></html>

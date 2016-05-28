@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <fstream>
 #include <cstdlib>
 
 
@@ -12,14 +13,20 @@ class Vocabulary
   public:
     
     // Function to add a word to the vocabulary.
-    void AddWord(std::string &s);
+    // And return the id given to the new word.
+    static int AddWord(std::string &s);
     
     // Returns the index of a word, -1 if it doesn't exist.
-    int GetIndex(std::string &s) const;
+    static int GetIndex(std::string &s);
     
     // Given an index, this function returns the correspondent word.
     // It returns an empty string if the index doesn't exist.
-    std::string GetWord(int index) const;
+    static std::string GetWord(unsigned index);
+    
+    // Given a string s, it returns if s exists on the vocabulary.
+    static bool ExistsWord(std::string &s);
+
+    static void Dump();
     
   private:
     static std::map<std::string, int> fromWordToIndex;

@@ -1,6 +1,7 @@
 #ifndef _externalsorter_hpp
 #define _externalsorter_hpp
 
+#include <string>
 
 class ExternalSorter {
   public:

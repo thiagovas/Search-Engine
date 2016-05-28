@@ -18,3 +18,6 @@ cd ../gumbo-parser/
 make
 sudo make install
 sudo python setup.py sdist install
+
+# Making sure lib icu is intalled
+sudo apt-get install libicu-dev
