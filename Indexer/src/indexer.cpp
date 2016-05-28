@@ -25,6 +25,14 @@ void Indexer::Index(vector<string> &vFilenames)
   // position of the term>
   
   
+  this->GenerateTriples(vFilenames);
+  this->SortTriples();
+  Vocabulary::Dump();
+}
+
+
+void Indexer::GenerateTriples(vector<string> &vFilenames)
+{
   this->frequency.clear();
   this->OpenTriplesFile();
   
@@ -60,10 +68,12 @@ void Indexer::Index(vector<string> &vFilenames)
     ifs.close();
   }
   this->CloseTriplesFile();
-
-  Vocabulary::Dump();
 }
 
+void Indexer::SortTriples()
+{
+  
+}
 
 void Indexer::AddTriples(string &html, string &url, int docid)
 {

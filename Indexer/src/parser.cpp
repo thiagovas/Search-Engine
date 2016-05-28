@@ -105,6 +105,7 @@ bool IsSpecial(char a)
     case '?':
     case '<':
     case '>':
+    case '@':
       return true;
   }
   return false;

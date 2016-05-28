@@ -36,6 +36,10 @@ class Indexer
     void CloseTriplesFile();
     
     void SetTriplesFilename(std::string pfilename);
+
+    void GenerateTriples(std::vector<std::string> &vFilenames);
+    
+    void SortTriples();
 };
 
 
