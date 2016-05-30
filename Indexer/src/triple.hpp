@@ -4,6 +4,8 @@
 class Triple {
   public:
     
+    Triple(int ptermid, int pdocid, int pfrequency);
+
     void SetTriple(int ptermid, int pdocid, int pfrequency);
     
     int GetTermId() const;
@@ -11,6 +13,8 @@ class Triple {
     int GetDocId() const;
 
     int GetFrequency() const;
+
+    bool operator< (const Triple &a) const;
     
   private:
     int termid, docid, frequency;

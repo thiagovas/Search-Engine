@@ -72,7 +72,8 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
 
 void Indexer::SortTriples()
 {
-  
+  ExternalSorter es;
+  es.Sort(this->triplesFilename);
 }
 
 void Indexer::AddTriples(string &html, string &url, int docid)

@@ -9,7 +9,7 @@ SRC_DIR=./src
 all: prep build
 
 
-build: main compressor externalsorter parser vocabulary indexer
+build: main compressor externalsorter parser vocabulary indexer triple
 	$(CC) $(OBJ_DIR)/*.o -o main $(OP) $(GUMBO_OP) $(ICU_OP)
 
 
@@ -17,15 +17,11 @@ main: parser compressor externalsorter vocabulary indexer
 	$(CC) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o $(OP) $(GUMBO_OP) $(ICU_OP)
 
 
-indexer: vocabulary parser
+indexer: vocabulary parser externalsorter
 	$(CC) -c $(SRC_DIR)/indexer.cpp -o $(OBJ_DIR)/indexer.o $(OP) $(ICU_OP)
 
 
-compressor:
-	$(CC) -c $(SRC_DIR)/compressor.cpp -o $(OBJ_DIR)/compressor.o $(OP)
-
-
-externalsorter:
+externalsorter: triple
 	$(CC) -c $(SRC_DIR)/externalsorter.cpp -o $(OBJ_DIR)/externalsorter.o $(OP)
 
 
@@ -33,9 +29,16 @@ parser:
 	$(CC) -c $(SRC_DIR)/parser.cpp -o $(OBJ_DIR)/parser.o $(OP) $(GUMBO_OP) $(ICU_OP)
 
 
+compressor:
+	$(CC) -c $(SRC_DIR)/compressor.cpp -o $(OBJ_DIR)/compressor.o $(OP)
+
+
 vocabulary:
 	$(CC) -c $(SRC_DIR)/vocabulary.cpp -o $(OBJ_DIR)/vocabulary.o $(OP) $(ICU_OP)
 
+
+triple:
+	$(CC) -c $(SRC_DIR)/triple.cpp -o $(OBJ_DIR)/triple.o $(OP)
 
 
 prep:

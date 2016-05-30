@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include "parser.hpp"
 #include "vocabulary.hpp"
+#include "externalsorter.hpp"
 
 class Indexer
 {
