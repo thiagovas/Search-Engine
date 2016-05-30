@@ -46,6 +46,7 @@ prep:
 	mkdir -p $(OBJ_DIR)
 	mkdir -p ./documents
 	mkdir -p ./.tmp
+	mkdir -p ./output
 
 
 clean:

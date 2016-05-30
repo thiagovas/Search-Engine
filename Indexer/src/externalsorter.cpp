@@ -6,6 +6,8 @@ ExternalSorter::ExternalSorter()
 {
   this->triplesFilename = ".tmp/triples.txt";
   this->numberChunks = 0;
+
+  // Setting memory limit to 128Mb.
   this->SetMemoryLimit(128000000);
 }
 
@@ -21,6 +23,7 @@ void ExternalSorter::SetMemoryLimit(int newLimit)
   this->maxTriples = newLimit/(sizeof(Triple)+4);
 }
 
+// Function that sorts [filename] using a multiway sorting algorithm.
 void ExternalSorter::Sort(string filename)
 {
   this->triplesFilename = filename;
@@ -103,6 +106,8 @@ void ExternalSorter::GenerateSortedChunks()
   this->DumpChunk(pq);
 }
 
+// Method to dump the priority queue in the next chunk file.
+// This method is called whenever the priority queue gets full.
 void ExternalSorter::DumpChunk(priority_queue<Triple> &pq)
 {
   if(pq.size()==0) return;

@@ -17,9 +17,8 @@ string RemoveSpecialCharacters(string &str)
   Transliterator *accentsConverter = Transliterator::createInstance(
       "NFD; [:Mn:] Remove; NFC", UTRANS_FORWARD, status);
   accentsConverter->transliterate(source);
-  // TODO: handle errors with status
   
-  std::string result;
+  string result;
   source.toUTF8String(result);
   
   // Transforming the string characters to lower case.

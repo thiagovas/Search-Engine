@@ -57,6 +57,9 @@ class Indexer
     
     // Method that basically calls the external sorter.
     void SortTriples();
+    
+    // Function that reads the sorted triples file and write the index.
+    void WriteFinalIndexFile();
 };
 
 

@@ -1,3 +1,8 @@
+/*
+  Just a test to check how to remove accents
+  and special characters from a string.
+*/
+
 #include <iostream>
 #include <clocale>
 #include <string>
@@ -8,20 +13,17 @@
 #include <unicode/translit.h>
 using namespace std;
 
-std::string oia(const std::string& str) {
-    UnicodeString source = UnicodeString::fromUTF8(StringPiece(str));
-    
-    UErrorCode status = U_ZERO_ERROR;
-    Transliterator *accentsConverter = Transliterator::createInstance(
-        "NFD; [:Mn:] Remove; NFC", UTRANS_FORWARD, status);
-    accentsConverter->transliterate(source);
-    // TODO: handle errors with status
+string oia(const std::string& str)
+{
+  UnicodeString source = UnicodeString::fromUTF8(StringPiece(str));
 
-    // UTF-16 UnicodeString -> UTF-8 std::string
-    std::string result;
-    source.toUTF8String(result);
-    
-    return result;
+  UErrorCode status = U_ZERO_ERROR;
+  Transliterator *accentsConverter = Transliterator::createInstance(
+      "NFD; [:Mn:] Remove; NFC", UTRANS_FORWARD, status);
+  accentsConverter->transliterate(source);
+  std::string result;
+  source.toUTF8String(result);
+  return result;
 }
 
 

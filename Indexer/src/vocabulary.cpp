@@ -47,7 +47,7 @@ bool Vocabulary::ExistsWord(std::string &s)
 void Vocabulary::Dump()
 {
   filebuf fb;
-  fb.open(".tmp/vocabulary_l.txt", std::ios::out);
+  fb.open("output/vocabulary_l.txt", std::ios::out);
   ostream os(&fb);
   
   for(pair<string, int> e : Vocabulary::fromWordToIndex)
@@ -58,7 +58,7 @@ void Vocabulary::Dump()
   fb.close();
   
   
-  fb.open(".tmp/vocabulary_i.txt", std::ios::out);
+  fb.open("output/vocabulary_i.txt", std::ios::out);
   for(unsigned i = 0; i < Vocabulary::fromIndexToWord.size(); i++)
     os << i << ": " << Vocabulary::fromIndexToWord[i] << endl;
   os.flush();

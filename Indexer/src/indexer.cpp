@@ -24,6 +24,42 @@ void Indexer::Index(vector<string> &vFilenames)
   this->GenerateTriples(vFilenames);
   this->SortTriples();
   Vocabulary::Dump();
+  
+  this->WriteFinalIndexFile();
+}
+
+// Function that reads the sorted triples file and write the index.
+void Indexer::WriteFinalIndexFile()
+{
+  int termid, docid, frequency;
+  filebuf sortedFile, indexFile;
+  sortedFile.open("./.tmp/sortedTriples", std::ios::in);
+  indexFile.open("output/index", std::ios::out);
+  
+  
+  istream is(&sortedFile);
+  ostream os(&indexFile);
+  
+  int lastTermId=-1;
+  while(true)
+  {
+    is >> termid >> docid >> frequency;
+    if(not is) break;
+    
+    if(lastTermId == -1)
+    {
+      lastTermId = termid;
+      os << termid;
+    }
+    
+    if(lastTermId != termid) os << endl << termid;
+    os << " " << docid << " " << frequency;
+    lastTermId = termid;
+  }
+  os << endl;
+  
+  sortedFile.close();
+  indexFile.close();
 }
 
 
@@ -48,12 +84,14 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
       if(s=="|||")
       {
         if(page != "")
+        {
           AddTriples(page, url, docid);
+          docid++;
+        }
         
         getline(ifs, url);
         getline(ifs, delimiter);
         page.clear();
-        docid++;
       }
       else page.append(s);
     }
@@ -100,7 +138,7 @@ void Indexer::WriteTriple(ostream &os, int termid, int docid, int frequency)
 
 void Indexer::OpenTriplesFile()
 {
-  this->urlFile.open("./.tmp/urls", std::ios::out);
+  this->urlFile.open("output/urls", std::ios::out);
   this->fb.open(this->triplesFilename, std::ios::out);
 }
 
