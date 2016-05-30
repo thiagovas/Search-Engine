@@ -54,6 +54,8 @@ void ExternalSorter::Sort(string filename)
       pq.push(make_pair(Triple(termid, docid, frequency), i));
     }
   }
+  vfb.shrink_to_fit();
+  vins.shrink_to_fit();
   
   while(not pq.empty())
   {

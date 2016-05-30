@@ -1,8 +1,6 @@
 #ifndef _externalsorter_hpp
 #define _externalsorter_hpp
 
-#include <iostream>
-
 #include <sstream>
 #include <fstream>
 #include <string>

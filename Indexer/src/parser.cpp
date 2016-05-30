@@ -22,7 +22,8 @@ vector<string> Parser::GetWords(string &html) const
   words = this->SplitStr(cleantext);
   
   gumbo_destroy_output(&kGumboDefaultOptions, output);
-  
+  words.shrink_to_fit();
+
   return words;
 }
 
@@ -116,7 +117,7 @@ vector<string> Parser::SplitStr(string &s) const
 {
   //,.-_+;:[{]}|!@#$%*&?<>
   std::replace_if(s.begin(), s.end(), IsSpecial, ' ');
-
+  
   vector<string> result;
   string str = s, token, delimiter = " ";
   size_t pos=0;

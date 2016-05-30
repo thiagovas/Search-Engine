@@ -8,7 +8,6 @@ Indexer::Indexer()
 
 void Indexer::Index(vector<string> &vFilenames)
 {
-  //TODO:
   // 1) Read the crawled pages.
   // 2) Foreach document read, send to the parser the string of the
   //    document with its id.
@@ -17,12 +16,9 @@ void Indexer::Index(vector<string> &vFilenames)
   // 5) Create the index using the sorted file.
   // 6) Save the vocabulary with the ids in a file.
   
-  // The sorted file before the index will have a quadruple for each line:
-  // <TermID, DocumentID, Term Frequency on the document, position of the term>
-  
   // Each line of the index file will represent a term of the vocabulary.
-  // A line will have triples <DocumentID, Term Frequency of the document,
-  // position of the term>
+  // A line will have a set of pairs
+  // <DocumentID, Term Frequency of the document>
   
   
   this->GenerateTriples(vFilenames);
@@ -86,13 +82,14 @@ void Indexer::AddTriples(string &html, string &url, int docid)
     int neueid = Vocabulary::AddWord(s);
     this->frequency[neueid]++;
   }
+  ostream osUrl(&this->urlFile);
+  osUrl << docid << " " << url << endl;
   
   ostream os(&this->fb);
   for(pair<int, int> it : this->frequency)
   {
     this->WriteTriple(os, it.first, docid, it.second);
   }
-  os.flush();
   this->frequency.clear();
 }
 
@@ -103,12 +100,14 @@ void Indexer::WriteTriple(ostream &os, int termid, int docid, int frequency)
 
 void Indexer::OpenTriplesFile()
 {
+  this->urlFile.open("./.tmp/urls", std::ios::out);
   this->fb.open(this->triplesFilename, std::ios::out);
 }
 
 void Indexer::CloseTriplesFile()
 {
   this->fb.close();
+  this->urlFile.close();
 }
 
 void Indexer::SetTriplesFilename(string pfilename)
