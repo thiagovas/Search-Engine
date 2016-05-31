@@ -7,6 +7,10 @@
 #include <cstring>
 #include <fstream>
 #include <cstdlib>
+#include <mutex>
+#include <thread>
+#include <chrono>
+#include <unistd.h>
 #include "parser.hpp"
 #include "vocabulary.hpp"
 #include "externalsorter.hpp"
@@ -29,16 +33,24 @@ class Indexer
     
     // File buffer for the file that keeps the urls.
     std::filebuf urlFile;
+
+    int maxWriteThreads;
     
-    // Map used to count the frequency of each term in a document.
-    std::map<int, int> frequency;
+    std::mutex mutexCheck;
+    
+    std::mutex mutexWrite;
+    
+    void AddTriples(std::thread **t1, std::thread **t2, std::string &html,
+                    std::string &url, int docid);
     
     // Method to add the triples of the page html on the triples file.
-    void AddTriples(std::string &html, std::string &url, int docid);   
+    void AddTriplesThread(std::string html, std::string url, int docid,
+                          int key); 
     
     // Method to write the term id, document id and the frequency of the term
     // on a file referenced by os.
-    void WriteTriple(std::ostream &os, int termid, int docid, int frequency);
+    inline void WriteTriple(std::ostream &os, int termid, int docid,
+                            int frequency);
     
     // Method to open fb
     void OpenTriplesFile();

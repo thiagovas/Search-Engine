@@ -1,5 +1,5 @@
 CC=g++-4.8
-OP=-O2 -std=c++11 -Wall
+OP=-O2 -std=c++11 -Wall -pthread
 GUMBO_OP = `pkg-config --libs --cflags gumbo`
 ICU_OP = `pkg-config --libs --cflags icu-uc icu-io`
 OBJ_DIR=./bin

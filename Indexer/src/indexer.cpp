@@ -65,8 +65,9 @@ void Indexer::WriteFinalIndexFile()
 
 void Indexer::GenerateTriples(vector<string> &vFilenames)
 {
-  this->frequency.clear();
   this->OpenTriplesFile();
+  this->maxWriteThreads = 0;
+  std::thread *t1 = NULL, *t2 = NULL;
   
   // docid keep the id of the current document being indexed.
   int docid=1;
@@ -85,7 +86,7 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
       {
         if(page != "")
         {
-          AddTriples(page, url, docid);
+          this->AddTriples(&t1, &t2, page, url, docid);
           docid++;
         }
         
@@ -97,10 +98,23 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
     }
     
     if(page != "")
-      AddTriples(page, url, docid);
+      this->AddTriples(&t1, &t2, page, url, docid);
     
     ifs.close();
   }
+  
+  if(t1 != NULL)
+  {
+    t1->join();
+    delete t1;
+  }
+  
+  if(t2 != NULL)
+  {
+    t2->join();
+    delete t2;
+  }
+  
   this->CloseTriplesFile();
 }
 
@@ -110,29 +124,93 @@ void Indexer::SortTriples()
   es.Sort(this->triplesFilename);
 }
 
-void Indexer::AddTriples(string &html, string &url, int docid)
+void Indexer::AddTriples(thread **t1, thread **t2, string &html, string &url,
+                         int docid)
 {
+  while(true)
+  {
+    this->mutexCheck.lock();
+    if(this->maxWriteThreads == 3)
+    {
+      this->mutexCheck.unlock();
+      
+      // Sleep for 1 milisecond...
+      usleep(1000);
+    }
+    else if(this->maxWriteThreads == 1)
+    {
+      this->mutexCheck.unlock();
+      if((*t2) != NULL)
+      {
+        (*t2)->join();
+        delete (*t2);
+      }
+      (*t2) = new thread(&Indexer::AddTriplesThread, this, html, url, docid, 2);
+      break;
+    }
+    else if(this->maxWriteThreads == 2)
+    {
+      this->mutexCheck.unlock();
+      if((*t1) != NULL)
+      {
+        (*t1)->join();
+        delete (*t1);
+      }
+      (*t1) = new thread(&Indexer::AddTriplesThread, this, html, url, docid, 1);
+      break;
+    }
+    else
+    {
+      this->mutexCheck.unlock();
+      if((*t1) != NULL)
+      {
+        (*t1)->join();
+        delete (*t1);
+      }
+      (*t1) = new thread(&Indexer::AddTriplesThread, this, html, url, docid, 1);
+      break;
+    }
+  }
+}
+
+void Indexer::AddTriplesThread(string html, string url, int docid, int key)
+{
+  this->mutexCheck.lock();
+  this->maxWriteThreads |= key;
+  this->mutexCheck.unlock();
+
   Parser parser;
   vector<string> terms = parser.GetWords(html);
+  
+  // Map used to count the frequency of each term in a document.
+  std::map<int, int> frequency;
   
   for(string s : terms)
   {
     if(s.size() > 127) continue;
     int neueid = Vocabulary::AddWord(s);
-    this->frequency[neueid]++;
+    frequency[neueid]++;
   }
+
+  this->mutexWrite.lock();
   ostream osUrl(&this->urlFile);
   osUrl << docid << " " << url << endl;
   
   ostream os(&this->fb);
-  for(pair<int, int> it : this->frequency)
+  for(pair<int, int> it : frequency)
   {
     this->WriteTriple(os, it.first, docid, it.second);
   }
-  this->frequency.clear();
+  os.flush();
+  this->mutexWrite.unlock();
+  
+  this->mutexCheck.lock();
+  this->maxWriteThreads ^= key;
+  this->mutexCheck.unlock();
 }
 
-void Indexer::WriteTriple(ostream &os, int termid, int docid, int frequency)
+inline void Indexer::WriteTriple(ostream &os, int termid, int docid,
+                                 int frequency)
 {
   os << termid << " " << docid << " " << frequency << endl;
 }
