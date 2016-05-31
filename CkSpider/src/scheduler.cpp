@@ -53,6 +53,7 @@ long long int Scheduler::VisitedHash(string &url)
 bool Scheduler::AddURL(string &url)
 {
   if(url.size() > 200) return false;
+  transform(url.begin(), url.end(), url.begin(), ::tolower);
   
   // Making sure the url doesn't have any of the forbidden keywords
   for(list<string>::iterator it = Scheduler::forbidden.begin(); it != Scheduler::forbidden.end(); it++)
@@ -93,7 +94,7 @@ void Scheduler::ForceAddURL(string &url)
   url.shrink_to_fit();
   if(Scheduler::pq_urls.Size() > Scheduler::max_size)
     return;
-  
+ 
   long long int vhash = Scheduler::VisitedHash(url);
   string domain = Utils::GetDomain(url);
   unsigned char hash = Utils::GetURLHash(domain);

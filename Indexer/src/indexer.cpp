@@ -45,7 +45,7 @@ void Indexer::WriteFinalIndexFile()
   {
     is >> termid >> docid >> frequency;
     if(not is) break;
-    
+
     if(lastTermId == -1)
     {
       lastTermId = termid;
@@ -117,6 +117,7 @@ void Indexer::AddTriples(string &html, string &url, int docid)
   
   for(string s : terms)
   {
+    if(s.size() > 127) continue;
     int neueid = Vocabulary::AddWord(s);
     this->frequency[neueid]++;
   }
