@@ -29,7 +29,7 @@ void Indexer::Index(vector<string> &vFilenames)
 }
 
 // Function that reads the sorted triples file and write the index.
-void Indexer::WriteFinalIndexFile()
+void Indexer::WriteFinalIndexFile() const
 {
   int termid, docid, frequency;
   filebuf sortedFile, indexFile;
@@ -118,7 +118,7 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
   this->CloseTriplesFile();
 }
 
-void Indexer::SortTriples()
+void Indexer::SortTriples() const
 {
   ExternalSorter es;
   es.Sort(this->triplesFilename);
@@ -134,8 +134,8 @@ void Indexer::AddTriples(thread **t1, thread **t2, string &html, string &url,
     {
       this->mutexCheck.unlock();
       
-      // Sleep for 1 milisecond...
-      usleep(1000);
+      // Sleep for 0.1 milisecond...
+      usleep(100);
     }
     else if(this->maxWriteThreads == 1)
     {
@@ -146,17 +146,6 @@ void Indexer::AddTriples(thread **t1, thread **t2, string &html, string &url,
         delete (*t2);
       }
       (*t2) = new thread(&Indexer::AddTriplesThread, this, html, url, docid, 2);
-      break;
-    }
-    else if(this->maxWriteThreads == 2)
-    {
-      this->mutexCheck.unlock();
-      if((*t1) != NULL)
-      {
-        (*t1)->join();
-        delete (*t1);
-      }
-      (*t1) = new thread(&Indexer::AddTriplesThread, this, html, url, docid, 1);
       break;
     }
     else
@@ -178,7 +167,7 @@ void Indexer::AddTriplesThread(string html, string url, int docid, int key)
   this->mutexCheck.lock();
   this->maxWriteThreads |= key;
   this->mutexCheck.unlock();
-
+  
   Parser parser;
   vector<string> terms = parser.GetWords(html);
   
@@ -191,11 +180,11 @@ void Indexer::AddTriplesThread(string html, string url, int docid, int key)
     int neueid = Vocabulary::AddWord(s);
     frequency[neueid]++;
   }
-
+  
   this->mutexWrite.lock();
   ostream osUrl(&this->urlFile);
   osUrl << docid << " " << url << endl;
-  
+        
   ostream os(&this->fb);
   for(pair<int, int> it : frequency)
   {
@@ -210,7 +199,7 @@ void Indexer::AddTriplesThread(string html, string url, int docid, int key)
 }
 
 inline void Indexer::WriteTriple(ostream &os, int termid, int docid,
-                                 int frequency)
+                                 int frequency) const
 {
   os << termid << " " << docid << " " << frequency << endl;
 }

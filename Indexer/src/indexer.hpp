@@ -36,8 +36,10 @@ class Indexer
 
     int maxWriteThreads;
     
+    // Mutex to control who writes and reads from maxWriteThreads.
     std::mutex mutexCheck;
     
+    // Mutex to control who is writing at the triples file.
     std::mutex mutexWrite;
     
     void AddTriples(std::thread **t1, std::thread **t2, std::string &html,
@@ -45,12 +47,12 @@ class Indexer
     
     // Method to add the triples of the page html on the triples file.
     void AddTriplesThread(std::string html, std::string url, int docid,
-                          int key); 
+                          int key);
     
     // Method to write the term id, document id and the frequency of the term
     // on a file referenced by os.
     inline void WriteTriple(std::ostream &os, int termid, int docid,
-                            int frequency);
+                            int frequency) const;
     
     // Method to open fb
     void OpenTriplesFile();
@@ -68,10 +70,10 @@ class Indexer
     void GenerateTriples(std::vector<std::string> &vFilenames);
     
     // Method that basically calls the external sorter.
-    void SortTriples();
+    void SortTriples() const;
     
     // Function that reads the sorted triples file and write the index.
-    void WriteFinalIndexFile();
+    void WriteFinalIndexFile() const;
 };
 
 

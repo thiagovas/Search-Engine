@@ -1,5 +1,7 @@
 # Script used to install all the dependencies
 
+sudo apt-get update
+
 mkdir -p bin
 cd bin
 wget 'https://googletest.googlecode.com/files/gtest-1.7.0.zip'
@@ -10,7 +12,7 @@ sudo pip install BeautifulSoup
 sudo pip install html5lib==0.95
 
 # Making sure libtoolize is installed
-sudo apt-get install build-essential libtool
+sudo apt-get install libcunit1-dev automake autotools-dev build-essential libtool
 
 cd ../gumbo-parser/
 ./autogen.sh
