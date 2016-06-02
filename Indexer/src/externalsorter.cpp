@@ -27,8 +27,8 @@ void ExternalSorter::SetMemoryLimit(int newLimit)
 void ExternalSorter::Sort(string filename)
 {
   this->triplesFilename = filename;
-  this->GenerateSortedChunks();
-  
+  //this->GenerateSortedChunks();
+  return;
   int termid, docid, frequency;
   vector<filebuf*> vfb;
   vector<istream*> vins;
@@ -49,7 +49,12 @@ void ExternalSorter::Sort(string filename)
     istream *ins = new istream(fb);
     (*ins) >> termid >> docid >> frequency;
     
-    if(not (*ins)) fb->close();
+    if(not (*ins))
+    {
+      fb->close();
+      delete fb;
+      delete ins;
+    }
     else
     {
       vfb.push_back(fb);
@@ -74,6 +79,8 @@ void ExternalSorter::Sort(string filename)
     {
       // There is anything else to read on this file...
       vfb[current.second]->close();
+      delete vfb[current.second];
+      delete vins[current.second];
     }
     else
     {
