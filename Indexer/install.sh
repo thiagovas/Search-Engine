@@ -2,6 +2,8 @@
 
 sudo apt-get update
 
+sudo apt-get install python-pip
+
 mkdir -p bin
 cd bin
 wget 'https://googletest.googlecode.com/files/gtest-1.7.0.zip'
@@ -12,7 +14,8 @@ sudo pip install BeautifulSoup
 sudo pip install html5lib==0.95
 
 # Making sure libtoolize is installed
-sudo apt-get install libcunit1-dev automake autotools-dev build-essential libtool
+# Making sure lib icu is intalled
+sudo apt-get install libicu-dev libcunit1-dev automake autotools-dev build-essential libtool
 
 cd ../gumbo-parser/
 ./autogen.sh
@@ -20,6 +23,3 @@ cd ../gumbo-parser/
 make
 sudo make install
 sudo python setup.py sdist install
-
-# Making sure lib icu is intalled
-sudo apt-get install libicu-dev
