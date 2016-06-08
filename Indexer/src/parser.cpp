@@ -42,7 +42,8 @@ string Parser::RemoveSpecialCharacters(string &str) const
   
   // Transforming the string characters to lower case.
   transform(result.begin(), result.end(), result.begin(), ::tolower);
-  
+
+  delete accentsConverter;
   return result;
 }
 

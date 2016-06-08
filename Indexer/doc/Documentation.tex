@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\title{\textbf{Trabalho Prático II - Indexador}}
+\author{Thiago Vieira de Alcantara Silva\\2012075627}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+Neste trabalho, desenvolvi um indexador e um processador de consultas simples. Dado um conjunto de páginas web, o indexador as analisa, retira todos os termos presentes em seus conteúdos e cria um arquivo invertido, onde cada linha representa um termo e contém pares indicando em qual documento podemos encontrar o termo e quantas vezes ele aparece no documento. O processador de consultas foi desenvolvido seguindo o modelo booleano, assim as consultas são realizadas somente verificando se os termos da consulta estão presentes nos documentos; o ranking dos documentos é dado pelo número que termos da consulta que eles contém.
+
+\section{Decisões de Projeto}
+\subsection{Estrutura do Projeto}
+Tanto o indexador como o processador de consultas foram desenvolvidos em C++.
+A pasta principal do projeto é dividida em oito pastas diferentes:
+\begin{itemize}
+\item bin: Pasta onde os binários do indexador se localizam.
+\item doc: Pasta para guardar a descrição e documentação do projeto.
+\item documents: Pasta que uso para guardar sets de páginas web, uso não obrigatório.
+\item gumbo-parser: Pasta presente no indexador, onde a biblioteca gumbo é armazenada.
+\item output: Pasta onde os arquivos finais se localizam, dentre eles estão o index, urls, vocabulary$\_$i e vocabulary$\_$l, onde guardo, respectivamente, o arquivo invertido, a lista de urls, o vocabulário ordenado pelos índices e o ordenado lexicograficamente
+\item src: Pasta onde guardo o código fonte do indexador.
+\item tst: Pasta onde ficam os testes realizados para aprender as interfaces das bibliotecas usadas e para avaliar a corretude e eficiência de partes do código.
+\item .tmp: Pasta usada para guardar arquivos temporários necessários para o indexador.
+\end{itemize}
+
+\subsection{Bibliotecas, Dependências e Execução}
+Os pacotes necessários para executar o indexador são gumbo-parser e libicu. O gumbo-parser  é uma biblioteca desenvolvida pela Google ( \url{http://github.com/google/gumbo-parser} ), usada para fazer o parsing das páginas web e a libicu é utilizada para retirar caracteres especiais dos documentos.\\
+Um shell script, install.sh, foi desenvolvido para checar se o sistema operacional contém os pacotes e os instala se necessário.
+Para facilitar a compilação do indexador foi criado um snippet usando o utilitário Makefile, logo para compilar o código basta executar um make que o objeto main aparecerá na pasta principal.\\
+No arquivo DOCFILENAMES está localizada a lista dos nomes dos arquivos onde estão as páginas web, não é necessário passar este arquivo para o executável do indexador. Ao iniciar, o indexador lê os nomes dos arquivos de DOCFILENAMES, os armazena e começa o processo de indexação.
+
+\subsection{Método de Ordenação Externa}
+Após a geração das triplas, um algoritmo de ordenação entra em ação. Para ordenar o arquivos das triplas foi usado o heap-sort multiway, assim ordenamos chunks do arquivo de triplas e os salvamos em arquivos separados, logo após, uma intercalação desses arquivos é executada gerando o arquivo final ordenado.\\
+
+
+\section{Análise de Complexidade}
+
+%TODO: 
+% Analisar complexidade de memoria
+% Fazer analise assintotica em relacao ao tempo
+% Fazer analise da quantidade de escritas feitos em disco.
+% Falar da demora da geracao de triplas
+% 
+
+
+\section{Resultados Experimentais}
+\subsection{Ordenação Externa}
+%TODO: 
+% Mostrar a velocidade 
+% 
+% 
+% 
+% 
+
+
+\section{Conclusão}
+%TODO: 
+% 
+% 
+% 
+% 
+% 
+
+
+\end{document}
