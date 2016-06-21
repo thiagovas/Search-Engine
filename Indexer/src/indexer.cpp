@@ -176,7 +176,7 @@ void Indexer::AddTriplesThread(string html, string url, int docid, int key)
   
   for(string s : terms)
   {
-    if(s.size() > 127) continue;
+    if(s.size() > 65) continue;
     int neueid = Vocabulary::AddWord(s);
     frequency[neueid]++;
   }

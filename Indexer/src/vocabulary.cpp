@@ -2,7 +2,6 @@
 using namespace std;
 
 map<string, int> Vocabulary::fromWordToIndex;
-vector<string> Vocabulary::fromIndexToWord;
 int Vocabulary::numberOfWords;
 
 
@@ -14,7 +13,6 @@ int Vocabulary::AddWord(string &s)
   if(its != Vocabulary::fromWordToIndex.end())
     return its->second;
   
-  Vocabulary::fromIndexToWord.push_back(s);
   Vocabulary::fromWordToIndex[s] = numberOfWords++;
   return numberOfWords-1;
 }
@@ -28,14 +26,6 @@ int Vocabulary::GetIndex(string &s)
   return Vocabulary::fromWordToIndex[s];
 }
 
-// Given an index, this function returns the correspondent word.
-string Vocabulary::GetWord(unsigned index)
-{
-  if(index >= Vocabulary::fromIndexToWord.size())
-    return "";
-  
-  return Vocabulary::fromIndexToWord[index];
-}
 
 // Given a string s, it returns if s exists on the vocabulary.
 bool Vocabulary::ExistsWord(std::string &s)
@@ -54,13 +44,6 @@ void Vocabulary::Dump()
   {
     os << e.first << " " << e.second << endl;
   }
-  os.flush();
-  fb.close();
-  
-  
-  fb.open("output/vocabulary_i.txt", std::ios::out);
-  for(unsigned i = 0; i < Vocabulary::fromIndexToWord.size(); i++)
-    os << i << ": " << Vocabulary::fromIndexToWord[i] << endl;
   os.flush();
   fb.close();
 }

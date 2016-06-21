@@ -27,8 +27,7 @@ void ExternalSorter::SetMemoryLimit(int newLimit)
 void ExternalSorter::Sort(string filename)
 {
   this->triplesFilename = filename;
-  //this->GenerateSortedChunks();
-  return;
+  this->GenerateSortedChunks();
   int termid, docid, frequency;
   vector<filebuf*> vfb;
   vector<istream*> vins;
@@ -70,8 +69,6 @@ void ExternalSorter::Sort(string filename)
     pair<Triple, int> current = pq.top();
     pq.pop();
     int termid = current.first.GetTermId();
-    int docid = current.first.GetDocId();
-    int frequency = current.first.GetFrequency();
     out << termid << " " << docid << " " << frequency << endl;
     
     (*vins[current.second]) >> termid >> docid >> frequency;

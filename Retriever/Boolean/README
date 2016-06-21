@@ -1,0 +1,5 @@
+== Boolean Retriever ==
+
+Buscador simples que segue o modelo booleano.
+
+Para executá-lo, preencha no arquivo src/INDEXFILENAME a localização do índice.

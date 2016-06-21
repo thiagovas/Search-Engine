@@ -27,6 +27,8 @@ void Scheduler::Initialize(string filename)
   Scheduler::forbidden.push_back("porno");
   Scheduler::forbidden.push_back("redtube");
   Scheduler::forbidden.push_back("xxx");
+  Scheduler::forbidden.push_back("ads");
+  Scheduler::forbidden.push_back("advertisement");
   
   Scheduler::SetDumpFilename(filename);
   

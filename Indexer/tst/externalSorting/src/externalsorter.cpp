@@ -8,7 +8,7 @@ ExternalSorter::ExternalSorter()
   this->numberChunks = 0;
 
   // Setting memory limit to 128Mb.
-  this->SetMemoryLimit(1280000000);
+  this->SetMemoryLimit(128000000);
 }
 
 // Sets a new memory limit.
