@@ -26,6 +26,16 @@
 *.out
 *.app
 
+
+CkSpider/.tmp/*
+CkSpider/documents/*
+
 Indexer/bin
 Indexer/bin/*
 Indexer/.tmp/*
+Indexer/output/*
+Indexer/documents/*
+
+Retriever/.tmp/*
+Retriever/Boolean/.tmp/*
+Retriever/VectorModel/.tmp/*

@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "document.hpp"
+#include "../base/document.hpp"
 
 
 namespace retriever
 {
-namespace boolean
+namespace vectormodel
 {
 
 class Retriever {
@@ -23,7 +23,7 @@ class Retriever {
     // Function that processes the given query.
     // The query here is basically a sequence of words.
     // The method consider that words are the terms separated by spaces.
-    std::vector<Document> Retrieve(std::string &query);
+    std::vector<base::Document> Retrieve(std::string &query);
     
   private:
     
@@ -36,17 +36,17 @@ class Retriever {
     // Map from document id to url.
     std::map<int, std::string> murls;
     
-    // Function that splits a string given the delimiters.
-    std::vector<std::string> SplitStr(std::string &s, std::string delim) const;
-    
     // Method to load the vocabulary.
     void LoadVocabulary(std::string filename);
     
     // Method that loads the urls.
     void LoadUrls(std::string filename);
+    
+    // This method goes through 
+    std::vector<base::Document> GetTopKCosine(std::string &query, unsigned k);
 };
 
-} // namespace Boolean
+} // namespace vectormodel
 } // namespace retriever
 
 #endif

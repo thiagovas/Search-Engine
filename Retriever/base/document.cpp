@@ -2,9 +2,7 @@
 using namespace std;
 
 
-namespace retriever
-{
-namespace boolean
+namespace base
 {
 
 Document::Document(int pdocid, std::string &purl)
@@ -23,6 +21,5 @@ std::string Document::GetUrl()
   return this->url;
 }
 
-} // namespace Boolean
-} // namespace retriever
+} // namespace base
 

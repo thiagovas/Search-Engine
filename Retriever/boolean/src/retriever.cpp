@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include "../../base/util.hpp"
 using namespace std;
 
 
@@ -21,7 +22,7 @@ Retriever::Retriever(string pIndexFilename, string urlsFilename,
   this->indexFilename = pIndexFilename;
 }
 
-vector<Document> Retriever::Retrieve(string &query)
+vector<base::Document> Retriever::Retrieve(string &query)
 {
   // 1) Read the query.
   // 2) Get the ids of the words of the query from the vocabulary.
@@ -34,7 +35,8 @@ vector<Document> Retriever::Retrieve(string &query)
   
   // from document id to number of matches.
   map<int, int> result;
-  vector<string> terms = this->SplitStr(query, " ");
+  base::Util util;
+  vector<string> terms = util.SplitStr(query, " ");
   list<int> termids;
   string line;
   int index, docid, frequency;
@@ -88,10 +90,10 @@ vector<Document> Retriever::Retrieve(string &query)
   sort(sortedDoc.begin(), sortedDoc.end());
   reverse(sortedDoc.begin(), sortedDoc.end());
   
-  vector<Document> vdoc;
+  vector<base::Document> vdoc;
   for(pair<int, int> p : sortedDoc)
   {
-    vdoc.push_back(Document(p.second, this->murls[p.second]));
+    vdoc.push_back(base::Document(p.second, this->murls[p.second]));
   }
   return vdoc;
 }
@@ -128,25 +130,6 @@ void Retriever::LoadUrls(std::string filename)
   }
   fb.close();
 }
-
-
-vector<string> Retriever::SplitStr(string &s, string delimiter) const
-{
-  vector<string> result;
-  string str = s, token;
-  size_t pos=0;
-  while((pos=str.find(delimiter)) != std::string::npos)
-  {
-    token = str.substr(0, pos);
-    if(token.size() != 0)
-      result.push_back(token);
-    str.erase(0, pos+delimiter.length());
-  }
-  if(str.size() != 0)
-    result.push_back(str);
-  return result;
-}
-
 
 } // namespace Boolean
 } // namespace retriever

@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace retriever
-{
-namespace boolean
+namespace base
 {
 
 class Document {
@@ -24,7 +22,6 @@ class Document {
     std::string url;
 };
 
-} // namespace Boolean
-} // namespace retriever
+} // namespace base
 
 #endif
