@@ -91,7 +91,13 @@ void Indexer::GenerateTriples(vector<string> &vFilenames)
         }
         
         getline(ifs, url);
-        getline(ifs, delimiter);
+        unsigned spacePosition=0;
+        
+        // Considering the case where the separator of url-html is
+        // on the same line as the url.
+        if((spacePosition=url.find(" ")) != std::string::npos)
+          url = url.substr(0, spacePosition);
+        else getline(ifs, delimiter);
         page.clear();
       }
       else page.append(s);
