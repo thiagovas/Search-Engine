@@ -33,7 +33,7 @@ vector<base::Document> Retriever::Retrieve(string &query)
   // 3) Anchor Text
   // 
   
-  vector<base::Document> vDocuments = this->GetTopKCosine(query, 100);
+  vector<base::Document> vDocuments = this->GetTopKCosine(query, 20);
   return vDocuments;
 }
 
