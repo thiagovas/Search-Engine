@@ -1,27 +1,26 @@
-CC=g++-4.8
+CC=g++
 OP=-O2 -std=c++11 -Wall
 OBJ_DIR=./bin
+BASE_OBJ_DIR=../base
 SRC_DIR=./src
 
 
 all: prep build
 
 
-build: main document retriever
-	$(CC) $(OBJ_DIR)/*.o -o main $(OP)
+build: main base retriever
+	$(CC) $(OBJ_DIR)/*.o $(BASE_OBJ_DIR)/*.o -o main $(OP)
 
 
-main: retriever document
+main: retriever base
 	$(CC) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o $(OP)
 
 
-retriever: document
+retriever: base
 	$(CC) -c $(SRC_DIR)/retriever.cpp -o $(OBJ_DIR)/retriever.o $(OP)
 
-
-document:
-	$(CC) -c $(SRC_DIR)/document.cpp -o $(OBJ_DIR)/document.o $(OP)
-
+base:
+	cd ../base && make
 
 prep:
 	clear

@@ -3,6 +3,7 @@
 \usepackage{graphicx,url}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
+\usepackage{graphicx}
 \title{\textbf{Trabalho Prático II - Indexador}}
 \author{Thiago Vieira de Alcantara Silva\\2012075627}
 \date{}
@@ -44,9 +45,10 @@ Após a geração das triplas, um algoritmo de ordenação entra em ação. Para
 A geração de triplas de cada documento é feita em duas partes, o parsing do documento e a escrita das triplas em disco, uma vez em que o parsing do documento foi executado podemos escrever as triplas no arquivo de saída, assim podemos executar a geração das triplas usando duas threads, simulando um pipeline. O gargalo deste processo se encontra nas escritas em disco, assim o pipeline se comporta como mostrado na imagem abaixo:
 
 
-\begin{center}
-\includegraphics[scale=0.41]{Pipelining.png}
-\end{center}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.8\textwidth,scale=0.41,natwidth=1354,natheight=192]{Pipelining.png}
+%\end{figure}
 
 Assim, aproveitamos o máximo do tempo, sempre fazendo parsing e escrevendo em disco.
 
@@ -65,16 +67,16 @@ A ordenação das triplas é feita usando o multiway heap-sort. Sendo $T$ o tota
 
 
 \section{Resultados Experimentais}
-
-Os testes foram executados em um Intel® Core™ i5-4210U CPU @ 1.70GHz x 4.
+Os testes foram executados em um Intel® Core i5-4210U CPU @ 1.70GHz x 4.
 
 \subsection{Ordenação Externa}
-
 Foram executados testes para verificar a eficiência do método de ordenação externa usado neste trabalho. Os testes foram executados com arquivos de 100 a 10.000.000 triplas, e usando desde 100Kb de memória interna até 128Mb.
 
-\begin{center}
-\includegraphics[scale=0.55]{ExternalSortingEfficiency.png}
-\end{center}
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\textwidth,scale=0.5,natwidth=1024,natheight=581]{ExternalSortingEfficiency.png}
+%\end{figure}
 
 Apesar da variação da memória interna máxima nos testes, o resultado foi idêntico para todos; isso talvez se dê pelo fato de sempre termos o stream de todos os chunks abertos na ordenação.
 
@@ -82,9 +84,10 @@ Apesar da variação da memória interna máxima nos testes, o resultado foi id�
 
 Foram executados testes para verificar a eficiência do indexador como um todo. Os testes foram executados com 4 bases, com 141, 601, 2078 e 10096 documentos.
 
-\begin{center}
-\includegraphics[scale=0.55]{IndexingEfficiency.png}
-\end{center}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\textwidth,scale=0.5,natwidth=1029,natheight=192]{IndexingEfficiency.png}
+%\end{figure}
 
 Com esses dois testes apresentados, é possível verificar que o indexador passa o maior tempo tratando os documentos e escrevendo as triplas do que ordenando-as. Assim uma possível otimização do indexador deveria focar na primeira fase da indexação.
 
